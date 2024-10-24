@@ -1,6 +1,8 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
+
 const expenseRoutes = require('./routes/expenses')
 const userRoutes = require('./routes/user')
 
@@ -9,6 +11,12 @@ const app = express()
 
 //Middleware
 app.use(express.json())
+
+const allowedOrigins = ['https://budgetbuddy-a45u.onrender.com/', 'http://localhost:3000'];
+app.use(cors({
+  origin: allowedOrigins
+}));
+
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
