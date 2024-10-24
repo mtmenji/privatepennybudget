@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
+const path = require('path')
 
 const expenseRoutes = require('./routes/expenses')
 const userRoutes = require('./routes/user')
@@ -19,6 +20,12 @@ app.use((req, res, next) => {
 //Routes
 app.use('/expenses',expenseRoutes)
 app.use('/user',userRoutes)
+
+//Host
+app.use(express.static(path.join('../frontend/build')))
+app.get('*', (req, res) =>
+    res.sendFile(path.join('../frontend/build/index.html'))
+);
 
 //Database Connection
 mongoose.connect(process.env.MONGO_URI)
