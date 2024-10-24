@@ -11,10 +11,18 @@ const app = express()
 //Middleware
 app.use(express.json())
 
-app.use((req, res, next) => {
-    console.log(req.path, req.method)
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/build')));
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
+    });
     next()
-})
+} else {
+    app.use((req, res, next) => {
+        console.log(req.path, req.method)
+        next()
+    })
+}
 
 //Routes
 app.use('/expenses',expenseRoutes)
