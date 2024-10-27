@@ -4,22 +4,24 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
 
   const { user } = useAuthContext()
 
   return (
-    <div className="App">
+    <div className="theme-parchment flex flex-col min-h-screen">
       <BrowserRouter>
         <Navbar />
-        <div className='pages'>
+        <div className='pages flex-grow bg-primary-bg text-secondary-text'>
           <Routes>
             <Route path='/' element={user ? <Home /> : <Navigate to='/login' />}/>
             <Route path='/register' element={!user ? <Register /> : <Navigate to='/' />}/>
             <Route path='/login' element={!user ? <Login /> : <Navigate to='/' />}/>
           </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
     </div>
   );
