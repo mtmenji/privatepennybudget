@@ -1,11 +1,11 @@
 import '../index.css'
 import { useState } from "react"
-import { useExpensesContext } from '../hooks/useExpensesContext'
+import { useTransactionsContext } from '../hooks/useTransactionsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const ExpenseForm = () => {
+const TransactionForm = () => {
 
-    const { dispatch } = useExpensesContext()
+    const { dispatch } = useTransactionsContext()
     const { user } = useAuthContext()
 
     const [title, setTitle] = useState('')
@@ -24,10 +24,10 @@ const ExpenseForm = () => {
             return
         }
 
-        const expense = {title, date, category, subcategory, value}
-        const response = await fetch('/expenses', {
+        const transaction = {title, date, category, subcategory, value}
+        const response = await fetch('/transactions', {
             method: 'POST',
-            body: JSON.stringify(expense),
+            body: JSON.stringify(transaction),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.token}`
@@ -48,16 +48,16 @@ const ExpenseForm = () => {
             setValue('')
             setError(null)
             setEmptyFields([])
-            console.log('New Expense Added', json)
+            console.log('New Transaction Added', json)
             dispatch({type: 'CREATE_EXPENSE', payload: json})
         }
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <h3>Add a New Expense</h3>
+            <h3>Add a New Transaction</h3>
 
-            <label>Expense Title:</label>
+            <label>Transaction Title:</label>
             <input
                 type='text'
                 onChange={(e) => setTitle(e.target.value)}
@@ -97,10 +97,10 @@ const ExpenseForm = () => {
                 className={emptyFields.includes('value') ? 'error' : ''}
             />
 
-            <button>Add Expense</button>
+            <button>Add Transaction</button>
             {error && <div>{error}</div>}
         </form>
     )
 }
 
-export default ExpenseForm
+export default TransactionForm

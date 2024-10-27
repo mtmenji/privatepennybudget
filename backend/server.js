@@ -3,7 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
 
-const expenseRoutes = require('./routes/expenses')
+const transactionRoutes = require('./routes/transactions')
 const userRoutes = require('./routes/user')
 
 //Express App
@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 })
 
 //Routes
-app.use('/expenses',expenseRoutes)
+app.use('/transactions',transactionRoutes)
 app.use('/user',userRoutes)
 
 //Host

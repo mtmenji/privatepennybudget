@@ -1,17 +1,17 @@
 import { useEffect } from 'react'
-import { useExpensesContext } from '../hooks/useExpensesContext'
+import { useTransactionsContext } from '../hooks/useTransactionsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
-import ExpenseDetails from '../components/ExpenseDetails'
-import ExpenseForm from '../components/ExpenseForm'
+import TransactionDetails from '../components/TransactionDetails'
+import TransactionForm from '../components/TransactionForm'
 
 const Home = () => {
 
-    const {expenses, dispatch} = useExpensesContext()
+    const {transactions, dispatch} = useTransactionsContext()
     const {user} = useAuthContext()
 
     useEffect(() => {
-        const fetchExpenses = async () => {
-            const response = await fetch('/expenses', {
+        const fetchTransactions = async () => {
+            const response = await fetch('/transactions', {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -24,7 +24,7 @@ const Home = () => {
         }
 
         if (user) {
-            fetchExpenses()
+            fetchTransactions()
         }
     }, [dispatch, user])
 
@@ -32,11 +32,11 @@ const Home = () => {
         <div className='home'>
             <h2>Home</h2>
             <div>
-                {expenses && expenses.map((expense) => (
-                    <ExpenseDetails key={expense._id} expense={expense} />
+                {transactions && transactions.map((transaction) => (
+                    <TransactionDetails key={transaction._id} transaction={transaction} />
                 ))}
             </div>
-            <ExpenseForm />
+            <TransactionForm />
         </div>
     )
 }

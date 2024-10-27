@@ -1,5 +1,5 @@
 const express = require('express')
-const { getExpenses, getExpense, createExpense, deleteExpense, updateExpense } = require('../controllers/expenseController')
+const { getTransactions, getTransaction, createTransaction, deleteTransaction, updateTransaction } = require('../controllers/transactionController')
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
@@ -11,20 +11,20 @@ The following is example routes that include GET ALL, GET SINGLE, POST, DELETE S
 *************************************************************************
 **************************************************************************/
 
-            //GET all expenses.
-            router.get('/', getExpenses)
+            //GET all transactions.
+            router.get('/', getTransactions)
 
-            //GET a single expenses.
-            router.get('/:id', getExpense)
+            //GET a single transactions.
+            router.get('/:id', getTransaction)
 
-            //POST a single expenses.
-            router.post('/', createExpense)
+            //POST a single transactions.
+            router.post('/', createTransaction)
 
-            //DELETE a expense.
-            router.delete('/:id', deleteExpense)
+            //DELETE a transaction.
+            router.delete('/:id', deleteTransaction)
 
-            //UPDATE a single expenses.
-            router.patch('/', updateExpense)
+            //UPDATE a single transactions.
+            router.patch('/', updateTransaction)
 /************************************************************************
 *************************************************************************/
 
