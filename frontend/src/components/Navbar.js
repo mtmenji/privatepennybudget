@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Login from '../components/Login'
 
 const Navbar = () => {
     
@@ -49,11 +50,9 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
-                            <Link to="/login" className="hover:text-gray-300 transition-colors duration-200 text-light1">
-                                Login
-                            </Link>
-                            <Link to="/register" className="hover:text-gray-300 transition-colors duration-200 text-light1">
-                                Register
+                            <Login />
+                            <Link to="/register" className="hover:text-light1hover transition-colors duration-200 text-light1">
+                                No account? Register!
                             </Link>
                         </>
                     )}
@@ -98,11 +97,9 @@ const Navbar = () => {
                             </>
                         ) : (
                             <>
-                                <Link to="/login" className="block hover:text-gray-300 transition-colors duration-200 text-light1 text-center">
-                                    Login
-                                </Link>
+                                <Login />
                                 <Link to="/register" className="block hover:text-gray-300 transition-colors duration-200 text-light1 text-center">
-                                    Register
+                                    No account? Register!
                                 </Link>
                             </>
                         )}
