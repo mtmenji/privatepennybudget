@@ -21,7 +21,7 @@ const Navbar = () => {
 
     return (
         <header className="bg-dark1 text-light1 shadow-xl z-10">
-            <div className="container mx-auto flex justify-between items-center py-4 px-6">
+            <div className="container mx-auto flex justify-between items-center py-2 px-6">
                 <Link to="/" className="text-2xl font-bold hover:text-light1hover" onClick={() => handleToggleMenu(false)}>
                     Budget Buddy
                 </Link>
