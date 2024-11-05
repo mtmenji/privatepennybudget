@@ -14,7 +14,7 @@ function App() {
     <div className="theme-blue flex flex-col min-h-screen">
       <BrowserRouter>
         <Navbar />
-        <div className='pages flex-grow bg-light1 text-bodytext'>
+        <div className='pages flex-grow bg-light1 text-bodytext mt-14 lg:mt-12'>
           <Routes>
             <Route path='/' element={user ? <Home /> : <Navigate to='/login' />}/>
             <Route path='/register' element={!user ? <Register /> : <Navigate to='/' />}/>
