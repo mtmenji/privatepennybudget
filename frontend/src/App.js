@@ -11,10 +11,10 @@ function App() {
   const { user } = useAuthContext()
 
   return (
-    <div className="theme-parchment flex flex-col min-h-screen">
+    <div className="theme-blue flex flex-col min-h-screen">
       <BrowserRouter>
         <Navbar />
-        <div className='pages flex-grow bg-primary-bg text-secondary-text'>
+        <div className='pages flex-grow bg-light1 text-bodytext'>
           <Routes>
             <Route path='/' element={user ? <Home /> : <Navigate to='/login' />}/>
             <Route path='/register' element={!user ? <Register /> : <Navigate to='/' />}/>

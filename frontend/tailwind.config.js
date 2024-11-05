@@ -4,12 +4,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary-bg': 'var(--primary-bg)',
-        'secondary-bg': 'var(--secondary-bg)',
-        'primary-text': 'var(--primary-text)',
-        'secondary-text': 'var(--secondary-text)',
-        'highlight': 'var(--highlight)',
-        'accent': 'var(--accent-color)',
+        'dark1': 'var(--dark1)',
+        'dark2': 'var(--dark2)',
+        'dark3': 'var(--dark3)',
+        'light1': 'var(--light1)',
+        'light1hover': 'var(--light1hover)',
+        'light2': 'var(--light2)',
+        'light3': 'var(--light3)',
+        'button': 'var(--button)',
+        'buttonhover': 'var(--buttonhover)',
+        'bodytext': 'var(--bodytext)',
       },
     },
   },

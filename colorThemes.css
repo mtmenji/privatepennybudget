@@ -1,49 +1,62 @@
 /* Theme: Parchment */
 .theme-parchment {
-    --primary-bg: #FAF3E0;
-    --secondary-bg: #E8DCC0;
-    --accent-color: #C6A87D;
-    --primary-text: #3C2F2F;
-    --secondary-text: #7F6756;
-    --highlight: #FFF1CC;
+    --dark1: #FAF3E0;
+    --dark2: #E8DCC0;
+    --button: #C6A87D;
+    --light1: #3C2F2F;
+    --light2: #7F6756;
+    --buttonhover: #FFF1CC;
 }
   
 /* Theme: Sunset */
 .theme-sunset {
-    --primary-bg: #FFEDD5;
-    --secondary-bg: #FDBE8E;
-    --accent-color: #FF8966;
-    --primary-text: #5D4037;
-    --secondary-text: #8B5E34;
-    --highlight: #FF6F61;
+    --dark1: #FFEDD5;
+    --dark2: #FDBE8E;
+    --button: #FF8966;
+    --light1: #5D4037;
+    --light2: #8B5E34;
+    --buttonhover: #FF6F61;
 }
 
 /* Theme: Midnight */
 .theme-midnight {
-    --primary-bg: #1A1A2E;
-    --secondary-bg: #16213E;
-    --accent-color: #0F3460;
-    --primary-text: #EAEAEA;
-    --secondary-text: #B1B1B1;
-    --highlight: #FFC300;
+    --dark1: #1A1A2E;
+    --dark2: #16213E;
+    --button: #0F3460;
+    --light1: #EAEAEA;
+    --light2: #B1B1B1;
+    --buttonhover: #FFC300;
 }
 
 /* Theme: Bouquet */
 .theme-bouquet {
-    --primary-bg: #F4E1E1;
-    --secondary-bg: #F2C2C2;
-    --accent-color: #D36E70;
-    --primary-text: #4B2E83;
-    --secondary-text: #77487D;
-    --highlight: #AF1C54;
+    --dark1: #F4E1E1;
+    --dark2: #F2C2C2;
+    --button: #D36E70;
+    --light1: #4B2E83;
+    --light2: #77487D;
+    --buttonhover: #AF1C54;
 }
 
 /* Theme: Forest Moss */
 .theme-forest {
-    --primary-bg: #E8F5E9;
-    --secondary-bg: #C8E6C9;
-    --accent-color: #8BC34A;
-    --primary-text: #3A5311;
-    --secondary-text: #6D9A3A;
-    --highlight: #4CAF50;
+    --dark1: #E8F5E9;
+    --dark2: #C8E6C9;
+    --button: #8BC34A;
+    --light1: #3A5311;
+    --light2: #6D9A3A;
+    --buttonhover: #4CAF50;
+}
+
+/* Theme: Blue */
+.theme-blue {
+    --dark1: #0A3D62;
+    --dark2: #1B4F72;
+    --dark3: #2E86C1;
+    --light1: #D6EAF8;
+    --light2: #AED6F1;
+    --light3: #85C1E9;
+    --button: #3498DB;
+    --buttonhover: #5DADE2;
+    --bodytext: #000000;
 }

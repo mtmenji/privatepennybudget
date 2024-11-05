@@ -20,39 +20,39 @@ const Navbar = () => {
     }
 
     return (
-        <header className="bg-secondary-bg text-primary-text">
+        <header className="bg-dark1 text-light1 shadow-xl z-10">
             <div className="container mx-auto flex justify-between items-center py-4 px-6">
-                <Link to="/" className="text-2xl font-bold hover:text-gray-300" onClick={() => handleToggleMenu(false)}>
+                <Link to="/" className="text-2xl font-bold hover:text-light1hover" onClick={() => handleToggleMenu(false)}>
                     Budget Buddy
                 </Link>
                 <div className="hidden md:flex md:items-center space-x-4">
                     {user ? (
                         <>
-                            <Link to="/dashboard" className="hover:text-gray-300 transition-colors duration-200 text-primary-text">
+                            <Link to="/dashboard" className="hover:text-light1hover transition-colors duration-200 text-light1">
                                 Dashboard
                             </Link>
-                            <Link to="/transactions" className="hover:text-gray-300 transition-colors duration-200 text-primary-text">
+                            <Link to="/transactions" className="hover:text-light1hover transition-colors duration-200 text-light1">
                                 Transactions
                             </Link>
-                            <Link to="/budget" className="hover:text-gray-300 transition-colors duration-200 text-primary-text">
+                            <Link to="/budget" className="hover:text-light1hover transition-colors duration-200 text-light1">
                                 Budget
                             </Link>
-                            <Link to="/settings" className="hover:text-gray-300 transition-colors duration-200 text-primary-text">
+                            <Link to="/settings" className="hover:text-light1hover transition-colors duration-200 text-light1">
                                 Settings
                             </Link>
                             <button
                                 onClick={handleClick}
-                                className="bg-highlight hover:bg-accent text-primary-text font-semibold py-1 px-4 rounded transition-colors duration-200"
+                                className="bg-button text-light1 hover:bg-buttonhover hover:text-dark1 font-semibold py-1 px-4 rounded transition-colors duration-200"
                             >
                                 Log Out
                             </button>
                         </>
                     ) : (
                         <>
-                            <Link to="/login" className="hover:text-gray-300 transition-colors duration-200 text-primary-text">
+                            <Link to="/login" className="hover:text-gray-300 transition-colors duration-200 text-light1">
                                 Login
                             </Link>
-                            <Link to="/register" className="hover:text-gray-300 transition-colors duration-200 text-primary-text">
+                            <Link to="/register" className="hover:text-gray-300 transition-colors duration-200 text-light1">
                                 Register
                             </Link>
                         </>
@@ -64,44 +64,44 @@ const Navbar = () => {
                     onClick={() => handleToggleMenu(!isMenuOpen)}
                 >
                     {isMenuOpen ? (
-                        <XMarkIcon className="w-6 h-6 text-primary-text" />
+                        <XMarkIcon className="w-6 h-6 text-light1" />
                     ) : (
-                        <Bars3Icon className="w-6 h-6 text-primary-text" />
+                        <Bars3Icon className="w-6 h-6 text-light1" />
                     )}
                 </button>
             </div>
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="md:hidden bg-primary-bg">
+                <div className="md:hidden bg-dark1">
                     <nav className="flex flex-col space-y-2 py-2">
                         {user ? (
                             <>
-                                <Link to="/dashboard" className="block hover:text-gray-300 transition-colors duration-200 text-primary-text text-center" onClick={() => handleToggleMenu(false)}>
+                                <Link to="/dashboard" className="block hover:text-gray-300 transition-colors duration-200 text-light1 text-center" onClick={() => handleToggleMenu(false)}>
                                     Dashboard
                                 </Link>
-                                <Link to="/transactions" className="block hover:text-gray-300 transition-colors duration-200 text-primary-text text-center" onClick={() => handleToggleMenu(false)}>
+                                <Link to="/transactions" className="block hover:text-gray-300 transition-colors duration-200 text-light1 text-center" onClick={() => handleToggleMenu(false)}>
                                     Transactions
                                 </Link>
-                                <Link to="/budget" className="block hover:text-gray-300 transition-colors duration-200 text-primary-text text-center" onClick={() => handleToggleMenu(false)}>
+                                <Link to="/budget" className="block hover:text-gray-300 transition-colors duration-200 text-light1 text-center" onClick={() => handleToggleMenu(false)}>
                                     Budget
                                 </Link>
-                                <Link to="/settings" className="block hover:text-gray-300 transition-colors duration-200 text-primary-text text-center" onClick={() => handleToggleMenu(false)}>
+                                <Link to="/settings" className="block hover:text-gray-300 transition-colors duration-200 text-light1 text-center" onClick={() => handleToggleMenu(false)}>
                                     Settings
                                 </Link>
                                 <button
                                     onClick={handleClick}
-                                    className="bg-highlight hover:bg-accent text-primary-text font-semibold py-1 px-4 rounded transition-colors duration-200"
+                                    className="bg-button text-light1 hover:bg-buttonhover hover:text-dark1 font-semibold py-1 px-4 rounded transition-colors duration-200"
                                 >
                                     Log Out
                                 </button>
                             </>
                         ) : (
                             <>
-                                <Link to="/login" className="block hover:text-gray-300 transition-colors duration-200 text-primary-text text-center">
+                                <Link to="/login" className="block hover:text-gray-300 transition-colors duration-200 text-light1 text-center">
                                     Login
                                 </Link>
-                                <Link to="/register" className="block hover:text-gray-300 transition-colors duration-200 text-primary-text text-center">
+                                <Link to="/register" className="block hover:text-gray-300 transition-colors duration-200 text-light1 text-center">
                                     Register
                                 </Link>
                             </>
