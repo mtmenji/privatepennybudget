@@ -12,14 +12,22 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    nickname: {
+        type: String,
+        required: true
+    },
+    theme: {
+        type: String,
+        required: true
     }
 })
 
 //Static Register Method
-userSchema.statics.register = async function (email, password) {
+userSchema.statics.register = async function (email, password, nickname, theme) {
 
-    //Validation: Is the email or password missing?
-    if (!email || !password) {
+    //Validation: Are any inputs missing?
+    if (!email || !password || !nickname || !theme) {
         throw Error('All fields must be filled.')
     }
     //Validation: Is the email valid?
@@ -41,7 +49,7 @@ userSchema.statics.register = async function (email, password) {
     const hash = await bcrypt.hash(password, salt)
 
     //Create user.
-    const user = await this.create({ email, password: hash})
+    const user = await this.create({ email, password: hash, nickname, theme})
     return user
 }
 

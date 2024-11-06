@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-input.error {
-    border: 1px solid #e7195a;
-}
-
 /* Theme: Blue */
 .theme-blue {
     --dark1: #0A3D62;
@@ -19,4 +14,42 @@ input.error {
     --button: #3498DB;
     --buttonhover: #5DADE2;
     --bodytext: #000000;
+}
+
+/* Theme: Green */
+.theme-green {
+    --dark1: #0D4D1A;
+    --dark2: #1B5E20;
+    --dark3: #388E3C;
+    --light1: #E0F2F1;
+    --light2: #81C784;
+    --light3: #66BB6A;
+    --button: #388E3C;
+    --buttonhover: #66BB6A;
+    --bodytext: #000000;
+}
+
+/* Theme: Pink */
+.theme-pink {
+    --dark1: #880E4F;
+    --dark2: #C2185B;
+    --dark3: #D81B60;
+    --light1: #F3E5F5;
+    --light2: #F48FB1;
+    --light3: #F06292;
+    --button: #D81B60;
+    --buttonhover: #F06292;
+    --bodytext: #000000;
+}
+
+.theme-parchment {
+    --dark1: #5f472e;
+    --dark2: #866554;
+    --dark3: #9e8069;
+    --light1: #f8f7f4;
+    --light2: #e9e1ce;
+    --light3: #d4c4a8;
+    --button: #A67C52;
+    --buttonhover: #BF8E62;
+    --bodytext: #3E3A33;
 }

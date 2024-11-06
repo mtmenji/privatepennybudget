@@ -18,7 +18,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 placeholder="Email"
-                className="p-2 bg-light1 text-bodytext rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 md:w-48"
+                className="bg-light1 px-2 text-bodytext rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 md:w-48"
             />
 
             <input
@@ -26,16 +26,16 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 placeholder="Password"
-                className="p-2 bg-light1 text-bodytext rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 md:w-48"
+                className="bg-light1 px-2 text-bodytext rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 md:w-48"
             />
 
             <button
                 disabled={isLoading}
-                className={`p-2 bg-button text-light1 rounded-md font-semibold transition-colors duration-200 hover:bg-buttonhover focus:outline-none ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`bg-button px-2 text-light1 rounded-md font-semibold transition-colors duration-200 hover:bg-buttonhover focus:outline-none ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
                 Log In
             </button>
-            {error && <div className="error">{error}</div>}
+            {error && <div className="text-red-500">{error}</div>}
         </form>
     )
 }

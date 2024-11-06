@@ -4,7 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import TransactionDetails from '../components/TransactionDetails'
 import TransactionForm from '../components/TransactionForm'
 
-const Home = () => {
+const Dashboard = () => {
 
     const {transactions, dispatch} = useTransactionsContext()
     const {user} = useAuthContext()
@@ -29,7 +29,7 @@ const Home = () => {
     }, [dispatch, user])
 
     return (
-        <div className='home'>
+        <div className='dashboard'>
             <h2>DASHBOARD</h2>
             <div>
                 {transactions && transactions.map((transaction) => (
@@ -41,4 +41,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Dashboard
