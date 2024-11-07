@@ -23,7 +23,7 @@ const userSchema = new Schema({
     }
 })
 
-//Static Register Method
+// Register
 userSchema.statics.register = async function (email, password, nickname, theme) {
 
     //Validation: Are any inputs missing?
@@ -53,7 +53,7 @@ userSchema.statics.register = async function (email, password, nickname, theme) 
     return user
 }
 
-//Static Login Method
+// Login
 userSchema.statics.login = async function(email, password) {
     //Validation: Did the user enter a email and password?
     if (!email || !password) {
@@ -74,7 +74,7 @@ userSchema.statics.login = async function(email, password) {
     return user
 }
 
-// Instance Method to Update User
+// Update User
 userSchema.methods.update = async function (email, password, nickname, theme) {
     // Update the fields that were provided
     if (email) {
@@ -104,6 +104,17 @@ userSchema.methods.update = async function (email, password, nickname, theme) {
     // Save the updated user
     await this.save()
     return this
+}
+
+// Delete User
+userSchema.methods.deleteUser = async function (password) {
+    const match = await bcrypt.compare(password, this.password)
+    if (!match) {
+        throw Error('Incorrect password.')
+    }
+
+    await this.deleteOne()
+    return { message: 'Account deleted successfully.' }
 }
 
 module.exports = mongoose.model('User', userSchema)

@@ -49,6 +49,18 @@ const updateUser = async (req, res) => {
     }
 }
 
+// Delete Account
+const deleteUser = async (req, res) => {
+    const { password } = req.body
+    const userId = req.user._id
 
+    try {
+        const user = await User.findById(userId)
+        const response = await user.deleteUser(password)
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
 
-module.exports = { loginUser, registerUser, updateUser }
+module.exports = { loginUser, registerUser, updateUser, deleteUser }

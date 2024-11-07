@@ -7,7 +7,8 @@ const Settings = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [nickname, setNickname] = useState('')
     const [theme, setTheme] = useState('')
-    const {settings, error, isLoading, successMessage} = useSettings()
+    const [deletePassword, setDeletePassword] = useState('')
+    const {settings, deleteAccount, error, isLoading, successMessage} = useSettings()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -16,6 +17,14 @@ const Settings = () => {
             return
         }
         await settings(email, password, nickname, theme)
+    }
+
+    const handleDeleteAccount = async (e) => {
+        e.preventDefault()
+        if (!window.confirm("Are you sure you want to delete your account? This action is irreversible.")) {
+            return
+        }
+        await deleteAccount(deletePassword)
     }
 
     return (
@@ -81,6 +90,18 @@ const Settings = () => {
                 
                 {successMessage && <div className="bg-dark1 text-light1 text-center rounded-md p-4 mt-4">{successMessage}</div>}
                 {error && <div className="bg-dark1 text-light1 text-center rounded-md p-4 mt-4">❌❌❌ {error} ❌❌❌</div>}
+
+                <hr className="my-8 border-t border-dark1" />
+                <h4 className="text-lg font-bold mt-8 text-dark1">Delete Account</h4>
+                <p className="text-sm text-dark1 mb-2">This action is irreversible. Please enter your password to confirm.</p>
+                <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    onChange={(e) => setDeletePassword(e.target.value)}
+                    value={deletePassword}
+                    className="w-full p-2 rounded-md mb-4 bg-light1"
+                />
+                <button onClick={handleDeleteAccount} className="w-full bg-button hover:bg-buttonhover text-light1 p-2 rounded-md">Delete Account</button>
             </form>
         </div>
     )
