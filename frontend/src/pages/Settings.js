@@ -29,7 +29,8 @@ const Settings = () => {
 
     return (
         <form onSubmit={handleSubmit} className="w-full p-6">
-            <h3 className="text-xl font-bold mb-4 text-dark1">Settings</h3>
+            <h3 className="text-xl font-bold text-dark1">Settings</h3>
+            <p className="text-sm text-dark1 mb-4">Fill in any part of the form to update your information!</p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
