@@ -32,4 +32,23 @@ const registerUser = async (req, res) => {
     }
 }
 
-module.exports = { loginUser, registerUser }
+// Update Account Settings
+const updateUser = async (req, res) => {
+
+    const {email, password, nickname, theme} = req.body
+    const userId = req.user._id
+
+    try {
+        const user = await User.findById(userId)
+        await user.update(email, password, nickname, theme)
+
+        const token = createToken(user._id)
+        return res.status(200).json({email: user.email, theme: user.theme, token})
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+
+
+module.exports = { loginUser, registerUser, updateUser }

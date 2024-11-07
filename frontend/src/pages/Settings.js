@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { useRegister } from '../hooks/useRegister'
+import { useSettings } from '../hooks/useSettings'
 
-const Register = () => {
+const Settings = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [nickname, setNickname] = useState('')
     const [theme, setTheme] = useState('')
-    const {register, error, isLoading} = useRegister()
+    const {settings, error, isLoading, successMessage} = useSettings()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -15,13 +15,13 @@ const Register = () => {
             alert("Passwords do not match!")
             return
         }
-        await register(email, password, nickname, theme)
+        await settings(email, password, nickname, theme)
     }
 
     return (
         <div className="bg-light1 flex h-full justify-center items-center w-[1000px]">
             <form onSubmit={handleSubmit} className="w-full max-w-3xl p-6 bg-light3 rounded-lg shadow-2xl">
-                <h3 className="text-xl font-bold mb-4 text-dark1">Register</h3>
+                <h3 className="text-xl font-bold mb-4 text-dark1">Settings</h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     <div>
@@ -31,7 +31,6 @@ const Register = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                             className="w-full p-2 border border-gray-300 rounded-md mb-4 bg-light1"
-                            required
                         />
                     </div>
                     <div>
@@ -41,7 +40,6 @@ const Register = () => {
                             onChange={(e) => setNickname(e.target.value)}
                             value={nickname}
                             className="w-full p-2 border border-gray-300 rounded-md mb-4 bg-light1"
-                            required
                         />
                     </div>
                 </div>
@@ -54,7 +52,6 @@ const Register = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             value={password}
                             className="w-full p-2 border border-gray-300 rounded-md mb-4 bg-light1"
-                            required
                         />
                     </div>
                     <div>
@@ -64,7 +61,6 @@ const Register = () => {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             value={confirmPassword}
                             className="w-full p-2 border border-gray-300 rounded-md bg-light1"
-                            required
                         />
                     </div>
                 </div>
@@ -74,7 +70,6 @@ const Register = () => {
                     onChange={(e) => setTheme(e.target.value)}
                     value={theme}
                     className="w-full p-2 border border-gray-300 rounded-md mb-4 bg-light1"
-                    required
                 >
                     <option value="Parchment" selected>Parchment</option>
                     <option value="Blue">Blue</option>
@@ -82,13 +77,13 @@ const Register = () => {
                     <option value="Pink">Pink</option>
                 </select>
 
-                <button disabled={isLoading} className="w-full mt-4 bg-button hover:bg-buttonhover text-white p-2 rounded-md">Register</button>
+                <button disabled={isLoading} className="w-full mt-4 bg-button hover:bg-buttonhover text-light1 p-2 rounded-md">Update Account</button>
                 
-
+                {successMessage && <div className="bg-dark1 text-light1 text-center rounded-md p-4 mt-4">{successMessage}</div>}
                 {error && <div className="bg-dark1 text-light1 text-center rounded-md p-4 mt-4">❌❌❌ {error} ❌❌❌</div>}
             </form>
         </div>
     )
 }
 
-export default Register
+export default Settings

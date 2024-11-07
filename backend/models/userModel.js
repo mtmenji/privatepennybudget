@@ -74,4 +74,36 @@ userSchema.statics.login = async function(email, password) {
     return user
 }
 
+// Instance Method to Update User
+userSchema.methods.update = async function (email, password, nickname, theme) {
+    // Update the fields that were provided
+    if (email) {
+        //Validation: Is the email valid?
+        if (!validator.isEmail(email)) {
+            throw Error('Email is not valid.')
+        }
+        //Validation: Does the email exist on the database already?
+        const emailExists = await mongoose.model('User').findOne({ email })
+        if (emailExists) {
+            throw Error('Email already in use.')
+        }
+        this.email = email
+    }
+    if (password) {
+        //Validation: Is the password strong?
+        if (!validator.isStrongPassword(password)) {
+            throw Error('Password is not strong enough.')
+        }
+        // If password is being updated, hash it first
+        const salt = await bcrypt.genSalt(10)
+        this.password = await bcrypt.hash(password, salt)
+    }
+    if (nickname) this.nickname = nickname
+    if (theme) this.theme = theme
+
+    // Save the updated user
+    await this.save()
+    return this
+}
+
 module.exports = mongoose.model('User', userSchema)
