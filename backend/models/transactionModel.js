@@ -24,7 +24,7 @@ const transactionSchema = new Schema({
     },
     user_id: {
         type: String,
-        require: true
+        required: true
     }
 }, {timestamps: true})
 
