@@ -1,5 +1,5 @@
 const express = require('express')
-const { createBudget, getBudgets } = require('../controllers/budgetController')
+const { createBudget, getBudgets, deleteBudget } = require('../controllers/budgetController')
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
@@ -14,7 +14,7 @@ router.get('/', getBudgets)
 router.post('/', createBudget)
 
 //DELETE a budget.
-
+router.delete('/:id', deleteBudget)
 //UPDATE a single budget.
 
 

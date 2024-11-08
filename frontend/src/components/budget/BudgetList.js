@@ -4,7 +4,7 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 import BudgetListItem from "./BudgetListItem"
 
 
-const BudgetList = ({ onCreateClick }) => {
+const BudgetList = ({ onCreateClick, onSelectBudget }) => {
 
     const {budgets, dispatch} = useBudgetContext()
     const {user} = useAuthContext()
@@ -29,7 +29,7 @@ const BudgetList = ({ onCreateClick }) => {
     }, [dispatch, user])
 
     return (
-        <div className='h-full'>
+        <div className='h-full w-full'>
             <h1>Monthly Budgets List</h1>
             <button 
                 onClick={onCreateClick} 
@@ -39,7 +39,7 @@ const BudgetList = ({ onCreateClick }) => {
             </button>
             <div>
                 {budgets && budgets.map((budget) => (
-                    <BudgetListItem key={budget._id} budget={budget} />
+                    <BudgetListItem key={budget._id} budget={budget} onSelectBudget={onSelectBudget}/>
                 ))}
             </div>
         </div>

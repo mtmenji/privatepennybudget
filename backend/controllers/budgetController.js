@@ -37,7 +37,17 @@ const createBudget = async (req, res) => {
 }
 
 //DELETE budget.
-
+const deleteBudget = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such budget.'})
+    }
+    const budget = await Budget.findOneAndDelete({_id: id})
+    if (!budget) {
+        return res.status(404).json({error: 'No such budget.'})
+    }
+    res.status(200).json(budget)
+}
 
 //UPDATE budget.
 
@@ -45,5 +55,6 @@ const createBudget = async (req, res) => {
 //Export
 module.exports = {
     getBudgets,
-    createBudget
+    createBudget,
+    deleteBudget
 }
