@@ -4,6 +4,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const path = require('path')
 
+const budgetRoutes = require('./routes/budgets')
 const transactionRoutes = require('./routes/transactions')
 const userRoutes = require('./routes/user')
 
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 })
 
 //Routes
+app.use('/budgets',budgetRoutes)
 app.use('/transactions',transactionRoutes)
 app.use('/user',userRoutes)
 
