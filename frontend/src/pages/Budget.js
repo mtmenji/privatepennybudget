@@ -54,6 +54,11 @@ const Budget = () => {
                 {shouldShowCreateForm && (
                     <BudgetCreate onCancel={() => setShowCreateForm(false)}/>
                 )}
+                {!shouldShowCreateForm && (
+                    <div>
+                        <p className='text-dark1 text-2xl font-bold'>It looks like you don't have any budget selected! Choose one from the Monthly Budget List!</p>
+                    </div>
+                )}
             </div>
         </section>
     )
