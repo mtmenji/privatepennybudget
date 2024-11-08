@@ -2,7 +2,11 @@ const Budget = require('../models/budgetModel')
 const mongoose = require('mongoose')
 
 //GET ALL budgets.
-
+const getBudgets = async (req, res) => {
+    const user_id = req.user._id
+    const budget = await Budget.find({ user_id }).sort({createdAt: -1})
+    res.status(200).json(budget)
+}
 
 //GET SINGLE budget.
 
@@ -40,5 +44,6 @@ const createBudget = async (req, res) => {
 
 //Export
 module.exports = {
+    getBudgets,
     createBudget
 }

@@ -6,6 +6,7 @@ const router = express.Router()
 router.use(requireAuth)
 
 //GET all budgets.
+router.get('/', createBudget)
 
 //GET a single budgets.
 
