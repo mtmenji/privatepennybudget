@@ -1,4 +1,33 @@
+import { useEffect } from 'react'
+import { useBudgetContext } from '../../hooks/useBudgetContext'
+import { useAuthContext } from '../../hooks/useAuthContext'
+import BudgetListItem from "./BudgetListItem"
+
+
 const BudgetList = ({ onCreateClick }) => {
+
+    const {budgets, dispatch} = useBudgetContext()
+    const {user} = useAuthContext()
+
+    useEffect(() => {
+        const fetchBudgets = async () => {
+            const response = await fetch('/budgets', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
+            const json = await response.json()
+
+            if (response.ok) {
+                dispatch({type: 'SET_BUDGETS', payload: json})
+            }
+        }
+
+        if (user) {
+            fetchBudgets()
+        }
+    }, [dispatch, user])
+
     return (
         <div className='h-full'>
             <h1>Monthly Budgets List</h1>
@@ -8,6 +37,11 @@ const BudgetList = ({ onCreateClick }) => {
             >
                 Create Budget
             </button>
+            <div>
+                {budgets && budgets.map((budget) => (
+                    <BudgetListItem key={budget._id} budget={budget} />
+                ))}
+            </div>
         </div>
     )
 

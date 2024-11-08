@@ -1,11 +1,51 @@
 import { useState } from 'react';
+import { useBudgetContext } from '../../hooks/useBudgetContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const BudgetCreate = ({ onCancel }) => {
+  const { dispatch } = useBudgetContext();
+  const { user } = useAuthContext();
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [useCategories, setUseCategories] = useState(null);
   const [copyAmounts, setCopyAmounts] = useState(null);
   const [selectedBudget, setSelectedBudget] = useState('');
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!user) {
+        setError('You must be logged in.');
+        return;
+    }
+
+    const budget = { month, year, useCategories, copyAmounts, selectedBudget };
+
+    const response = await fetch('/budgets', {
+        method: 'POST',
+        body: JSON.stringify(budget),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+        }
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+        setError(json.error);
+    } else {
+        setMonth('');
+        setYear('');
+        setUseCategories(null);
+        setCopyAmounts(null);
+        setSelectedBudget('');
+        setError(null);
+        dispatch({ type: 'CREATE_BUDGET', payload: json });
+        onCancel();
+    }
+  }
 
   const handleCancel = () => {
     setMonth('')
@@ -17,7 +57,7 @@ const BudgetCreate = ({ onCancel }) => {
   }
 
   return (
-    <form className="w-full max-w-3xl p-6 bg-light3 rounded-lg shadow-2xl">
+    <form onSubmit={handleSubmit} className="w-full max-w-3xl p-6 bg-light3 rounded-lg shadow-2xl">
       <h3 className="text-xl font-bold mb-4 text-dark1">Create a New Budget</h3>
 
       {/* Select Month and Year */}
@@ -104,7 +144,7 @@ const BudgetCreate = ({ onCancel }) => {
       )}
 
       {/* Create Button */}
-      <button type="button" className="w-full mt-4 bg-button hover:bg-buttonhover text-white p-2 rounded-md">
+      <button type="submit" className="w-full mt-4 bg-button hover:bg-buttonhover text-white p-2 rounded-md">
         Create
       </button>
       <button
@@ -114,6 +154,7 @@ const BudgetCreate = ({ onCancel }) => {
       >
         Cancel
       </button>
+      {error && <div className="error">{error}</div>}
     </form>
   );
 }

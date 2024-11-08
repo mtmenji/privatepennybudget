@@ -1,12 +1,12 @@
 const express = require('express')
-const { createBudget } = require('../controllers/budgetController')
+const { createBudget, getBudgets } = require('../controllers/budgetController')
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
 router.use(requireAuth)
 
 //GET all budgets.
-router.get('/', createBudget)
+router.get('/', getBudgets)
 
 //GET a single budgets.
 

@@ -4,15 +4,18 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { TransactionsContextProvider } from './context/TransactionContext';
 import { AuthContextProvider } from './context/AuthContext';
+import { BudgetContextProvider } from './context/BudgetContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <TransactionsContextProvider>
-        <App />
-      </TransactionsContextProvider>
+      <BudgetContextProvider>
+        <TransactionsContextProvider>
+          <App />
+        </TransactionsContextProvider>
+      </BudgetContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );
