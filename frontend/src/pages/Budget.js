@@ -67,7 +67,6 @@ const Budget = () => {
                 <BudgetList onCreateClick={() => setShowCreateForm(true)} onSelectBudget={handleSelectBudget}/>
                 )}
                 
-                {/* Button on the outside right edge of the BudgetList */}
                 <button
                 onClick={() => setIsListVisible(!isListVisible)}
                 className="absolute right-0 top-0 bottom-0 transform translate-x-full bg-dark1 text-white hover:bg-buttonhover"
@@ -84,15 +83,12 @@ const Budget = () => {
                     <BudgetCreate onCancel={() => setShowCreateForm(false)}/>
                 )}
                 {!shouldShowCreateForm && (
-                    // <div>
-                    //     <p className='text-dark1 text-2xl font-bold'>It looks like you don't have any budget selected! Choose one from the Monthly Budget List!</p>
-                    // </div>
                     <div>
                         {selectedBudget ? (
                             <BudgetDetails key={selectedBudget._id} budget={selectedBudget} />
                         ) : (
                             <p className='text-dark1 text-2xl font-bold'>
-                                No budget found for January 2025. Choose another from the Monthly Budget List!
+                                No budget selected. Choose one from the Monthly Budget List!
                             </p>
                         )}
                     </div>

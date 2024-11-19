@@ -28,17 +28,34 @@ const BudgetList = ({ onCreateClick, onSelectBudget }) => {
         }
     }, [dispatch, user])
 
+    const getMonthNumber = (month) => {
+        const monthMap = {
+            January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
+            July: 7, August: 8, September: 9, October: 10, November: 11, December: 12
+        }
+        return monthMap[month] || 0 // Default to 0 for invalid month names
+    }
+
+    const sortedBudgets = budgets
+    ? [...budgets].sort((a, b) => {
+        if (b.year !== a.year) {
+            return b.year - a.year
+        }
+        return getMonthNumber(b.month) - getMonthNumber(a.month)
+    })
+    : []
+
     return (
         <div className='h-full w-full'>
-            <h1>Monthly Budgets List</h1>
+            <h1>Monthly Budget List</h1>
             <button 
                 onClick={onCreateClick} 
-                className="mt-4 bg-button text-white p-2 rounded-md hover:bg-buttonhover"
+                className="mt-4 w-full bg-light1 text-dark1 p-2 hover:bg-light3"
             >
-                Create Budget
+                Create A Budget
             </button>
             <div>
-                {budgets && budgets.map((budget) => (
+                {sortedBudgets.map((budget) => (
                     <BudgetListItem key={budget._id} budget={budget} onSelectBudget={onSelectBudget}/>
                 ))}
             </div>

@@ -39,7 +39,7 @@ const BudgetListItem = ({ budget, onSelectBudget }) => {
             </button>
             <button 
                 onClick={() => onSelectBudget(budget)} 
-                className="w-full text-left p-2 bg-dark1 text-white hover:bg-dark2"
+                className="w-full text-left p-2 bg-dark1 text-light1 hover:bg-dark2"
             >
                 {budget.month} {budget.year}
             </button>
