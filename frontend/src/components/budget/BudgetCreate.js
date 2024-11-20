@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useBudgetContext } from '../../hooks/useBudgetContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -10,7 +10,33 @@ const BudgetCreate = ({ onCancel }) => {
   const [useCategories, setUseCategories] = useState(null);
   const [copyAmounts, setCopyAmounts] = useState(null);
   const [selectedBudget, setSelectedBudget] = useState('');
+  const [availableBudgets, setAvailableBudgets] = useState([]);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (useCategories && user) {
+      const fetchBudgets = async () => {
+        try {
+          const response = await fetch('http://localhost:4001/budgets', {
+            headers: {
+              'Authorization': `Bearer ${user.token}`,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to fetch budgets');
+          }
+
+          const budgets = await response.json();
+          setAvailableBudgets(budgets);
+        } catch (err) {
+          setError(err.message);
+        }
+      };
+
+      fetchBudgets();
+    }
+  }, [useCategories, user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,8 +141,10 @@ const BudgetCreate = ({ onCancel }) => {
             required
           >
             <option value="" disabled>Select Budget</option>
-            {["January 2022", "February 2022", "March 2022"].map((budget) => (
-              <option key={budget} value={budget}>{budget}</option>
+            {availableBudgets.map(({ month, year, id }) => (
+              <option key={id} value={id}>
+                {`${month} ${year}`}
+              </option>
             ))}
           </select>
 
