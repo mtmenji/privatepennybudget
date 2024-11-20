@@ -82,61 +82,87 @@ const BudgetDetails = ({ budget }) => {
     };
 
     return (
-        <div className="budget-details">
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Month:
-                    <input
-                        type="text"
-                        name="month"
-                        value={formData.month}
-                        onChange={handleChange}
-                    />
-                </label>
-
-                <label>
-                    Year:
-                    <input
-                        type="number"
-                        name="year"
-                        value={formData.year}
-                        onChange={handleChange}
-                    />
-                </label>
-
-                <h3>Categories:</h3>
-                {formData.categories.map((category, index) => (
-                    <div key={index} className="category-item">
-                        <label>
-                            Name:
-                            <input
-                                type="text"
-                                value={category.name}
-                                onChange={(e) => handleCategoryChange(index, 'name', e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Amount:
-                            <input
-                                type="number"
-                                value={category.amount}
-                                onChange={(e) => handleCategoryChange(index, 'amount', e.target.value)}
-                            />
-                        </label>
-                        <button type="button" onClick={() => removeCategory(index)}>
-                            Remove
-                        </button>
+        <div className="w-full p-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="text-center">
+                    <div className="flex justify-center space-x-2 text-2xl font-bold text-dark1">
+                        <select
+                            name="month"
+                            value={formData.month}
+                            onChange={handleChange}
+                            className="text-xl text-center font-bold bg-transparent border-none focus:outline-none appearance-none"
+                        >
+                            {[
+                                'January', 'February', 'March', 'April', 'May', 'June',
+                                'July', 'August', 'September', 'October', 'November', 'December'
+                            ].map((month) => (
+                                <option key={month} value={month}>
+                                    {month}
+                                </option>
+                            ))}
+                        </select>
+                        <input
+                            type="number"
+                            name="year"
+                            value={formData.year}
+                            onChange={handleChange}
+                            className="text-xl font-bold bg-transparent border-none w-20 text-center focus:outline-none"
+                        />
                     </div>
-                ))}
-                <button type="button" onClick={addCategory}>
+                </div>
+
+                <div>
+                    <h3 className="text-xl font-semibold">Categories:</h3>
+                    {formData.categories.map((category, index) => (
+                        <div key={index} className="flex flex-col sm:flex-row sm:space-x-4">
+                            <div className="w-full sm:w-1/2">
+                                <input
+                                    type="text"
+                                    value={category.name}
+                                    onChange={(e) => handleCategoryChange(index, 'name', e.target.value)}
+                                    placeholder="Name"
+                                    className="mt-1 block w-full p-3 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                                />
+                            </div>
+
+                            <div className="w-full sm:w-1/2">
+                                <input
+                                    type="number"
+                                    value={category.amount}
+                                    onChange={(e) => handleCategoryChange(index, 'amount', e.target.value)}
+                                    placeholder="Amount"
+                                    className="mt-1 block w-full p-3 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                                />
+                            </div>
+
+                            <button
+                                type="button"
+                                onClick={() => removeCategory(index)}
+                                className="mt-2 sm:mt-0 sm:ml-4 text-dark1 hover:text-dark3 sm:self-center material-symbols-outlined"
+                            >
+                                delete
+                            </button>
+                        </div>
+                    ))}
+                </div>
+
+                <button
+                    type="button"
+                    onClick={addCategory}
+                    className="w-full py-3 bg-button text-light1 rounded-lg hover:bg-buttonhover hover:text-dark1"
+                >
                     Add Category
                 </button>
 
-                <button type="submit" disabled={loading}>
+                <button
+                    type="submit"
+                    disabled={loading}
+                    className={`w-full py-3 mt-4 text-light1 rounded-lg ${loading ? 'bg-gray-500' : 'bg-button hover:bg-buttonhover hover:text-dark1'}`}
+                >
                     {loading ? 'Updating...' : 'Update Budget'}
                 </button>
 
-                {error && <p className="error">{error}</p>}
+                {error && <p className="text-warningcolor text-xl text-center">{error}</p>}
             </form>
         </div>
     );

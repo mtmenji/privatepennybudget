@@ -13,7 +13,8 @@ module.exports = {
         'light3': 'var(--light3)',
         'button': 'var(--button)',
         'buttonhover': 'var(--buttonhover)',
-        'bodytext': 'var(--bodytext)'
+        'bodytext': 'var(--bodytext)',
+        'warningcolor': 'var(--warningcolor)'
       },
     },
   },

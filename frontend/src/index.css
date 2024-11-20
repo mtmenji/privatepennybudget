@@ -14,6 +14,7 @@
     --button: #3498DB;
     --buttonhover: #5DADE2;
     --bodytext: #000000;
+    --warningcolor: #ef4444;
 }
 
 /* Theme: Green */
@@ -27,6 +28,7 @@
     --button: #388E3C;
     --buttonhover: #66BB6A;
     --bodytext: #000000;
+    --warningcolor: #ef4444;
 }
 
 /* Theme: Pink */
@@ -40,6 +42,7 @@
     --button: #D81B60;
     --buttonhover: #F06292;
     --bodytext: #000000;
+    --warningcolor: #ef4444;
 }
 
 .theme-parchment {
@@ -52,4 +55,5 @@
     --button: #A67C52;
     --buttonhover: #BF8E62;
     --bodytext: #3E3A33;
+    --warningcolor: #ef4444;
 }

@@ -83,7 +83,7 @@ const Budget = () => {
                     <BudgetCreate onCancel={() => setShowCreateForm(false)}/>
                 )}
                 {!shouldShowCreateForm && (
-                    <div>
+                    <div className="flex w-full justify-center">
                         {selectedBudget ? (
                             <BudgetDetails key={selectedBudget._id} budget={selectedBudget} />
                         ) : (
