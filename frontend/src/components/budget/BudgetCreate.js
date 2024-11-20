@@ -43,7 +43,8 @@ const BudgetCreate = ({ onCancel }) => {
     if (selectedBudget && user) {
       const fetchBudgetDetails = async () => {
         try {
-          const response = await fetch(`http://localhost:4001/budgets/672d903ea8878aa90d150070`, {
+          console.log(`TEST 101: ${selectedBudget}`)
+          const response = await fetch(`http://localhost:4001/budgets/${selectedBudget}`, {
             headers: {
               'Authorization': `Bearer ${user.token}`,
             },
@@ -173,8 +174,8 @@ const BudgetCreate = ({ onCancel }) => {
             required
           >
             <option value="" disabled>Select Budget</option>
-            {availableBudgets.map(({ month, year, id }) => (
-              <option key={id} value={id}>
+            {availableBudgets.map(({ month, year, _id }) => (
+              <option key={_id} value={_id}>
                 {`${month} ${year}`}
               </option>
             ))}
