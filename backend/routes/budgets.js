@@ -1,5 +1,5 @@
 const express = require('express')
-const { createBudget, getBudgets, deleteBudget, updateBudget } = require('../controllers/budgetController')
+const { createBudget, getBudgets, deleteBudget, updateBudget, getBudget } = require('../controllers/budgetController')
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
@@ -9,6 +9,7 @@ router.use(requireAuth)
 router.get('/', getBudgets)
 
 //GET a single budgets.
+router.get('/:id', getBudget)
 
 //POST a single budget.
 router.post('/', createBudget)

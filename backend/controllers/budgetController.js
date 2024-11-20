@@ -9,7 +9,15 @@ const getBudgets = async (req, res) => {
 }
 
 //GET SINGLE budget.
-
+const getBudget = async (req, res) => {
+    const { id } = req.params
+    const user_id = req.user._id
+    const budget = await Budget.findOne({_id: id, user_id});
+    if (!budget) {
+        return res.status(404).json({message: "Budget not found."})
+    }
+    res.status(200).json(budget)
+}
 
 //CREATE budget.
 const createBudget = async (req, res) => {
@@ -51,35 +59,30 @@ const deleteBudget = async (req, res) => {
 
 //UPDATE budget.
 const updateBudget = async (req, res) => {
-    const { id } = req.params; // Get the budget ID from the route params
-    const { month, year, categories } = req.body; // Destructure the fields from the request body
-    const user_id = req.user._id; // Get the authenticated user's ID
+    const { id } = req.params;
+    const { month, year, categories } = req.body;
+    const user_id = req.user._id;
 
-    // Check if the ID is a valid MongoDB ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such budget.' });
     }
 
-    // Build the update object dynamically based on provided fields
     const updateFields = {};
     if (month !== undefined) updateFields.month = month;
     if (year !== undefined) updateFields.year = year;
     if (categories !== undefined) updateFields.categories = categories;
 
     try {
-        // Find the budget by ID and user ID and update it
         const budget = await Budget.findOneAndUpdate(
-            { _id: id, user_id }, // Filter by ID and authenticated user
-            { $set: updateFields }, // Update only the provided fields
-            { new: true } // Return the updated document
+            { _id: id, user_id },
+            { $set: updateFields },
+            { new: true }
         );
 
-        // If no budget was found, return an error
         if (!budget) {
             return res.status(404).json({ error: 'No such budget.' });
         }
 
-        // Return the updated budget
         res.status(200).json(budget);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -89,6 +92,7 @@ const updateBudget = async (req, res) => {
 //Export
 module.exports = {
     getBudgets,
+    getBudget,
     createBudget,
     deleteBudget,
     updateBudget

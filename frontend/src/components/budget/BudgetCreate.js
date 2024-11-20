@@ -7,6 +7,7 @@ const BudgetCreate = ({ onCancel }) => {
   const { user } = useAuthContext();
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
+  const [categories, setCategories] = useState([]);
   const [useCategories, setUseCategories] = useState(null);
   const [copyAmounts, setCopyAmounts] = useState(null);
   const [selectedBudget, setSelectedBudget] = useState('');
@@ -38,6 +39,35 @@ const BudgetCreate = ({ onCancel }) => {
     }
   }, [useCategories, user]);
 
+  useEffect(() => {
+    if (selectedBudget && user) {
+      const fetchBudgetDetails = async () => {
+        try {
+          const response = await fetch(`http://localhost:4001/budgets/672d903ea8878aa90d150070`, {
+            headers: {
+              'Authorization': `Bearer ${user.token}`,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to fetch budget details');
+          }
+
+          const budget = await response.json();
+          const copiedCategories = budget.categories.map((category) => ({
+            name: category.name,
+            amount: copyAmounts ? category.amount : 0,
+          }));
+          setCategories(copiedCategories);
+        } catch (err) {
+          setError(err.message);
+        }
+      };
+
+      fetchBudgetDetails();
+    }
+  }, [selectedBudget, copyAmounts, user]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,7 +76,7 @@ const BudgetCreate = ({ onCancel }) => {
         return;
     }
 
-    const budget = { month, year, useCategories, copyAmounts, selectedBudget };
+    const budget = { month, year, categories };
 
     const response = await fetch('/budgets', {
         method: 'POST',
@@ -67,6 +97,7 @@ const BudgetCreate = ({ onCancel }) => {
         setUseCategories(null);
         setCopyAmounts(null);
         setSelectedBudget('');
+        setCategories([]);
         setError(null);
         dispatch({ type: 'CREATE_BUDGET', payload: json });
         onCancel();
@@ -79,6 +110,7 @@ const BudgetCreate = ({ onCancel }) => {
     setUseCategories(null)
     setCopyAmounts(null)
     setSelectedBudget('')
+    setCategories([])
     onCancel()
   }
 
