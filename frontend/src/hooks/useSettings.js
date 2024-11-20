@@ -31,7 +31,6 @@ export const useSettings = () => {
 
         const user = JSON.parse(localStorage.getItem('user'))
         const token = user ? user.token : null;
-        console.log('Token: ', token)
 
         const response = await fetch('http://localhost:4001/user/settings', {
             method: 'PUT',
