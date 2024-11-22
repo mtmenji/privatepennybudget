@@ -14,9 +14,8 @@ const transactionSchema = new Schema({
         type: String,
         required: true
     },
-    subcategory: {
-        type: String,
-        required: true
+    note: {
+        type: String
     },
     value: {
         type: Number,

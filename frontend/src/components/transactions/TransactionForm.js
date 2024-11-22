@@ -1,7 +1,7 @@
-import '../index.css'
+import '../../index.css'
 import { useState } from "react"
-import { useTransactionsContext } from '../hooks/useTransactionsContext'
-import { useAuthContext } from '../hooks/useAuthContext'
+import { useTransactionsContext } from '../../hooks/useTransactionsContext'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 const TransactionForm = () => {
 
@@ -11,7 +11,7 @@ const TransactionForm = () => {
     const [title, setTitle] = useState('')
     const [date, setDate] = useState('')
     const [category, setCategory] = useState('')
-    const [subcategory, setSubcategory] = useState('')
+    const [note, setNote] = useState('')
     const [value, setValue] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
@@ -24,7 +24,7 @@ const TransactionForm = () => {
             return
         }
 
-        const transaction = {title, date, category, subcategory, value}
+        const transaction = {title, date, category, note, value}
         const response = await fetch('/transactions', {
             method: 'POST',
             body: JSON.stringify(transaction),
@@ -37,14 +37,14 @@ const TransactionForm = () => {
 
         if (!response.ok) {
             setError(json.error)
-            setEmptyFields(json.emptyFields)
+            setEmptyFields(json.emptyFields || [])
         }
 
         if (response.ok) {
             setTitle('')
             setDate('')
             setCategory('')
-            setSubcategory('')
+            setNote('')
             setValue('')
             setError(null)
             setEmptyFields([])
@@ -54,18 +54,7 @@ const TransactionForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h3>Add a New Transaction</h3>
-
-            <label>Transaction Title:</label>
-            <input
-                type='text'
-                onChange={(e) => setTitle(e.target.value)}
-                value={title}
-                className={emptyFields.includes('title') ? 'error' : ''}
-            />
-
-            <label>Date:</label>
+        <form onSubmit={handleSubmit} className='flex justify-around'>
             <input
                 type='date'
                 onChange={(e) => setDate(e.target.value)}
@@ -73,31 +62,42 @@ const TransactionForm = () => {
                 className={emptyFields.includes('date') ? 'error' : ''}
             />
 
-            <label>Category:</label>
             <input
                 type='text'
+                placeholder='Title'
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+                className={emptyFields.includes('title') ? 'error' : ''}
+            />
+
+            <input
+                type='text'
+                placeholder='Category'
                 onChange={(e) => setCategory(e.target.value)}
                 value={category}
                 className={emptyFields.includes('category') ? 'error' : ''}
             />
 
-            <label>Sub-Category:</label>
             <input
                 type='text'
-                onChange={(e) => setSubcategory(e.target.value)}
-                value={subcategory}
-                className={emptyFields.includes('subcategory') ? 'error' : ''}
+                placeholder='Note'
+                onChange={(e) => setNote(e.target.value)}
+                value={note}
+                className={emptyFields.includes('note') ? 'error' : ''}
             />
 
-            <label>Value:</label>
-            <input
-                type='number'
-                onChange={(e) => setValue(e.target.value)}
-                value={value}
-                className={emptyFields.includes('value') ? 'error' : ''}
-            />
+            <div className='flex flex-row'>
+                <p>$</p>
+                <input
+                    type='number'
+                    placeholder='0'
+                    onChange={(e) => setValue(e.target.value)}
+                    value={value}
+                    className={emptyFields.includes('value') ? 'error' : ''}
+                />
+            </div>
 
-            <button>Add Transaction</button>
+            <button className='material-symbols-outlined'>add</button>
             {error && <div>{error}</div>}
         </form>
     )

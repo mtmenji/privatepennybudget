@@ -23,7 +23,7 @@ const getTransaction = async (req, res) => {
 
 //CREATE transaction.
 const createTransaction = async (req, res) => {
-    const {date, title, category, subcategory, value} = req.body
+    const {date, title, category, note, value} = req.body
 
     let emptyFields = []
     if(!title) {
@@ -38,16 +38,13 @@ const createTransaction = async (req, res) => {
     if (!value) {
         emptyFields.push('value')
     }
-    if (!subcategory) {
-        emptyFields.push('subcategory')
-    }
     if (emptyFields.length > 0) {
-        return res.status(400).json({error: 'Please fill in all the fields.', emptyFields})
+        return res.status(400).json({error: 'Please fill in all the fields (note not required).', emptyFields})
     }
 
     try {
         const user_id = req.user._id
-        const transaction = await Transaction.create({date, title, category, subcategory, value, user_id})
+        const transaction = await Transaction.create({date, title, category, note, value, user_id})
         
         res.status(200).json(transaction)
     } catch (error) {

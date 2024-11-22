@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Budget from './pages/Budget';
+import Transactions from './pages/Transactions';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
             <Route path='/register' element={!user ? <Register /> : <Navigate to='/' />}/>
             <Route path='/settings' element={user ? <Settings /> : <Navigate to='/' />}/>
             <Route path='/budget' element={user ? <Budget /> : <Navigate to='/' />}/>
+            <Route path='/transactions' element={user ? <Transactions /> : <Navigate to='/' />}/>
           </Routes>
         </div>
         <Footer />
