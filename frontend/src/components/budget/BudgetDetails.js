@@ -97,7 +97,7 @@ const BudgetDetails = ({ budget }) => {
                             name="month"
                             value={formData.month}
                             onChange={handleChange}
-                            className="text-4xl text-center font-bold bg-transparent border-none focus:outline-none appearance-none"
+                            className="text-2xl text-center font-bold bg-transparent border-none focus:outline-none appearance-none"
                         >
                             {[
                                 'January', 'February', 'March', 'April', 'May', 'June',
@@ -113,7 +113,7 @@ const BudgetDetails = ({ budget }) => {
                             name="year"
                             value={formData.year}
                             onChange={handleChange}
-                            className="text-4xl font-bold bg-transparent border-none w-24 text-center focus:outline-none"
+                            className="text-2xl font-bold bg-transparent border-none w-24 text-center focus:outline-none"
                         />
                     </div>
                 </div>
@@ -122,30 +122,30 @@ const BudgetDetails = ({ budget }) => {
 
                 <div className="flex items-center justify-between space-x-4">
                     <div className="w-full sm:w-1/2">
-                        <h3 className="text-xl font-semibold text-bodytext">Budgeted Income:</h3>
+                        <h3 className="text-lg font-semibold text-bodytext">Budgeted Income:</h3>
                         <input
                             type="number"
                             name="budgetedIncome"
                             value={formData.budgetedIncome}
                             onChange={handleChange}
                             placeholder="Enter budgeted income"
-                            className="mt-1 block w-full p-3 border border-dark1 text-bodytext rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                            className="mt-1 block w-full p-2 border border-dark1 text-bodytext text-sm rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
                         />
                     </div>
                     <div className="w-full sm:w-1/2 sm:mt-0">
-                        <h3 className="text-xl font-semibold text-bodytext">Planned Expenses:</h3>
-                        <p className="text-lg text-bodytext bg-light2 p-3 rounded-md border border-dark1">${plannedExpenses.toFixed(2)}</p>
+                        <h3 className="text-lg font-semibold text-bodytext">Planned Expenses:</h3>
+                        <p className="text-sm text-bodytext bg-light2 p-2 rounded-md border border-dark1">${plannedExpenses.toFixed(2)}</p>
                     </div>
                     <div className="w-full sm:w-1/2 sm:mt-0">
-                        <h3 className="text-xl font-semibold text-bodytext">Remaining Income:</h3>
-                        <p className={`text-lg text-bodytext p-3 rounded-md border border-dark1 ${formData.budgetedIncome - plannedExpenses < 0 ? 'bg-warningcolor': 'bg-light2'}`}>${(formData.budgetedIncome-plannedExpenses).toFixed(2)}</p>
+                        <h3 className="text-lg font-semibold text-bodytext">Remaining Income:</h3>
+                        <p className={`text-sm text-bodytext p-2 rounded-md border border-dark1 ${formData.budgetedIncome - plannedExpenses < 0 ? 'bg-warningcolor': 'bg-light2'}`}>${(formData.budgetedIncome-plannedExpenses).toFixed(2)}</p>
                     </div>
                 </div>
 
                 <hr className='border-t-2 border-dark1 mt-2'/>
 
                 <div>
-                    <h3 className="text-xl font-semibold">Categories and Amounts:</h3>
+                    <h3 className="text-lg font-semibold">Categories and Amounts:</h3>
                     {formData.categories.map((category, index) => (
                         <div key={index} className="flex flex-col sm:flex-row sm:space-x-4">
                             <div className="w-full sm:w-1/2">
@@ -154,7 +154,7 @@ const BudgetDetails = ({ budget }) => {
                                     value={category.name}
                                     onChange={(e) => handleCategoryChange(index, 'name', e.target.value)}
                                     placeholder="Name"
-                                    className="mt-1 block w-full p-3 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                                    className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
                                 />
                             </div>
 
@@ -164,7 +164,7 @@ const BudgetDetails = ({ budget }) => {
                                     value={category.amount}
                                     onChange={(e) => handleCategoryChange(index, 'amount', e.target.value)}
                                     placeholder="Amount"
-                                    className="mt-1 block w-full p-3 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                                    className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
                                 />
                             </div>
 
@@ -179,21 +179,25 @@ const BudgetDetails = ({ budget }) => {
                     ))}
                 </div>
 
-                <button
-                    type="button"
-                    onClick={addCategory}
-                    className="w-full py-3 bg-button text-light1 rounded-lg hover:bg-buttonhover hover:text-dark1"
-                >
-                    Add Category
-                </button>
+                <hr className='border-t-2 border-dark1 mt-2'/>
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className={`w-full py-3 mt-4 text-light1 rounded-lg ${loading ? 'bg-gray-500' : 'bg-button hover:bg-buttonhover hover:text-dark1'}`}
-                >
-                    {loading ? 'Updating...' : 'Update Budget'}
-                </button>
+                <div className="flex flex-col sm:flex-row sm:space-x-4 sm:items-center">
+                    <button
+                        type="button"
+                        onClick={addCategory}
+                        className="w-full py-1 bg-button text-light1 rounded-lg hover:bg-buttonhover hover:text-dark1"
+                    >
+                        Add Category
+                    </button>
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={`w-full py-1 text-light1 rounded-lg ${loading ? 'bg-gray-500' : 'bg-button hover:bg-buttonhover hover:text-dark1'}`}
+                    >
+                        {loading ? 'Updating...' : 'Update Budget'}
+                    </button>
+                </div>
 
                 {error && <p className="text-warningcolor text-xl text-center">{error}</p>}
             </form>
