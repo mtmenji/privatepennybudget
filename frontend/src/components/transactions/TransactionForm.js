@@ -54,51 +54,64 @@ const TransactionForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className='flex justify-around'>
+        <form onSubmit={handleSubmit} className="flex flex-wrap items-center justify-around gap-4 mt-2">
             <input
-                type='date'
+                type="date"
                 onChange={(e) => setDate(e.target.value)}
                 value={date}
-                className={emptyFields.includes('date') ? 'error' : ''}
+                className={`p-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    emptyFields.includes('date') ? 'border-warningcolor' : 'border-light3'
+                }`}
             />
 
             <input
-                type='text'
-                placeholder='Title'
+                type="text"
+                placeholder="Title"
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
-                className={emptyFields.includes('title') ? 'error' : ''}
+                className={`p-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    emptyFields.includes('title') ? 'border-warningcolor' : 'border-light3'
+                }`}
             />
 
             <input
-                type='text'
-                placeholder='Category'
+                type="text"
+                placeholder="Category"
                 onChange={(e) => setCategory(e.target.value)}
                 value={category}
-                className={emptyFields.includes('category') ? 'error' : ''}
+                className={`p-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    emptyFields.includes('category') ? 'border-warningcolor' : 'border-light3'
+                }`}
             />
 
             <input
-                type='text'
-                placeholder='Note'
+                type="text"
+                placeholder="Note"
                 onChange={(e) => setNote(e.target.value)}
                 value={note}
-                className={emptyFields.includes('note') ? 'error' : ''}
+                className={`p-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    emptyFields.includes('note') ? 'border-warningcolor' : 'border-light3'
+                }`}
             />
 
-            <div className='flex flex-row'>
-                <p>$</p>
+            <div className="flex items-center">
+                <p className="mr-2">$</p>
                 <input
-                    type='number'
-                    placeholder='0'
+                    type="number"
+                    placeholder="0"
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
-                    className={emptyFields.includes('value') ? 'error' : ''}
+                    className={`p-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                        emptyFields.includes('value') ? 'border-warningcolor' : 'border-light3'
+                    }`}
                 />
             </div>
 
-            <button className='material-symbols-outlined'>add</button>
-            {error && <div>{error}</div>}
+            <button className="material-symbols-outlined border border-dark1 rounded-md bg-dark1 text-light1 font-bold">
+                add
+            </button>
+
+            {error && <div className="text-warningcolor">{error}</div>}
         </form>
     )
 }

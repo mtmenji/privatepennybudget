@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 //GET ALL transactions.
 const getTransactions = async (req, res) => {
     const user_id = req.user._id
-    const transactions = await Transaction.find({ user_id }).sort({createdAt: -1}) //-1 means descending order.
+    const transactions = await Transaction.find({ user_id }).sort({createdAt: -1})    
     res.status(200).json(transactions)
 }
 
@@ -39,12 +39,18 @@ const createTransaction = async (req, res) => {
         emptyFields.push('value')
     }
     if (emptyFields.length > 0) {
-        return res.status(400).json({error: 'Please fill in all the fields (note not required).', emptyFields})
+        return res.status(400).json({error: 'Please fill in all the required fields.', emptyFields})
     }
 
     try {
         const user_id = req.user._id
-        const transaction = await Transaction.create({date, title, category, note, value, user_id})
+        const transaction = await Transaction.create({
+            date: new Date(date).toISOString().split('T')[0],
+            title,
+            category,
+            note,
+            value,
+            user_id})
         
         res.status(200).json(transaction)
     } catch (error) {
