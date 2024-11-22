@@ -20,6 +20,9 @@ const budgetSchema = new Schema({
             required: true
         }
     }],
+    budgetedIncome: {
+        type: Number
+    },
     user_id: {
         type: String,
         required: true

@@ -4,6 +4,7 @@ const BudgetDetails = ({ budget }) => {
     const [formData, setFormData] = useState({
         month: budget.month,
         year: budget.year,
+        budgetedIncome: budget.budgetedIncome || 0,
         categories: budget.categories,
     });
 
@@ -47,6 +48,12 @@ const BudgetDetails = ({ budget }) => {
         }));
     };
 
+    // Calculate total planned expenses
+    const plannedExpenses = formData.categories.reduce((sum, category)=> {
+        const amount = parseFloat(category.amount) || 0
+        return sum + amount
+    }, 0);
+
     // Submit the updated budget to the server
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -85,12 +92,12 @@ const BudgetDetails = ({ budget }) => {
         <div className="w-full p-6">
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="text-center">
-                    <div className="flex justify-center space-x-2 text-2xl font-bold text-dark1">
+                    <div className="flex justify-center space-x-2 font-bold text-bodytext">
                         <select
                             name="month"
                             value={formData.month}
                             onChange={handleChange}
-                            className="text-xl text-center font-bold bg-transparent border-none focus:outline-none appearance-none"
+                            className="text-4xl text-center font-bold bg-transparent border-none focus:outline-none appearance-none"
                         >
                             {[
                                 'January', 'February', 'March', 'April', 'May', 'June',
@@ -106,13 +113,39 @@ const BudgetDetails = ({ budget }) => {
                             name="year"
                             value={formData.year}
                             onChange={handleChange}
-                            className="text-xl font-bold bg-transparent border-none w-20 text-center focus:outline-none"
+                            className="text-4xl font-bold bg-transparent border-none w-24 text-center focus:outline-none"
                         />
                     </div>
                 </div>
 
+                <hr className='border-t-2 border-dark1 mt-2'/>
+
+                <div className="flex items-center justify-between space-x-4">
+                    <div className="w-full sm:w-1/2">
+                        <h3 className="text-xl font-semibold text-bodytext">Budgeted Income:</h3>
+                        <input
+                            type="number"
+                            name="budgetedIncome"
+                            value={formData.budgetedIncome}
+                            onChange={handleChange}
+                            placeholder="Enter budgeted income"
+                            className="mt-1 block w-full p-3 border border-dark1 text-bodytext rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                        />
+                    </div>
+                    <div className="w-full sm:w-1/2 sm:mt-0">
+                        <h3 className="text-xl font-semibold text-bodytext">Planned Expenses:</h3>
+                        <p className="text-lg text-bodytext bg-light2 p-3 rounded-md border border-dark1">${plannedExpenses.toFixed(2)}</p>
+                    </div>
+                    <div className="w-full sm:w-1/2 sm:mt-0">
+                        <h3 className="text-xl font-semibold text-bodytext">Remaining Income:</h3>
+                        <p className={`text-lg text-bodytext p-3 rounded-md border border-dark1 ${formData.budgetedIncome - plannedExpenses < 0 ? 'bg-warningcolor': 'bg-light2'}`}>${(formData.budgetedIncome-plannedExpenses).toFixed(2)}</p>
+                    </div>
+                </div>
+
+                <hr className='border-t-2 border-dark1 mt-2'/>
+
                 <div>
-                    <h3 className="text-xl font-semibold">Categories:</h3>
+                    <h3 className="text-xl font-semibold">Categories and Amounts:</h3>
                     {formData.categories.map((category, index) => (
                         <div key={index} className="flex flex-col sm:flex-row sm:space-x-4">
                             <div className="w-full sm:w-1/2">

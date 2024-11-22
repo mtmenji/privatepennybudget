@@ -21,7 +21,7 @@ const getBudget = async (req, res) => {
 
 //CREATE budget.
 const createBudget = async (req, res) => {
-    const {month, year, categories} = req.body
+    const {month, year, categories, budgetedIncome} = req.body
 
     let emptyFields = []
     if(!month) {
@@ -36,7 +36,7 @@ const createBudget = async (req, res) => {
 
     try {
         const user_id = req.user._id
-        const budget = await Budget.create({month, year, categories, user_id})
+        const budget = await Budget.create({month, year, categories, budgetedIncome, user_id})
         
         res.status(200).json(budget)
     } catch (error) {
@@ -60,7 +60,7 @@ const deleteBudget = async (req, res) => {
 //UPDATE budget.
 const updateBudget = async (req, res) => {
     const { id } = req.params;
-    const { month, year, categories } = req.body;
+    const { month, year, categories, budgetedIncome } = req.body;
     const user_id = req.user._id;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -71,6 +71,7 @@ const updateBudget = async (req, res) => {
     if (month !== undefined) updateFields.month = month;
     if (year !== undefined) updateFields.year = year;
     if (categories !== undefined) updateFields.categories = categories;
+    if (budgetedIncome !== undefined) updateFields.budgetedIncome = budgetedIncome;
 
     try {
         const budget = await Budget.findOneAndUpdate(

@@ -12,6 +12,7 @@ const BudgetCreate = ({ onCancel }) => {
   const [copyAmounts, setCopyAmounts] = useState(null);
   const [selectedBudget, setSelectedBudget] = useState('');
   const [availableBudgets, setAvailableBudgets] = useState([]);
+  const [budgetedIncome, setBudgetedIncome] = useState('');
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -77,7 +78,7 @@ const BudgetCreate = ({ onCancel }) => {
         return;
     }
 
-    const budget = { month, year, categories };
+    const budget = { month, year, categories, budgetedIncome };
 
     const response = await fetch('/budgets', {
         method: 'POST',
@@ -98,6 +99,7 @@ const BudgetCreate = ({ onCancel }) => {
         setUseCategories(null);
         setCopyAmounts(null);
         setSelectedBudget('');
+        setBudgetedIncome('');
         setCategories([]);
         setError(null);
         dispatch({ type: 'CREATE_BUDGET', payload: json });
@@ -112,6 +114,7 @@ const BudgetCreate = ({ onCancel }) => {
     setCopyAmounts(null)
     setSelectedBudget('')
     setCategories([])
+    setBudgetedIncome('')
     onCancel()
   }
 
@@ -140,6 +143,19 @@ const BudgetCreate = ({ onCancel }) => {
           value={year}
           className="w-full p-2 border border-gray-300 rounded-md bg-light1"
           placeholder="Enter Year"
+          required
+        />
+      </div>
+
+      {/* Select a Budgeted Income */}
+      <label className="block text-dark1 mb-2">What is your expected income?</label>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <input
+          type="number"
+          onChange={(e) => setBudgetedIncome(e.target.value)}
+          value={budgetedIncome}
+          className="w-full p-2 border border-gray-300 rounded-md bg-light1"
+          placeholder="Enter Income"
           required
         />
       </div>
