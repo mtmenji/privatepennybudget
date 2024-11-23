@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const TransactionFilter = () => {
+const TransactionFilter = ({setFilters}) => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [categories, setCategories] = useState([]);
@@ -16,13 +16,13 @@ const TransactionFilter = () => {
         setCategories(selectedOptions);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
+    useEffect(() => {
+        setFilters({ startDate, endDate, categories, minAmount, maxAmount });
+    }, [startDate, endDate, categories, minAmount, maxAmount, setFilters]);
 
     return (
         <div className="bg-dark2 border-b-2 border-dark1">
-            <form onSubmit={handleSubmit} className="flex flex-wrap items-center justify-around gap-4 mb-2">
+            <form className="flex flex-wrap items-center justify-around gap-4 mb-2">
                 {/* Start Date */}
                 <div>
                     <p className="text-light1 mb-1">Start Date</p>
