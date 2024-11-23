@@ -6,6 +6,7 @@ const TransactionFilter = ({setFilters, transactions}) => {
     const [categories, setCategories] = useState([]);
     const [minAmount, setMinAmount] = useState("");
     const [maxAmount, setMaxAmount] = useState("");
+    const [filteredCategories, setFilteredCategories] = useState([]);
 
     const categoryDropdown = transactions ? [...new Set(transactions.map((transaction) => {
         return transaction.category
@@ -29,6 +30,26 @@ const TransactionFilter = ({setFilters, transactions}) => {
     useEffect(() => {
         setFilters({ startDate, endDate, categories, minAmount, maxAmount });
     }, [startDate, endDate, categories, minAmount, maxAmount, setFilters]);
+
+    useEffect(() => {
+        let filteredTransactions = transactions || [];
+
+        if (startDate) {
+            filteredTransactions = filteredTransactions.filter(
+                (transaction) => new Date(transaction.date) >= new Date(startDate)
+            )
+        }
+        if (endDate) {
+            filteredTransactions = filteredTransactions.filter(
+                (transaction) => new Date(transaction.date) <= new Date(endDate)
+            )
+        }
+
+        const uniqueCategories = [
+            ...new Set(filteredTransactions.map((transaction) => transaction.category)),
+        ]
+        setFilteredCategories(uniqueCategories)
+    }, [startDate, endDate, transactions])
 
     return (
         <div className="bg-dark2 border-b-2 border-dark1">
@@ -64,7 +85,7 @@ const TransactionFilter = ({setFilters, transactions}) => {
                         className="bg-light1 p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
                     >
                         <option value=''>Select A Category</option>
-                        {categoryDropdown.map((category) => (
+                        {filteredCategories.map((category) => (
                             <option key={category} value={category}>
                                 {category}
                             </option>
