@@ -3,6 +3,7 @@ import { useTransactionsContext } from '../hooks/useTransactionsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import TransactionDetails from '../components/transactions/TransactionDetails'
 import TransactionForm from '../components/transactions/TransactionForm'
+import TransactionFilter from '../components/transactions/TransactionFilter'
 
 const Transactions = () => {
 
@@ -35,8 +36,7 @@ const Transactions = () => {
 
     return (
         <div className='flex flex-col w-full'>
-            <h2>Transactions</h2>
-            <hr className='border-t-2 border-dark1 mt-2'/>
+                <TransactionFilter />
                 <TransactionForm />
             <hr className='border-t-2 border-dark1 mt-2'/>
             <div className='w-full px-4'>

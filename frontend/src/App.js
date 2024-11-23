@@ -18,7 +18,7 @@ function App() {
     <div className={`${theme} flex flex-col min-h-screen`}>
       <BrowserRouter>
         <Navbar />
-        <div className='pages flex flex-col justify-center items-center flex-grow bg-light1 text-bodytext mt-14 lg:mt-12 h-full'>
+        <div className='pages flex flex-col items-center flex-grow bg-light1 text-bodytext mt-14 lg:mt-12 h-full'>
           <Routes>
             <Route path='/' element={user ? <Dashboard /> : <Home />}/>
             <Route path='/register' element={!user ? <Register /> : <Navigate to='/' />}/>
