@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 
-const TransactionFilter = ({setFilters}) => {
+const TransactionFilter = ({setFilters, transactions}) => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [categories, setCategories] = useState([]);
     const [minAmount, setMinAmount] = useState("");
     const [maxAmount, setMaxAmount] = useState("");
 
-    const allCategories = ["Category 1", "Category 2", "Category 3", "Category 4"];
+    const categoryDropdown = transactions ? [...new Set(transactions.map((transaction) => {
+        return transaction.category
+    }))] : [];
 
     const handleCategoryChange = (e) => {
         const selectedOptions = Array.from(e.target.selectedOptions).map(
@@ -16,16 +18,24 @@ const TransactionFilter = ({setFilters}) => {
         setCategories(selectedOptions);
     };
 
+    const handleReset = () => {
+        setStartDate("");
+        setEndDate("");
+        setCategories([]);
+        setMinAmount("");
+        setMaxAmount("");
+    };
+
     useEffect(() => {
         setFilters({ startDate, endDate, categories, minAmount, maxAmount });
     }, [startDate, endDate, categories, minAmount, maxAmount, setFilters]);
 
     return (
         <div className="bg-dark2 border-b-2 border-dark1">
-            <form className="flex flex-wrap items-center justify-around gap-4 mb-2">
+            <form className="flex flex-wrap items-center justify-around gap-4 mb-1">
                 {/* Start Date */}
                 <div>
-                    <p className="text-light1 mb-1">Start Date</p>
+                    <p className="text-light1 mb-1 text-sm">Start Date</p>
                     <input
                         type="date"
                         onChange={(e) => setStartDate(e.target.value)}
@@ -36,7 +46,7 @@ const TransactionFilter = ({setFilters}) => {
 
                 {/* End Date */}
                 <div>
-                <p className="text-light1 mb-1">End Date</p>
+                <p className="text-light1 mb-1 text-sm">End Date</p>
                     <input
                         type="date"
                         onChange={(e) => setEndDate(e.target.value)}
@@ -47,13 +57,14 @@ const TransactionFilter = ({setFilters}) => {
 
                 {/* Category Selection */}
                 <div>
-                    <p className="text-light1 mb-1">Category</p>
+                    <p className="text-light1 mb-1 text-sm">Category</p>
                     <select
                         value={categories}
                         onChange={handleCategoryChange}
                         className="bg-light1 p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
                     >
-                        {allCategories.map((category) => (
+                        <option value=''>Select A Category</option>
+                        {categoryDropdown.map((category) => (
                             <option key={category} value={category}>
                                 {category}
                             </option>
@@ -63,7 +74,7 @@ const TransactionFilter = ({setFilters}) => {
 
                 {/* Minimum Amount */}
                 <div>
-                    <p className="text-light1 mb-1">Minimum Amount</p>
+                    <p className="text-light1 mb-1 text-sm">Minimum Amount</p>
                     <input
                         type="number"
                         placeholder="$0"
@@ -77,7 +88,7 @@ const TransactionFilter = ({setFilters}) => {
 
                 {/* Maximum Amount */}
                 <div>
-                    <p className="text-light1 mb-1">Maximum Amount</p>
+                    <p className="text-light1 mb-1 text-sm">Maximum Amount</p>
                     <input
                         type="number"
                         placeholder="$0"
@@ -85,6 +96,17 @@ const TransactionFilter = ({setFilters}) => {
                         value={maxAmount}
                         className="bg-light1 p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
                     />
+                </div>
+
+                {/* Reset Button */}
+                <div>
+                    <button
+                        type="button"
+                        onClick={handleReset}
+                        className="bg-button text-light1 px-2 py-1 rounded-md shadow-sm hover:bg-buttonhover material-symbols-outlined mt-2"
+                    >
+                        history
+                    </button>
                 </div>
             </form>
         </div>

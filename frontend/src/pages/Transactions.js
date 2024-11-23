@@ -63,7 +63,7 @@ const Transactions = () => {
 
     return (
         <div className='flex flex-col w-full'>
-                <TransactionFilter setFilters={setFilters} />
+                <TransactionFilter setFilters={setFilters} transactions={transactions} />
                 <TransactionForm />
             <hr className='border-t-2 border-dark1 mt-2'/>
             <div className='w-full px-4'>
