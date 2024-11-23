@@ -1,11 +1,13 @@
 import '../../index.css'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useTransactionsContext } from '../../hooks/useTransactionsContext'
+import { useBudgetContext } from '../../hooks/useBudgetContext'
 import { useAuthContext } from '../../hooks/useAuthContext'
 
 const TransactionForm = () => {
 
     const { dispatch } = useTransactionsContext()
+    const {budgets, dispatch: budgetDispatch} = useBudgetContext()
     const { user } = useAuthContext()
 
     const [title, setTitle] = useState('')
@@ -15,6 +17,63 @@ const TransactionForm = () => {
     const [value, setValue] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
+
+    const [availableCategories, setAvailableCategories] = useState([])
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+
+    const handleDataChange = (selectedDate) => {
+        const [year, month] = selectedDate.split("-");
+
+        const monthName = monthNames[parseInt(month) - 1];
+
+        const budgetExists = budgets.some(
+            (budget) =>
+            budget.year === parseInt(year) &&
+            budget.month === monthName
+        );
+
+        if (!budgetExists) {
+            setError("No budget exists for the selected month and year.");
+            setAvailableCategories([]);
+            return;
+        }
+
+        setError(null);
+
+        const matchingBudget = budgets.find(
+            (budget) =>
+            budget.year === parseInt(year) &&
+            budget.month === monthName
+        );
+
+        setAvailableCategories(matchingBudget.categories || []);
+    };
+
+    useEffect(() => {
+        const fetchBudgets = async () => {
+            const response = await fetch('/budgets', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
+            const json = await response.json()
+    
+            if (response.ok) {
+                budgetDispatch({type: 'SET_BUDGETS', payload: json})
+            }
+        }
+    
+        if (user) {
+            fetchBudgets()
+        }
+    }, [dispatch, user])
+    
+    {budgets.map((budget) => (
+        console.log(`${budget.month} ${budget.year}`)
+    ))}
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -59,7 +118,10 @@ const TransactionForm = () => {
             <form onSubmit={handleSubmit} className="flex flex-wrap items-center justify-around gap-4 mt-2">
                 <input
                     type="date"
-                    onChange={(e) => setDate(e.target.value)}
+                    onChange={(e) => {
+                        setDate(e.target.value)
+                        handleDataChange(e.target.value)
+                    }}
                     value={date}
                     className={`p-1 border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
                         emptyFields.includes('date') ? 'border-warningcolor' : 'border-light3'
@@ -76,15 +138,20 @@ const TransactionForm = () => {
                     }`}
                 />
 
-                <input
-                    type="text"
-                    placeholder="Category"
+                <select
                     onChange={(e) => setCategory(e.target.value)}
                     value={category}
                     className={`p-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
                         emptyFields.includes('category') ? 'border-warningcolor' : 'border-light3'
                     }`}
-                />
+                >
+                    <option value="" disable>Select Category</option>
+                    {availableCategories.map((category) => (
+                        <option key={category.name} value={category.name}>
+                            {category.name}
+                        </option>
+                    ))}
+                </select>
 
                 <input
                     type="text"
