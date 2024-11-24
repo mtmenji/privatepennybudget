@@ -115,7 +115,7 @@ const TransactionForm = () => {
     return (
         <div>
             <h1 className="text-center font-bold text-bodytext">Create a Transaction</h1>
-            <form onSubmit={handleSubmit} className="flex flex-wrap items-center justify-around gap-4 mt-2">
+            <form onSubmit={handleSubmit} className="flex flex-wrap items-center justify-around gap-4">
                 <input
                     type="date"
                     onChange={(e) => {
@@ -123,7 +123,7 @@ const TransactionForm = () => {
                         handleDataChange(e.target.value)
                     }}
                     value={date}
-                    className={`p-1 border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    className={`p-px border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
                         emptyFields.includes('date') ? 'border-warningcolor' : 'border-light3'
                     }`}
                 />
@@ -133,7 +133,7 @@ const TransactionForm = () => {
                     placeholder="Title"
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
-                    className={`p-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
                         emptyFields.includes('title') ? 'border-warningcolor' : 'border-light3'
                     }`}
                 />
@@ -141,7 +141,7 @@ const TransactionForm = () => {
                 <select
                     onChange={(e) => setCategory(e.target.value)}
                     value={category}
-                    className={`p-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
                         emptyFields.includes('category') ? 'border-warningcolor' : 'border-light3'
                     }`}
                 >
@@ -158,7 +158,7 @@ const TransactionForm = () => {
                     placeholder="Note"
                     onChange={(e) => setNote(e.target.value)}
                     value={note}
-                    className={`p-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
                         emptyFields.includes('note') ? 'border-warningcolor' : 'border-light3'
                     }`}
                 />
@@ -170,7 +170,7 @@ const TransactionForm = () => {
                         placeholder="0"
                         onChange={(e) => setValue(e.target.value)}
                         value={value}
-                        className={`p-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                        className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
                             emptyFields.includes('value') ? 'border-warningcolor' : 'border-light3'
                         }`}
                     />
