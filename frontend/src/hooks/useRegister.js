@@ -27,7 +27,7 @@ export const useRegister = () => {
                 theme = 'theme-parchment';
         }
 
-        const response = await fetch('https://budgetbuddy-frontend-9h43.onrender.com/user/register', {
+        const response = await fetch('/user/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password, nickname, theme})
