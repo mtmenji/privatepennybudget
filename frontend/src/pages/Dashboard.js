@@ -1,9 +1,9 @@
-const Dashboard = () => {
+const Reports = () => {
     return (
-        <div className='dashboard'>
-            <h2>DASHBOARD</h2>
+        <div className='reports'>
+            <h2>Reports</h2>
         </div>
     )
 }
 
-export default Dashboard
+export default Reports

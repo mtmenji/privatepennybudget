@@ -8,6 +8,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Budget from './pages/Budget';
 import Transactions from './pages/Transactions';
+import Goals from './pages/Goals';
+import Reports from './pages/Dashboard';
 
 function App() {
 
@@ -20,11 +22,13 @@ function App() {
         <Navbar />
         <div className='pages flex flex-col items-center flex-grow bg-light1 text-bodytext mt-14 lg:mt-12 h-full'>
           <Routes>
-            <Route path='/' element={user ? <Dashboard /> : <Home />}/>
+            <Route path='/' element={<Home />}/>
             <Route path='/register' element={!user ? <Register /> : <Navigate to='/' />}/>
             <Route path='/settings' element={user ? <Settings /> : <Navigate to='/' />}/>
             <Route path='/budget' element={user ? <Budget /> : <Navigate to='/' />}/>
             <Route path='/transactions' element={user ? <Transactions /> : <Navigate to='/' />}/>
+            <Route path='/goals' element={user ? <Goals /> : <Navigate to='/' />}/>
+            <Route path='/reports' element={user ? <Reports /> : <Navigate to='/' />}/>
           </Routes>
         </div>
         <Footer />
