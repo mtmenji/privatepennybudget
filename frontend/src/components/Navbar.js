@@ -29,17 +29,14 @@ const Navbar = () => {
                 <div className="hidden md:flex md:items-center space-x-4">
                     {user ? (
                         <>
-                            <Link to="/reports" className="hover:text-light1hover transition-colors duration-200 text-light1">
-                                Reports
+                            <Link to="/dashboard" className="hover:text-light1hover transition-colors duration-200 text-light1">
+                                Dashboard
                             </Link>
                             <Link to="/budget" className="hover:text-light1hover transition-colors duration-200 text-light1">
                                 Budget
                             </Link>
                             <Link to="/transactions" className="hover:text-light1hover transition-colors duration-200 text-light1">
                                 Transactions
-                            </Link>
-                            <Link to="/goals" className="hover:text-light1hover transition-colors duration-200 text-light1">
-                                Goals
                             </Link>
                             <Link to="/settings" className="hover:text-light1hover transition-colors duration-200 text-light1">
                                 Settings
