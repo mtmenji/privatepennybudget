@@ -45,7 +45,7 @@ mongoose.connect(process.env.MONGO_URI)
     .then(()=> {
         //Listening to requests.
         app.listen(process.env.PORT, () => {
-            console.log('BudgetBuddy is connected to the database and listening on port', process.env.PORT)
+            console.log('Private Penny is connected to the database and listening on port', process.env.PORT)
         })
     }).catch((error) => {
         console.log('ERROR LOCATION: server.js DATABASE CONNECTION SECTION\n', error)
