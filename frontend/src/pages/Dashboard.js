@@ -1,13 +1,11 @@
-import GoalsCreate from "../components/dashboard/GoalsCreate"
-import GoalsDetails from "../components/dashboard/GoalsDetails"
-
+import Goals from "../components/dashboard/Goals"
 
 const Dashboard = () => {
     return (
-        <div className='dashboard'>
-            <h2>Dashboard</h2>
-            <GoalsCreate />
-            <GoalsDetails />
+        <div className='w-full flex justify-between'>
+            <section>Section One</section>
+            <section>Section Three</section>
+            <Goals/>
         </div>
     )
 }
