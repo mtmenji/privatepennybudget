@@ -4,7 +4,7 @@ const Dashboard = () => {
     return (
         <div className='w-full flex justify-between'>
             <section>Section One</section>
-            <section>Section Three</section>
+            <section>Section Two</section>
             <Goals/>
         </div>
     )
