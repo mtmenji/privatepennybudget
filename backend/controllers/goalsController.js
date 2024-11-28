@@ -72,8 +72,8 @@ const updateGoal = async (req, res) => {
 
     const updateFields = {};
     if (name !== undefined) updateFields.name = name;
-    if (amountGoal !== undefined) updateFields.amount = amountGoal;
-    if (amountActual !== undefined) updateFields.amount = amountActual;
+    if (amountGoal !== undefined) updateFields.amountGoal = amountGoal;
+    if (amountActual !== undefined) updateFields.amountActual = amountActual;
 
     try {
         const goal = await Goal.findOneAndUpdate(

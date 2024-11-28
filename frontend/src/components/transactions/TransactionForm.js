@@ -14,6 +14,7 @@ const TransactionForm = () => {
     const [date, setDate] = useState('')
     const [category, setCategory] = useState('')
     const [note, setNote] = useState('')
+    const [goals, setGoals] = useState([])
     const [value, setValue] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
@@ -49,7 +50,12 @@ const TransactionForm = () => {
             budget.month === monthName
         );
 
-        setAvailableCategories(matchingBudget.categories || []);
+        setAvailableCategories([
+            "Income",
+            ...(matchingBudget.categories || []),
+            "Add to Savings Goal",
+            "Remove from Savings Goal"
+        ]);
     };
 
     useEffect(() => {
@@ -75,6 +81,27 @@ const TransactionForm = () => {
         console.log(`${budget.month} ${budget.year}`)
     ))}
 
+    useEffect(() => {
+        const fetchGoals = async () => {
+            if (!user) return;
+
+            const response = await fetch('/goals', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                },
+            });
+
+            const json = await response.json();
+            if (response.ok) {
+                setGoals(json); // Store the fetched goals in state
+            } else {
+                console.error(json.error || 'Failed to fetch goals.');
+            }
+        };
+
+        fetchGoals();
+    }, [user]);
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -84,6 +111,45 @@ const TransactionForm = () => {
         }
 
         const transaction = {title, date, category, note, value}
+
+        if (category === "Add to Savings Goal" || category === "Remove from Savings Goal") {
+            const goal = goals.find((goal) => goal.name === note);
+    
+            if (!goal) {
+                setError('Goal not found');
+                return;
+            }
+    
+            const updatedAmount = category === "Add to Savings Goal"
+                ? parseFloat(goal.amountActual) + parseFloat(value)
+                : parseFloat(goal.amountActual) - parseFloat(value);
+
+            console.log(`TEST 1: ${goal.amountActual}`)
+            console.log(`TEST 2: ${value}`)
+            console.log(`TEST 1123123: ${updatedAmount}`)
+    
+            const goalResponse = await fetch(`/goals/${goal._id}`, {
+                method: 'PUT',
+                body: JSON.stringify({ amountActual: updatedAmount }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`,
+                },
+            });
+    
+            const goalJson = await goalResponse.json();
+    
+            if (!goalResponse.ok) {
+                setError(goalJson.error);
+                return;
+            }
+    
+            const updatedGoals = goals.map((g) =>
+                g._id === goal._id ? { ...g, amount: updatedAmount } : g
+            );
+            setGoals(updatedGoals);
+        }
+
         const response = await fetch('/transactions', {
             method: 'POST',
             body: JSON.stringify(transaction),
@@ -147,21 +213,38 @@ const TransactionForm = () => {
                 >
                     <option value="" disable>Select Category</option>
                     {availableCategories.map((category) => (
-                        <option key={category.name} value={category.name}>
-                            {category.name}
+                        <option key={category.name || category} value={category.name || category}>
+                            {category.name || category}
                         </option>
                     ))}
                 </select>
 
-                <input
-                    type="text"
-                    placeholder="Note"
-                    onChange={(e) => setNote(e.target.value)}
-                    value={note}
-                    className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
-                        emptyFields.includes('note') ? 'border-warningcolor' : 'border-light3'
-                    }`}
-                />
+                {(category === "Add to Savings Goal" || category === "Remove from Savings Goal") ? (
+                    <select
+                        onChange={(e) => setNote(e.target.value)}
+                        value={note}
+                        className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                            emptyFields.includes('note') ? 'border-warningcolor' : 'border-light3'
+                        }`}
+                    >
+                        <option value="" disabled>Select Goal</option>
+                        {goals.map((goal) => (
+                            <option key={goal._id} value={goal.name}>
+                                {goal.name}
+                            </option>
+                        ))}
+                    </select>
+                ) : (
+                    <input
+                        type="text"
+                        placeholder="Note"
+                        onChange={(e) => setNote(e.target.value)}
+                        value={note}
+                        className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                            emptyFields.includes('note') ? 'border-warningcolor' : 'border-light3'
+                        }`}
+                    />
+                )}
 
                 <div className="flex items-center">
                     <p className="mr-2">$</p>
