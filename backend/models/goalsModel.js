@@ -6,7 +6,11 @@ const goalsSchema = new Schema({
         type: String,
         required: true
     },
-    amount: {
+    amountGoal: {
+        type: Number,
+        required: true
+    },
+    amountActual: {
         type: Number,
         required: true
     },

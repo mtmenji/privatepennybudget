@@ -21,22 +21,25 @@ const getGoal = async (req, res) => {
 
 //CREATE goal.
 const createGoal = async (req, res) => {
-    const {name, amount} = req.body
+    const {name, amountGoal, amountActual} = req.body
 
     let emptyFields = []
     if(!name) {
         emptyFields.push('name')
     }
-    if (!amount) {
-        emptyFields.push('amount')
+    if (!amountGoal) {
+        emptyFields.push('amountGoal')
+    }
+    if (!amountActual) {
+        emptyFields.push('amountActual')
     }
     if (emptyFields.length > 0) {
-        return res.status(400).json({error: 'Please enter a name and amount.', emptyFields})
+        return res.status(400).json({error: 'Please fill in all fields.', emptyFields})
     }
 
     try {
         const user_id = req.user._id
-        const goal = await Goal.create({name, amount, user_id})
+        const goal = await Goal.create({name, amountGoal, amountActual, user_id})
         
         res.status(200).json(goal)
     } catch (error) {
@@ -60,7 +63,7 @@ const deleteGoal = async (req, res) => {
 //UPDATE goal.
 const updateGoal = async (req, res) => {
     const { id } = req.params;
-    const { name, amount } = req.body;
+    const { name, amountGoal, amountActual } = req.body;
     const user_id = req.user._id;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -69,7 +72,8 @@ const updateGoal = async (req, res) => {
 
     const updateFields = {};
     if (name !== undefined) updateFields.name = name;
-    if (amount !== undefined) updateFields.amount = amount;
+    if (amountGoal !== undefined) updateFields.amount = amountGoal;
+    if (amountActual !== undefined) updateFields.amount = amountActual;
 
     try {
         const goal = await Goal.findOneAndUpdate(
