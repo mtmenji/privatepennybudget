@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-const Goals = () => {
+const PaymentReminders = () => {
   const { user } = useAuthContext();
-  const [goals, setGoals] = useState([]);
+  const [reminders, setReminders] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [editingGoalId, setEditingGoalId] = useState(null);
+  const [editingReminderId, setEditingReminderId] = useState(null);
   const [editName, setEditName] = useState('');
+  const [editDate, setEditDate] = useState('');
   const [editAmount, setEditAmount] = useState('');
   const [name, setName] = useState('');
-  const [amountGoal, setAmountGoal] = useState('');
-  const [amountActual, setAmountActual] = useState('');
+  const [date, setdate] = useState('');
+  const [amount, setAmount] = useState('');
 
-  // Fetch goals
+  // Fetch reminders
   useEffect(() => {
-    const fetchGoals = async () => {
+    const fetchReminders = async () => {
       if (!user) {
         setError('You must be logged in.');
         setLoading(false);
@@ -23,7 +24,7 @@ const Goals = () => {
       }
 
       try {
-        const response = await fetch('/goals', {
+        const response = await fetch('/reminders', {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -32,9 +33,9 @@ const Goals = () => {
         const json = await response.json();
 
         if (!response.ok) {
-          setError(json.error || 'Failed to fetch goals.');
+          setError(json.error || 'Failed to fetch reminders.');
         } else {
-          setGoals(json);
+          setReminders(json);
         }
       } catch (err) {
         setError('Something went wrong. Please try again.');
@@ -43,8 +44,42 @@ const Goals = () => {
       }
     };
 
-    fetchGoals();
+    fetchReminders();
   }, [user]);
+
+  const handleToggleCheckbox = async (id, newCheckboxValue) => {
+    if (!user) {
+      setError('You must be logged in.');
+      return;
+    }
+  
+    try {
+      const response = await fetch(`/reminders/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ checkbox: newCheckboxValue }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+  
+      const json = await response.json();
+  
+      if (!response.ok) {
+        setError(json.error || 'Failed to update checkbox.');
+        return;
+      }
+  
+      setReminders((prevReminders) =>
+        prevReminders.map((reminder) =>
+          reminder._id === id ? { ...reminder, checkbox: newCheckboxValue } : reminder
+        )
+      );
+      setError(null);
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    }
+  };
 
   // Handle delete
   const handleDelete = async (id) => {
@@ -54,7 +89,7 @@ const Goals = () => {
     }
 
     try {
-      const response = await fetch(`/goals/${id}`, {
+      const response = await fetch(`/reminders/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${user.token}`,
@@ -63,21 +98,22 @@ const Goals = () => {
 
       if (!response.ok) {
         const json = await response.json();
-        setError(json.error || 'Failed to delete goal.');
+        setError(json.error || 'Failed to delete reminder.');
         return;
       }
 
-      setGoals((prevGoals) => prevGoals.filter((goal) => goal._id !== id));
+      setReminders((prevReminders) => prevReminders.filter((reminder) => reminder._id !== id));
     } catch (err) {
       setError('Something went wrong. Please try again.');
     }
   };
 
   // Handle edit
-  const handleEdit = (id, name, amountGoal) => {
-    setEditingGoalId(id);
+  const handleEdit = (id, name, date, amount) => {
+    setEditingReminderId(id);
     setEditName(name);
-    setEditAmount(amountGoal);
+    setEditDate(date);
+    setEditAmount(amount);
   };
 
   const handleSaveEdit = async () => {
@@ -86,12 +122,12 @@ const Goals = () => {
       return;
     }
 
-    const updatedGoal = { name: editName, amountGoal: editAmount };
+    const updatedReminder = { name: editName, date: editDate, amount: editAmount };
 
     try {
-      const response = await fetch(`/goals/${editingGoalId}`, {
+      const response = await fetch(`/reminders/${editingReminderId}`, {
         method: 'PUT',
-        body: JSON.stringify(updatedGoal),
+        body: JSON.stringify(updatedReminder),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${user.token}`,
@@ -101,18 +137,19 @@ const Goals = () => {
       const json = await response.json();
 
       if (!response.ok) {
-        setError(json.error || 'Failed to update goal.');
+        setError(json.error || 'Failed to update reminder.');
         return;
       }
 
-      setGoals((prevGoals) =>
-        prevGoals.map((goal) =>
-          goal._id === editingGoalId ? { ...goal, ...updatedGoal } : goal
+      setReminders((prevReminders) =>
+        prevReminders.map((reminder) =>
+          reminder._id === editingReminderId ? { ...reminder, ...updatedReminder } : reminder
         )
       );
 
-      setEditingGoalId(null);
+      setEditingReminderId(null);
       setEditName('');
+      setEditDate('');
       setEditAmount('');
       setError(null);
     } catch (err) {
@@ -129,12 +166,12 @@ const Goals = () => {
       return;
     }
 
-    const saving = { name, amountGoal, amountActual };
+    const newReminder = { name, date, amount };
 
     try {
-      const response = await fetch('/goals', {
+      const response = await fetch('/reminders', {
         method: 'POST',
-        body: JSON.stringify(saving),
+        body: JSON.stringify(newReminder),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${user.token}`,
@@ -146,10 +183,10 @@ const Goals = () => {
       if (!response.ok) {
         setError(json.error);
       } else {
-        setGoals((prevGoals) => [...prevGoals, json]);
+        setReminders((prevReminders) => [...prevReminders, json]);
         setName('');
-        setAmountGoal('');
-        setAmountActual('');
+        setdate('');
+        setAmount('');
         setError(null);
       }
     } catch (err) {
@@ -158,27 +195,40 @@ const Goals = () => {
   };
 
   if (loading) {
-    return <p className="text-center text-gray-600">Loading goals...</p>;
+    return <p className="text-center text-gray-600">Loading payment reminders...</p>;
   }
 
   if (error) {
-    return <p className="text-center text-red-500">{error}</p>;
+    console.log(`Error Message: ${error}`)
   }
 
   return (
-    <div className="max-w-sm m-2 h-full">
-      <h3 className="text-xl font-bold mb-4 text-dark1 text-center">Your Savings Goals</h3>
-      {goals.length === 0 ? (
-        <p className="text-gray-600">No goals found. Start by creating a new goal.</p>
+    <div className="max-w-sm m-2 bg-light1 h-full">
+      <h3 className="text-xl font-bold mb-4 text-dark1 text-center">Your Payment Reminders</h3>
+
+      {error && (
+        <p className='text-center text-red-500 mb-4'>
+            {error}
+        </p>
+      )}
+
+      {reminders.length === 0 ? (
+        <p className="text-gray-600">No reminders found. Start by creating a new reminder.</p>
       ) : (
         <ul className="space-y-4">
-          {goals.map((goal) => (
+          {reminders.map((reminder) => (
             <li
-              key={goal._id}
-              className="text-sm flex flex-col bg-light3 p-2 rounded-md shadow space-y-2"
+              key={reminder._id}
+              className={`text-sm flex flex-col p-2 rounded-md shadow space-y-2 ${reminder.checkbox ? 'bg-dark3': 'bg-light3'}`}
             >
               <div className="flex items-center justify-between">
-                {editingGoalId === goal._id ? (
+                <input
+                    type="checkbox"
+                    checked={reminder.checkbox}
+                    onChange={() => handleToggleCheckbox(reminder._id, !reminder.checkbox)}
+                    className="mr-2"
+                />
+                {editingReminderId === reminder._id ? (
                   <div className="flex items-center space-x-4 flex-grow">
                     <input
                       type="text"
@@ -187,20 +237,28 @@ const Goals = () => {
                       className="flex-1 p-px border border-gray-300 rounded-md"
                     />
                     <input
+                      type="date"
+                      value={editDate}
+                      onChange={(e) => setEditDate(e.target.value)}
+                      className="w-36 p-px border border-gray-300 rounded-md"
+                    />
+                    <input
                       type="number"
                       value={editAmount}
                       onChange={(e) => setEditAmount(e.target.value)}
-                      className="w-28 p-px border border-gray-300 rounded-md"
+                      className="w-20 p-px border border-gray-300 rounded-md"
+                      placeholder="Amount"
                     />
                   </div>
                 ) : (
                   <span className="flex-grow flex justify-between items-center">
-                    <span className="font-bold">{goal.name}</span>
-                    <span className="text-right ml-2">${goal.amountGoal}</span>
+                    <span className="font-bold">{reminder.name}</span>
+                    <span className="ml-2">{new Date(reminder.date).toLocaleDateString()}</span>
+                    <span className="ml-2">${reminder.amount.toFixed(2)}</span>
                   </span>
                 )}
 
-                {editingGoalId === goal._id ? (
+                {editingReminderId === reminder._id ? (
                   <button
                     onClick={handleSaveEdit}
                     className="bg-green-500 text-white p-px rounded-md ml-4 material-symbols-outlined"
@@ -209,7 +267,7 @@ const Goals = () => {
                   </button>
                 ) : (
                   <button
-                    onClick={() => handleEdit(goal._id, goal.name, goal.amountGoal)}
+                    onClick={() => handleEdit(reminder._id, reminder.name, reminder.date, reminder.amount)}
                     className="bg-blue-500 text-white p-px rounded-md ml-4 material-symbols-outlined"
                   >
                     edit
@@ -217,45 +275,23 @@ const Goals = () => {
                 )}
 
                 <button
-                  onClick={() => handleDelete(goal._id)}
+                  onClick={() => handleDelete(reminder._id)}
                   className="bg-red-500 text-white p-px rounded-md ml-2 material-symbols-outlined"
                 >
                   delete
                 </button>
               </div>
-
-              {/* Progress Bar */}
-              <div className="relative w-full h-4 bg-gray-200 rounded-md overflow-hidden">
-                <div
-                  className="absolute top-0 left-0 h-full bg-blue-500"
-                  style={{
-                    width: `${(goal.amountActual / goal.amountGoal) * 100}%`,
-                  }}
-                />
-              </div>
-              <p className="text-xs text-gray-600 text-center">
-                ${goal.amountActual} saved!{' '}
-                {Math.min(
-                  ((goal.amountActual / goal.amountGoal) * 100).toFixed(2),
-                  100
-                )}
-                % of goal achieved.
-              </p>
             </li>
           ))}
         </ul>
       )}
 
-      <hr className='border-t-2 border-dark1 my-2'/>
+      <hr className="border-t-2 border-dark1 my-2" />
 
-      {/* Create Goal Form */}
-      <form
-        onSubmit={handleSubmit}
-        className="w-full text-sm"
-      >
-        <h2 className="font-semibold mb-1 text-dark1 text-center">Create A New Goal</h2>
+      {/* Create Reminder Form */}
+      <form onSubmit={handleSubmit} className="w-full text-sm">
+        <h2 className="font-semibold mb-1 text-dark1 text-center">Create A New Reminder</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* First Line: Name and Goal Amount */}
           <div className="flex flex-col">
             <input
               type="text"
@@ -269,35 +305,34 @@ const Goals = () => {
 
           <div className="flex flex-col">
             <input
-              type="number"
-              onChange={(e) => setAmountGoal(e.target.value)}
-              value={amountGoal}
+              type="date"
+              onChange={(e) => setdate(e.target.value)}
+              value={date}
               className="p-px border border-gray-300 rounded-md bg-light1"
-              placeholder="Goal Amount"
+              placeholder="Due Date"
               required
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-          {/* Second Line: Starting Amount and Submit Button */}
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4'>
           <div className="flex flex-col">
             <input
               type="number"
-              onChange={(e) => setAmountActual(e.target.value)}
-              value={amountActual}
+              onChange={(e) => setAmount(e.target.value)}
+              value={amount}
               className="p-px border border-gray-300 rounded-md bg-light1"
-              placeholder="Starting Amount"
+              placeholder="Amount"
               required
             />
           </div>
 
           <div className="flex items-center justify-center">
             <button
-              type="submit"
-              className="w-full bg-button hover:bg-buttonhover text-white p-px rounded-md material-symbols-outlined"
+                type="submit"
+                className="w-full bg-button hover:bg-buttonhover text-white p-px rounded-md material-symbols-outlined"
             >
-              check
+                check
             </button>
           </div>
         </div>
@@ -306,4 +341,4 @@ const Goals = () => {
   );
 };
 
-export default Goals;
+export default PaymentReminders;

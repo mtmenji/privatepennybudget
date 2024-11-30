@@ -8,6 +8,7 @@ const budgetRoutes = require('./routes/budgets')
 const transactionRoutes = require('./routes/transactions')
 const userRoutes = require('./routes/user')
 const goalRoutes = require('./routes/goals')
+const reminderRoutes = require('./routes/reminders')
 
 //Express App
 const app = express()
@@ -35,6 +36,7 @@ app.use('/budgets',budgetRoutes)
 app.use('/transactions',transactionRoutes)
 app.use('/user',userRoutes)
 app.use('/goals',goalRoutes)
+app.use('/reminders',reminderRoutes)
 
 //Host
 app.use(express.static(path.join(__dirname, '../frontend/build')))
