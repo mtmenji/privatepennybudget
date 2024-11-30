@@ -215,11 +215,11 @@ const PaymentReminders = () => {
       {reminders.length === 0 ? (
         <p className="text-gray-600">No reminders found. Start by creating a new reminder.</p>
       ) : (
-        <ul className="space-y-4">
+        <ul className="bg-light1 rounded-md">
           {reminders.map((reminder) => (
             <li
               key={reminder._id}
-              className={`text-sm flex flex-col p-2 rounded-md shadow space-y-2 ${reminder.checkbox ? 'bg-dark3': 'bg-light3'}`}
+              className={`text-sm flex flex-col p-2 rounded-md space-y-2 ${reminder.checkbox ? 'bg-dark3': 'bg-light1'}`}
             >
               <div className="flex items-center justify-between">
                 <input
