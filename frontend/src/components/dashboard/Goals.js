@@ -166,7 +166,7 @@ const Goals = () => {
   }
 
   return (
-    <div className="max-w-sm m-2 h-full">
+    <div className="max-w-sm m-2 overflow-y-auto h-[calc(100vh-96px)]">
       <h3 className="text-xl font-bold mb-4 text-dark1 text-center">Your Savings Goals</h3>
       {goals.length === 0 ? (
         <p className="text-gray-600">No goals found. Start by creating a new goal.</p>

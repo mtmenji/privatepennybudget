@@ -203,7 +203,7 @@ const PaymentReminders = () => {
   }
 
   return (
-    <div className="max-w-sm m-2 bg-light1 h-full">
+    <div className="max-w-sm m-2 bg-light1 overflow-y-auto h-[calc(100vh-216px)]">
       <h3 className="text-xl font-bold mb-4 text-dark1 text-center">Your Payment Reminders</h3>
 
       {error && (
