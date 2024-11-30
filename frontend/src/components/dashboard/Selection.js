@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useBudgetContext } from '../../hooks/useBudgetContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-const Selection = () => {
+const Selection = ({ setSelectedBudgetId }) => {
     const { budgets, dispatch } = useBudgetContext();
     const { user } = useAuthContext();
 
@@ -50,6 +50,7 @@ const Selection = () => {
             <select
                 id="budget-select"
                 className="w-full p-2 border border-gray-300 rounded"
+                onChange={(e) => setSelectedBudgetId(e.target.value)}
             >
                 <option value="">-- Select Month --</option>
                 {sortedBudgets.map((budget) => (
