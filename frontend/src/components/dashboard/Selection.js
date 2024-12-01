@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useBudgetContext } from '../../hooks/useBudgetContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-const Selection = ({ setSelectedBudgetId }) => {
+const Selection = ({ onSelectionChange }) => {
     const { budgets, dispatch } = useBudgetContext();
     const { user } = useAuthContext();
 
@@ -41,6 +41,10 @@ const Selection = ({ setSelectedBudgetId }) => {
               return getMonthNumber(b.month) - getMonthNumber(a.month);
           })
         : [];
+    
+    const handleChange = (budgetId, month, year) => {
+        onSelectionChange(budgetId, month, year);
+    };
 
     return (
         <div className='m-2'>
@@ -50,7 +54,12 @@ const Selection = ({ setSelectedBudgetId }) => {
             <select
                 id="budget-select"
                 className="w-full p-2 border border-gray-300 rounded"
-                onChange={(e) => setSelectedBudgetId(e.target.value)}
+                onChange={(e) => {
+                    const selectedBudget = budgets.find(budget => budget._id === e.target.value);
+                    if (selectedBudget) {
+                        handleChange(selectedBudget._id, selectedBudget.month, selectedBudget.year);
+                    }
+                }}
             >
                 <option value="">-- Select Month --</option>
                 {sortedBudgets.map((budget) => (
