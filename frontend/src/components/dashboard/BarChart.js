@@ -86,7 +86,6 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
         labels: categories.map(category => category.name),
         datasets: [
             {
-                label: 'Percentage of Budget Spent',
                 data: categories.map(category => {
                     const spentAmount = getSpentAmount(category.name);
                     const percentage = category.amount > 0 ? (spentAmount / category.amount) * 100 : 0;
@@ -106,6 +105,8 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
     // Chart options
     const options = {
         responsive: true,
+        indexAxis: 'y',
+        maintainAspectRatio: false,
         plugins: {
             tooltip: {
                 callbacks: {
@@ -116,9 +117,12 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
                     },
                 },
             },
+            legend: {
+                display: false,
+            },
         },
         scales: {
-            y: {
+            x: {
                 min: 0,
                 max: 100,
                 ticks: {
@@ -128,14 +132,20 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
                     },
                 },
             },
+            y: {
+                grid: {
+                    drawTicks: false,
+                },
+            },
         },
     };
 
     return (
         <div className="m-2 overflow-y-auto h-[calc(100vh-96px)]">
-            <h2 className="text-xl font-bold text-dark1 mb-4">Budget Category Spending</h2>
+            <h2 className="text-xl font-bold text-dark1 mb-4 text-center">Budget Category Spending</h2>
             {categories.length > 0 ? (
-                <div>
+                <div className='h-[250px] p-2'>
+                    <p className='text-center text-sm mb-2'>A visualization of the money you spent.</p>
                     <Bar data={data} options={options} />
                     <ul className="list-none mt-4">
                         {categories.map((category, index) => {

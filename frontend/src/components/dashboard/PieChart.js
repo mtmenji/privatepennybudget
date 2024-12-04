@@ -58,10 +58,11 @@ const PieChart = ({ selectedBudgetId }) => {
 
     return (
         <div className="m-2 overflow-y-auto h-[calc(100vh-96px)]">
-            <h2 className="text-xl font-bold text-dark1 mb-4">Budget Categories</h2>
+            <h2 className="text-xl font-bold text-dark1 mb-4 text-center">Budget Categories</h2>
             {categories.length > 0 ? (
-                <div>
-                    <Pie data={data} options={options} />
+                <div className='p-2'>
+                    <p className='text-center text-sm mb-2'>A visual breakdown of your budgeted categories.</p>
+                    <Pie data={data} options={options}/>
                     <ul className="list-none mt-4">
                         {categories.map((category, index) => (
                             <li key={category.name} className="mb-2 flex justify-between text-sm">
@@ -70,7 +71,7 @@ const PieChart = ({ selectedBudgetId }) => {
                                     style={{ backgroundColor: colors[index] }}
                                 ></div>
                                 <span className="font-semibold">{category.name}</span>
-                                <span>{category.amount}</span>
+                                <span>${category.amount}</span>
                             </li>
                         ))}
                     </ul>
