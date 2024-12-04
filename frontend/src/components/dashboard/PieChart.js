@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useBudgetContext } from '../../hooks/useBudgetContext';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, Tooltip, Legend, ArcElement, Title, CategoryScale } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 
-ChartJS.register(Tooltip, Legend, ArcElement, Title, CategoryScale)
+ChartJS.register(Tooltip, Legend, ArcElement, Title, CategoryScale, ChartDataLabels)
 
 const PieChart = ({ selectedBudgetId }) => {
     const { budgets } = useBudgetContext();
@@ -47,13 +48,25 @@ const PieChart = ({ selectedBudgetId }) => {
                     },
                 },
             },
-        },
-        responsive: true,
-        plugins: {
             legend: {
                 display: false,
             },
-        }
+            datalabels: {
+                color: 'black',
+                backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                font: {
+                    weight: 'bold',
+                    size: 12,
+                },
+                formatter: (value, context) => {
+                    return `${context.chart.data.labels[context.dataIndex]}: $${value}`;
+                },
+                align: 'center',
+                anchor: 'center',
+                display: 'auto'
+            },
+        },
+        responsive: true,
     }
 
     return (

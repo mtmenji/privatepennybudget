@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useBudgetContext } from '../../hooks/useBudgetContext';
 import { useTransactionsContext } from '../../hooks/useTransactionsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Chart } from 'react-chartjs-2';
 import { Chart as ChartJS, Tooltip, Legend, BarElement, Title, CategoryScale, LinearScale } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 
-ChartJS.register(Tooltip, Legend, BarElement, Title, CategoryScale, LinearScale);
+ChartJS.register(Tooltip, Legend, BarElement, Title, CategoryScale, LinearScale, ChartDataLabels);
 
 const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
     const { budgets } = useBudgetContext();
@@ -89,10 +90,6 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
                 data: categories.map(category => {
                     const spentAmount = getSpentAmount(category.name);
                     const percentage = category.amount > 0 ? (spentAmount / category.amount) * 100 : 0;
-                    console.log(`Category: ${category.name}`)
-                    console.log(`Budgeted: ${category.amount}`)
-                    console.log(`Spent: ${spentAmount}`)
-                    console.log(`Percent: ${percentage}`)
                     return percentage;
                 }),
                 backgroundColor: categories.map(() => `hsl(${Math.random() * 360}, 100%, 70%)`),
@@ -116,6 +113,9 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
                         return `${categoryName}: ${percentageSpent}% of Budget`;
                     },
                 },
+            },
+            datalabels: {
+                display: false
             },
             legend: {
                 display: false,
