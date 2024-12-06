@@ -24,9 +24,9 @@ const Gallery = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
     <div className='flex items-center justify-center h-full w-full'>
       <button 
         onClick={handlePrev} 
-        className='bg-gray-200 hover:bg-gray-300 transition duration-200 h-full material-symbols-outlined'
+        className='bg-light1 h-full text-5xl'
       >
-        arrow_back_ios
+        &#8249;
       </button>
       
       <div className='flex justify-center items-center w-full'>
@@ -35,9 +35,9 @@ const Gallery = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
       
       <button 
         onClick={handleNext} 
-        className='bg-gray-200 hover:bg-gray-300 transition duration-200 h-full material-symbols-outlined'
+        className='bg-light1 h-full text-5xl'
       >
-        arrow_forward_ios
+        &#8250;
       </button>
     </div>
   );
