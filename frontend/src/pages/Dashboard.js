@@ -4,6 +4,7 @@ import PaymentReminders from "../components/dashboard/PaymentReminders"
 import Selection from "../components/dashboard/Selection"
 import PieChart from '../components/dashboard/PieChart'
 import BarChart from '../components/dashboard/BarChart'
+import Ratio from '../components/dashboard/Ratio'
 
 const Dashboard = () => {
 
@@ -27,6 +28,7 @@ const Dashboard = () => {
             <div className='gallery'>
                 {selectedBudgetId && <PieChart selectedBudgetId={selectedBudgetId} />}
                 {selectedBudgetId && <BarChart selectedMonth={selectedMonth} selectedYear={selectedYear} selectedBudgetId={selectedBudgetId} />}
+                {selectedBudgetId && <Ratio selectedMonth={selectedMonth} selectedYear={selectedYear} />}
             </div>
             <Goals/>
         </div>

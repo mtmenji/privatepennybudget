@@ -53,8 +53,8 @@ const TransactionForm = () => {
         setAvailableCategories([
             "Income",
             ...(matchingBudget.categories || []),
-            "Add to Savings Goal",
-            "Remove from Savings Goal"
+            "Add to Savings",
+            "Remove from Savings"
         ]);
     };
 
@@ -112,7 +112,7 @@ const TransactionForm = () => {
 
         const transaction = {title, date, category, note, value}
 
-        if (category === "Add to Savings Goal" || category === "Remove from Savings Goal") {
+        if (category === "Add to Savings" || category === "Remove from Savings") {
             const goal = goals.find((goal) => goal.name === note);
     
             if (!goal) {
@@ -120,7 +120,7 @@ const TransactionForm = () => {
                 return;
             }
     
-            const updatedAmount = category === "Add to Savings Goal"
+            const updatedAmount = category === "Add to Savings"
                 ? parseFloat(goal.amountActual) + parseFloat(value)
                 : parseFloat(goal.amountActual) - parseFloat(value);
 
@@ -219,7 +219,7 @@ const TransactionForm = () => {
                     ))}
                 </select>
 
-                {(category === "Add to Savings Goal" || category === "Remove from Savings Goal") ? (
+                {(category === "Add to Savings" || category === "Remove from Savings") ? (
                     <select
                         onChange={(e) => setNote(e.target.value)}
                         value={note}
