@@ -75,7 +75,9 @@ const PieChart = ({ selectedBudgetId }) => {
             {categories.length > 0 ? (
                 <div className='p-2'>
                     <p className='text-center text-sm mb-2'>A visual breakdown of your budgeted categories.</p>
-                    <Pie data={data} options={options}/>
+                    <div className='w-4/5 h-[300px] mx-auto'>
+                        <Pie data={data} options={options} className='mx-auto'/>
+                    </div>
                     <ul className="list-none mt-4">
                         {categories.map((category, index) => (
                             <li key={category.name} className="mb-2 flex justify-between text-sm">
