@@ -55,10 +55,8 @@ const Ratio = ({ selectedMonth, selectedYear }) => {
         return { totalIncome, totalExpenses };
     };
 
-    let { totalIncome, totalExpenses } = calculateTotals();
-    totalIncome = 1000; // Example value
-    const expensePercentage = totalIncome > 0 ? (400 / totalIncome) * 100 : 0; // Example calculation
-    console.log(`Income: ${totalIncome}, Expense Percentage: ${expensePercentage}`);
+    const { totalIncome, totalExpenses } = calculateTotals();
+    const expensePercentage = totalIncome > 0 ? (totalExpenses / totalIncome) * 100 : 0;
 
     const data = {
         labels: [''],
