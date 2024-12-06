@@ -21,21 +21,21 @@ const Gallery = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
   };
 
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex items-center justify-center h-full w-full'>
       <button 
         onClick={handlePrev} 
-        className='bg-gray-200 hover:bg-gray-300 rounded-md transition duration-200 material-symbols-outlined'
+        className='bg-gray-200 hover:bg-gray-300 transition duration-200 h-full material-symbols-outlined'
       >
         arrow_back_ios
       </button>
       
-      <div className='flex justify-center items-center'>
+      <div className='flex justify-center items-center w-full'>
         {selectedBudgetId && components[currentIndex]}
       </div>
       
       <button 
         onClick={handleNext} 
-        className='bg-gray-200 hover:bg-gray-300 rounded-md transition duration-200 material-symbols-outlined'
+        className='bg-gray-200 hover:bg-gray-300 transition duration-200 h-full material-symbols-outlined'
       >
         arrow_forward_ios
       </button>

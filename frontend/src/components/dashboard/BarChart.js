@@ -141,7 +141,7 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
     };
 
     return (
-        <div className="m-2 overflow-y-auto h-[calc(100vh-96px)]">
+        <div className="m-2 overflow-y-auto h-[calc(100vh-96px)] w-full">
             <h2 className="text-xl font-bold text-dark1 mb-4 text-center">Budget Category Spending</h2>
             {categories.length > 0 ? (
                 <div className='h-[250px] p-2'>
