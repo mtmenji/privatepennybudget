@@ -45,7 +45,12 @@ const PaymentReminders = () => {
         if (!response.ok) {
           setError(json.error || 'Failed to fetch reminders.');
         } else {
-          setReminders(json);
+          const sortedReminders = json.sort((a, b) => {
+            const dayA = new Date(a.date).getDate()
+            const dayB = new Date(b.date).getDate()
+            return dayA - dayB
+          })
+          setReminders(sortedReminders);
         }
       } catch (err) {
         setError('Something went wrong. Please try again.');
@@ -241,16 +246,16 @@ const PaymentReminders = () => {
                 {editingReminderId === reminder._id ? (
                   <div className="flex items-center space-x-4 flex-grow">
                     <input
-                      type="text"
-                      value={editName}
-                      onChange={(e) => setEditName(e.target.value)}
-                      className="flex-1 w-2 p-px border border-gray-300 rounded-md"
-                    />
-                    <input
                       type="date"
                       value={editDate}
                       onChange={(e) => setEditDate(e.target.value)}
                       className="w-28 p-px border border-gray-300 rounded-md"
+                    />
+                    <input
+                      type="text"
+                      value={editName}
+                      onChange={(e) => setEditName(e.target.value)}
+                      className="flex-1 w-2 p-px border border-gray-300 rounded-md"
                     />
                     <input
                       type="number"
@@ -262,8 +267,8 @@ const PaymentReminders = () => {
                   </div>
                 ) : (
                   <span className="flex-grow flex justify-between items-center">
-                    <span className="font-bold">{reminder.name}</span>
                     <span className="ml-2">{getOrdinalDate(reminder.date)}</span>
+                    <span className="font-bold">{reminder.name}</span>
                     <span className="ml-2">${reminder.amount.toFixed(2)}</span>
                   </span>
                 )}
