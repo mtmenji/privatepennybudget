@@ -26,7 +26,7 @@ export const useSettings = () => {
                 theme = 'theme-pink';
                 break;
             default:
-                theme = 'theme-parchment';
+                break;
         }
 
         const user = JSON.parse(localStorage.getItem('user'))

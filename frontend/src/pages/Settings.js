@@ -80,7 +80,8 @@ const Settings = () => {
                 value={theme}
                 className="w-full p-2 border border-dark1 rounded-md mb-4 bg-light1"
             >
-                <option value="Parchment" selected>Parchment</option>
+                <option value="" disabled>Select a color theme</option>
+                <option value="Parchment">Parchment</option>
                 <option value="Blue">Blue</option>
                 <option value="Green">Green</option>
                 <option value="Pink">Pink</option>
