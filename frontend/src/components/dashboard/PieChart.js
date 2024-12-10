@@ -20,7 +20,6 @@ const PieChart = ({ selectedBudgetId }) => {
     }, [selectedBudgetId, budgets]);
 
     const totalAmount = categories.reduce((total, category) => total + category.amount, 0)
-    const colors = categories.map(() => `hsl(${Math.random() * 360}, 100%, 70%)`)
 
     //Data Prep for Chart
     const data = {
@@ -29,7 +28,7 @@ const PieChart = ({ selectedBudgetId }) => {
             {
                 label: 'Budget Categories',
                 data: categories.map(category => category.amount),
-                backgroundColor: colors,
+                backgroundColor: categories.map(category => category.color),
                 borderWidth: 1,
             },
         ],
@@ -83,7 +82,7 @@ const PieChart = ({ selectedBudgetId }) => {
                             <li key={category.name} className="mb-2 flex justify-between text-sm">
                                 <div
                                     className="w-4 h-4 mr-2 rounded-md"
-                                    style={{ backgroundColor: colors[index] }}
+                                    style={{ backgroundColor: category.color }}
                                 ></div>
                                 <span className="font-semibold">{category.name}</span>
                                 <span>${category.amount}</span>

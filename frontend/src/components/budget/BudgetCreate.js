@@ -60,6 +60,7 @@ const BudgetCreate = ({ onCancel }) => {
           const budget = await response.json();
           const copiedCategories = budget.categories.map((category) => ({
             name: category.name,
+            color: category.color,
             amount: copyAmounts ? category.amount : 0,
           }));
           setCategories(copiedCategories);

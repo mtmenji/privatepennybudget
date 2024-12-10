@@ -92,7 +92,7 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
                     const percentage = category.amount > 0 ? (spentAmount / category.amount) * 100 : 0;
                     return percentage;
                 }),
-                backgroundColor: categories.map(() => `hsl(${Math.random() * 360}, 100%, 70%)`),
+                backgroundColor: categories.map(category => category.color),
                 borderColor: 'rgba(0, 0, 0, 0.1)',
                 borderWidth: 1,
             },

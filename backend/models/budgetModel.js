@@ -18,6 +18,10 @@ const budgetSchema = new Schema({
         amount: {
             type: Number,
             required: true
+        },
+        color: {
+            type: String,
+            required: true
         }
     }],
     budgetedIncome: {

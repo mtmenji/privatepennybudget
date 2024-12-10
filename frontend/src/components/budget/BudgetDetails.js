@@ -149,6 +149,15 @@ const BudgetDetails = ({ budget }) => {
                     <h3 className="text-lg font-semibold">Categories and Amounts:</h3>
                     {formData.categories.map((category, index) => (
                         <div key={index} className="flex flex-col sm:flex-row sm:space-x-4">
+                            <div className="flex items-center">
+                                <input
+                                    type="color"
+                                    value={category.color}
+                                    onChange={(e) => handleCategoryChange(index, 'color', e.target.value)}
+                                    className="h-8 w-8 cursor-pointer p-0 rounded-md bg-light1"
+                                />
+                            </div>
+
                             <div className="w-full sm:w-1/2">
                                 <input
                                     type="text"
