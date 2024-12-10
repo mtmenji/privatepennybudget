@@ -14,6 +14,16 @@ const PaymentReminders = () => {
   const [date, setdate] = useState('');
   const [amount, setAmount] = useState('');
 
+
+  const getOrdinalDate = (date) => {
+    const day = new Date(date).getDate();
+    const suffix = 
+      (day % 10 === 1 && day !== 11) ? 'st' :
+      (day % 10 === 2 && day !== 12) ? 'nd' :
+      (day % 10 === 3 && day !== 13) ? 'rd' : 'th';
+    return `${day}${suffix}`;
+  };
+
   // Fetch reminders
   useEffect(() => {
     const fetchReminders = async () => {
@@ -234,26 +244,26 @@ const PaymentReminders = () => {
                       type="text"
                       value={editName}
                       onChange={(e) => setEditName(e.target.value)}
-                      className="flex-1 p-px border border-gray-300 rounded-md"
+                      className="flex-1 w-2 p-px border border-gray-300 rounded-md"
                     />
                     <input
                       type="date"
                       value={editDate}
                       onChange={(e) => setEditDate(e.target.value)}
-                      className="w-36 p-px border border-gray-300 rounded-md"
+                      className="w-28 p-px border border-gray-300 rounded-md"
                     />
                     <input
                       type="number"
                       value={editAmount}
                       onChange={(e) => setEditAmount(e.target.value)}
-                      className="w-20 p-px border border-gray-300 rounded-md"
+                      className="w-10 p-px border border-gray-300 rounded-md"
                       placeholder="Amount"
                     />
                   </div>
                 ) : (
                   <span className="flex-grow flex justify-between items-center">
                     <span className="font-bold">{reminder.name}</span>
-                    <span className="ml-2">{new Date(reminder.date).toLocaleDateString()}</span>
+                    <span className="ml-2">{getOrdinalDate(reminder.date)}</span>
                     <span className="ml-2">${reminder.amount.toFixed(2)}</span>
                   </span>
                 )}
