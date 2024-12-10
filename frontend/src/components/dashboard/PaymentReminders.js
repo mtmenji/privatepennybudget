@@ -16,7 +16,8 @@ const PaymentReminders = () => {
 
 
   const getOrdinalDate = (date) => {
-    const day = new Date(date).getDate();
+    const parsedDate = new Date(date)
+    const day = parsedDate.getUTCDate()
     const suffix = 
       (day % 10 === 1 && day !== 11) ? 'st' :
       (day % 10 === 2 && day !== 12) ? 'nd' :
