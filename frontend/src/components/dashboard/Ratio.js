@@ -7,7 +7,6 @@ import { Chart as ChartJS, Tooltip, Legend, BarElement, Title, CategoryScale, Li
 ChartJS.register(Tooltip, Legend, BarElement, Title, CategoryScale, LinearScale);
 
 const Ratio = ({ selectedMonth, selectedYear }) => {
-    const { transactions } = useTransactionsContext();
     const { user } = useAuthContext();
     const [filteredTransactions, setFilteredTransactions] = useState([]);
 
@@ -45,11 +44,11 @@ const Ratio = ({ selectedMonth, selectedYear }) => {
 
     const calculateTotals = () => {
         const totalIncome = filteredTransactions
-            .filter(transaction => transaction.type === 'income')
+            .filter(transaction => transaction.category === 'Income')
             .reduce((sum, transaction) => sum + transaction.value, 0);
 
         const totalExpenses = filteredTransactions
-            .filter(transaction => transaction.type === 'expense' && !['income', 'saving'].includes(transaction.category))
+            .filter(transaction => transaction.category !== 'Income' && transaction.category !== 'Remove from Savings')
             .reduce((sum, transaction) => sum + transaction.value, 0);
 
         return { totalIncome, totalExpenses };
@@ -122,7 +121,7 @@ const Ratio = ({ selectedMonth, selectedYear }) => {
                     </div>
                     <div className="space-y-2">
                         <h2 className="text-xl font-bold border-b-2 border-gray-500 pb-1">Percentage Spent</h2>
-                        <p className="text-lg">{expensePercentage}%</p>
+                        <p className="text-lg">{expensePercentage.toFixed(2)}%</p>
                     </div>
                 </div>
 
