@@ -181,7 +181,7 @@ const TransactionForm = () => {
     return (
         <div>
             <h1 className="text-center font-bold text-bodytext">Create a Transaction</h1>
-            <form onSubmit={handleSubmit} className="flex flex-wrap items-center justify-around gap-4">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
                 <input
                     type="date"
                     onChange={(e) => {
@@ -189,7 +189,7 @@ const TransactionForm = () => {
                         handleDataChange(e.target.value)
                     }}
                     value={date}
-                    className={`p-px border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    className={`p-px border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
                         emptyFields.includes('date') ? 'border-warningcolor' : 'border-light3'
                     }`}
                 />
@@ -199,7 +199,7 @@ const TransactionForm = () => {
                     placeholder="Title"
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
-                    className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
                         emptyFields.includes('title') ? 'border-warningcolor' : 'border-light3'
                     }`}
                 />
@@ -207,7 +207,7 @@ const TransactionForm = () => {
                 <select
                     onChange={(e) => setCategory(e.target.value)}
                     value={category}
-                    className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                    className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
                         emptyFields.includes('category') ? 'border-warningcolor' : 'border-light3'
                     }`}
                 >
@@ -240,7 +240,7 @@ const TransactionForm = () => {
                         placeholder="Note"
                         onChange={(e) => setNote(e.target.value)}
                         value={note}
-                        className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                        className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
                             emptyFields.includes('note') ? 'border-warningcolor' : 'border-light3'
                         }`}
                     />
@@ -253,13 +253,13 @@ const TransactionForm = () => {
                         placeholder="0"
                         onChange={(e) => setValue(e.target.value)}
                         value={value}
-                        className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                        className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
                             emptyFields.includes('value') ? 'border-warningcolor' : 'border-light3'
                         }`}
                     />
                 </div>
 
-                <button className="material-symbols-outlined border border-dark1 rounded-md bg-dark1 text-light1 font-bold">
+                <button className="material-symbols-outlined border border-dark1 rounded-md bg-dark1 text-light1 font-bold w-full md:w-auto">
                     add
                 </button>
 

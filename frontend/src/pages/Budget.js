@@ -87,7 +87,7 @@ const Budget = () => {
                         {selectedBudget ? (
                             <BudgetDetails key={selectedBudget._id} budget={selectedBudget} />
                         ) : (
-                            <p className='text-dark1 text-2xl font-bold'>
+                            <p className='text-dark1 text-2xl font-bold mx-8 text-center'>
                                 No budget selected. Choose one from the Monthly Budget List!
                             </p>
                         )}
