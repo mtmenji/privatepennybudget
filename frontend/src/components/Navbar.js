@@ -23,9 +23,12 @@ const Navbar = () => {
     return (
         <header className="bg-dark1 text-light1 shadow-xl fixed w-full top-0 z-10">
             <div className="container mx-auto flex justify-between items-center py-2 px-6">
-                <Link to="/" className="text-2xl font-bold hover:text-light1hover" onClick={() => handleToggleMenu(false)}>
-                    Private Penny
-                </Link>
+                <div className='flex items-center'>
+                    <img src="/images/logo.png" alt="saluting soldier logo" style={{ width: '30px', height: '30px' }}/>
+                    <Link to="/" className="text-2xl font-bold hover:text-light1hover" onClick={() => handleToggleMenu(false)}>
+                        Private Penny
+                    </Link>
+                </div>
                 <div className="hidden md:flex md:items-center space-x-4">
                     {user ? (
                         <>
