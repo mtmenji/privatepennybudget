@@ -270,7 +270,7 @@ const PaymentReminders = () => {
                   <span className="flex-grow flex items-center">
                     <span className="ml-2">{getOrdinalDate(reminder.date)}</span>
                     <span className="ml-2 font-bold">{reminder.name}</span>
-                    <span className="ml-auto">${reminder.amount.toFixed(2)}</span>
+                    <span className="ml-auto">${reminder.amount}</span>
                   </span>
                 )}
 

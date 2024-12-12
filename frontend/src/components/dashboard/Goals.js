@@ -184,13 +184,13 @@ const Goals = () => {
                       type="text"
                       value={editName}
                       onChange={(e) => setEditName(e.target.value)}
-                      className="flex-1 p-px border border-gray-300 rounded-md"
+                      className="flex-1 w-28 p-px border border-gray-300 rounded-md"
                     />
                     <input
                       type="number"
                       value={editAmount}
                       onChange={(e) => setEditAmount(e.target.value)}
-                      className="w-28 p-px border border-gray-300 rounded-md"
+                      className="w-14 p-px border border-gray-300 rounded-md"
                     />
                   </div>
                 ) : (
