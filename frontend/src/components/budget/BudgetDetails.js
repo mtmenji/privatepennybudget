@@ -158,6 +158,23 @@ const BudgetDetails = ({ budget }) => {
                                 />
                             </div>
 
+                            <button
+                                type="button"
+                                className='mt-2 sm:mt-0 sm:ml-4 text-dark1 hover:text-dark3sm:self-center material-symbols-outlined'
+                            >
+                                edit_square
+                            </button>
+
+                            <div className="w-full sm:w-1/2">
+                                <input
+                                    type="text"
+                                    value={category.note}
+                                    onChange={(e) => handleCategoryChange(index, 'note', e.target.value)}
+                                    placeholder="Note"
+                                    className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                                />
+                            </div>
+
                             <div className="w-full sm:w-1/2">
                                 <input
                                     type="text"

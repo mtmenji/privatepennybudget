@@ -40,13 +40,14 @@ const createBudget = async (req, res) => {
         const defaultCategory = {
             name: "Add to Savings",
             amount: 0,
-            color: '#000000'
+            color: '#000000',
+            note: ''
         }
 
-        const updatedCategories = [
-            defaultCategory,
-            ...categories.filter((cat) => cat.name !== 'Add to Savings')
-        ]
+        const updatedCategories = categories.map((category) => ({
+            ...category,
+            note: category.note || '',
+        }));
 
         const budget = await Budget.create({month, year, categories: updatedCategories, budgetedIncome, user_id})
         

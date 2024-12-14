@@ -10,6 +10,7 @@ const BudgetCreate = ({ onCancel }) => {
   const [categories, setCategories] = useState([]);
   const [useCategories, setUseCategories] = useState(null);
   const [copyAmounts, setCopyAmounts] = useState(null);
+  const [copyNotes, setCopyNotes] = useState(null);
   const [selectedBudget, setSelectedBudget] = useState('');
   const [availableBudgets, setAvailableBudgets] = useState([]);
   const [budgetedIncome, setBudgetedIncome] = useState('');
@@ -62,6 +63,7 @@ const BudgetCreate = ({ onCancel }) => {
             name: category.name,
             color: category.color,
             amount: copyAmounts ? category.amount : 0,
+            note: copyNotes ? category.note : '',
           }));
           setCategories(copiedCategories);
         } catch (err) {
@@ -71,7 +73,7 @@ const BudgetCreate = ({ onCancel }) => {
 
       fetchBudgetDetails();
     }
-  }, [selectedBudget, copyAmounts, user]);
+  }, [selectedBudget, copyAmounts, copyNotes, user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -101,6 +103,7 @@ const BudgetCreate = ({ onCancel }) => {
         setYear('');
         setUseCategories(null);
         setCopyAmounts(null);
+        setCopyNotes(null);
         setSelectedBudget('');
         setBudgetedIncome('');
         setCategories([]);
@@ -115,6 +118,7 @@ const BudgetCreate = ({ onCancel }) => {
     setYear('')
     setUseCategories(null)
     setCopyAmounts(null)
+    setCopyNotes(null)
     setSelectedBudget('')
     setCategories([])
     setBudgetedIncome('')
@@ -216,6 +220,27 @@ const BudgetCreate = ({ onCancel }) => {
               type="button"
               onClick={() => setCopyAmounts(false)}
               className={`w-full p-2 rounded-md ${copyAmounts === false ? 'bg-button text-white' : 'bg-light1 border border-gray-300 text-dark1'}`}
+            >
+              No
+            </button>
+          </div>
+
+          {/* Copy Category Notes (Conditional) */}
+          <label className="block text-dark1 mb-2">
+            Would you like to use the same notes from the copied categories? These can be edited later.
+          </label>
+          <div className="flex gap-4 mb-4">
+            <button
+              type="button"
+              onClick={() => setCopyNotes(true)}
+              className={`w-full p-2 rounded-md ${copyNotes ? 'bg-button text-white' : 'bg-light1 border border-gray-300 text-dark1'}`}
+            >
+              Yes
+            </button>
+            <button
+              type="button"
+              onClick={() => setCopyNotes(false)}
+              className={`w-full p-2 rounded-md ${copyNotes === false ? 'bg-button text-white' : 'bg-light1 border border-gray-300 text-dark1'}`}
             >
               No
             </button>
