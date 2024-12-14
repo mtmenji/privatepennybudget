@@ -238,17 +238,18 @@ const BudgetDetails = ({ budget }) => {
             </form>
 
             {modalVisible && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <h2>Category Note</h2>
+                <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="modal-content bg-white p-6 rounded-lg shadow-lg w-96">
+                        <h2 className="text-xl font-semibold">Category Note</h2>
                         <textarea
                             value={formData.categories[selectedCategoryIndex]?.note || ''}
                             onChange={(e) => handleCategoryChange(selectedCategoryIndex, 'note', e.target.value)}
-                            className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                            className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 h-56"
                         />
-                        <button onClick={closeModal} className="mt-2 bg-button text-light1 rounded-lg">
+                        <button onClick={closeModal} className="mt-2 bg-button text-light1 rounded-lg w-full">
                             Close
                         </button>
+                        <p className='text-center'>Don't forget to update your budget!</p>
                     </div>
                 </div>
             )}
