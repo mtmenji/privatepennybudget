@@ -27,7 +27,7 @@ export const useRegister = () => {
                 theme = 'theme-parchment';
         }
 
-        const response = await fetch('/user/register', {
+        const response = await fetch('https://privatepennybudgettest-backend.onrender.com/user/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password, nickname, theme})
