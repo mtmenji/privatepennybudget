@@ -10,6 +10,8 @@ const BudgetDetails = ({ budget }) => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(null);
 
     // Handle input changes for month and year
     const handleChange = (e) => {
@@ -46,6 +48,18 @@ const BudgetDetails = ({ budget }) => {
             ...prev,
             categories: updatedCategories,
         }));
+    };
+
+    // Show the modal for editing a category's note
+    const handleEditNoteClick = (index) => {
+        setSelectedCategoryIndex(index);
+        setModalVisible(true);
+    };
+
+    // Close the modal
+    const closeModal = () => {
+        setModalVisible(false);
+        setSelectedCategoryIndex(null);
     };
 
     // Calculate total planned expenses
@@ -160,20 +174,11 @@ const BudgetDetails = ({ budget }) => {
 
                             <button
                                 type="button"
+                                onClick={() => handleEditNoteClick(index)}
                                 className='mt-2 sm:mt-0 sm:ml-4 text-dark1 hover:text-dark3sm:self-center material-symbols-outlined'
                             >
                                 edit_square
                             </button>
-
-                            <div className="w-full sm:w-1/2">
-                                <input
-                                    type="text"
-                                    value={category.note}
-                                    onChange={(e) => handleCategoryChange(index, 'note', e.target.value)}
-                                    placeholder="Note"
-                                    className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
-                                />
-                            </div>
 
                             <div className="w-full sm:w-1/2">
                                 <input
@@ -231,6 +236,22 @@ const BudgetDetails = ({ budget }) => {
 
                 {error && <p className="text-warningcolor text-xl text-center">{error}</p>}
             </form>
+
+            {modalVisible && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>Category Note</h2>
+                        <textarea
+                            value={formData.categories[selectedCategoryIndex]?.note || ''}
+                            onChange={(e) => handleCategoryChange(selectedCategoryIndex, 'note', e.target.value)}
+                            className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                        />
+                        <button onClick={closeModal} className="mt-2 bg-button text-light1 rounded-lg">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
