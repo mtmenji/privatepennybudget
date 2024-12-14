@@ -52,7 +52,7 @@ const TransactionForm = () => {
 
         setAvailableCategories([
             "Income",
-            ...(matchingBudget.categories || []),
+            ...(matchingBudget.categories?.slice().sort((a, b) => a.name.localeCompare(b.name)) || []),
             "Remove from Savings"
         ]);
     };
