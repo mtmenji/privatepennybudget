@@ -53,7 +53,6 @@ const TransactionForm = () => {
         setAvailableCategories([
             "Income",
             ...(matchingBudget.categories || []),
-            "Add to Savings",
             "Remove from Savings"
         ]);
     };
