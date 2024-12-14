@@ -162,9 +162,11 @@ const BudgetDetails = ({ budget }) => {
                                 <input
                                     type="text"
                                     value={category.name}
-                                    onChange={(e) => handleCategoryChange(index, 'name', e.target.value)}
+                                    onChange={(e) => 
+                                        category.name === 'Add to Savings' ? null :
+                                        handleCategoryChange(index, 'name', e.target.value)}
                                     placeholder="Name"
-                                    className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                                    className={`mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${category.name === 'Add to Savings' ? 'bg-light2' : ''}`}
                                 />
                             </div>
 
@@ -181,7 +183,8 @@ const BudgetDetails = ({ budget }) => {
                             <button
                                 type="button"
                                 onClick={() => removeCategory(index)}
-                                className="mt-2 sm:mt-0 sm:ml-4 text-dark1 hover:text-dark3 sm:self-center material-symbols-outlined"
+                                className={`mt-2 sm:mt-0 sm:ml-4 sm:self-center material-symbols-outlined ${category.name === 'Add to Savings' ? 'text-light1' : 'text-dark1'} ${category.name === 'Add to Savings' ? 'hover:text-light1' : 'hover:text-dark3'}`}
+                                disabled={category.name === 'Add to Savings'}
                             >
                                 delete
                             </button>

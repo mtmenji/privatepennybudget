@@ -21,7 +21,7 @@ const getBudget = async (req, res) => {
 
 //CREATE budget.
 const createBudget = async (req, res) => {
-    const {month, year, categories, budgetedIncome} = req.body
+    const {month, year, categories = [], budgetedIncome} = req.body
 
     let emptyFields = []
     if(!month) {
@@ -36,7 +36,19 @@ const createBudget = async (req, res) => {
 
     try {
         const user_id = req.user._id
-        const budget = await Budget.create({month, year, categories, budgetedIncome, user_id})
+
+        const defaultCategory = {
+            name: "Add to Savings",
+            amount: 0,
+            color: '#000000'
+        }
+
+        const updatedCategories = [
+            defaultCategory,
+            ...categories.filter((cat) => cat.name !== 'Add to Savings')
+        ]
+
+        const budget = await Budget.create({month, year, categories: updatedCategories, budgetedIncome, user_id})
         
         res.status(200).json(budget)
     } catch (error) {
