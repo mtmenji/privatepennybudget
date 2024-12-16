@@ -20,8 +20,8 @@ const BudgetCreate = ({ onCancel }) => {
     if (useCategories && user) {
       const fetchBudgets = async () => {
         try {
-          // const response = await fetch('http://localhost:4001/budgets', {
-          const response = await fetch('https://privatepennybudgettest-backend.onrender.com/budgets', {
+          const response = await fetch('http://localhost:4001/budgets', {
+          // const response = await fetch('https://privatepennybudgettest-backend.onrender.com/budgets', {
             headers: {
               'Authorization': `Bearer ${user.token}`,
             },
@@ -47,8 +47,8 @@ const BudgetCreate = ({ onCancel }) => {
       const fetchBudgetDetails = async () => {
         try {
           console.log(`TEST 101: ${selectedBudget}`)
-          // const response = await fetch(`http://localhost:4001/budgets/${selectedBudget}`, {
-          const response = await fetch(`https://privatepennybudgettest-backend.onrender.com/budgets/${selectedBudget}`, {
+          const response = await fetch(`http://localhost:4001/budgets/${selectedBudget}`, {
+          // const response = await fetch(`https://privatepennybudgettest-backend.onrender.com/budgets/${selectedBudget}`, {
             headers: {
               'Authorization': `Bearer ${user.token}`,
             },

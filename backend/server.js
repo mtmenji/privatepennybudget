@@ -15,8 +15,8 @@ const app = express()
 
 //CORS Configuration
 const corsOptions = {
-    // origin: 'http://localhost:3000',
-    origin: 'https://privatepennybudget-frontend.onrender.com',
+    origin: 'http://localhost:3000',
+    // origin: 'https://privatepennybudget-frontend.onrender.com',
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -38,11 +38,11 @@ app.use('/user',userRoutes)
 app.use('/goals',goalRoutes)
 app.use('/reminders',reminderRoutes)
 
-//Host
-// app.use(express.static(path.join(__dirname, '../frontend/build')))
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
-// });
+// Host
+app.use(express.static(path.join(__dirname, '../frontend/build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
+});
 
 //Database Connection
 mongoose.connect(process.env.MONGO_URI)
