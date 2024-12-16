@@ -1,5 +1,8 @@
 const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
+const nodemailer = require('nodemailer');
+const bcrypt = require('bcrypt')
+
 
 // JWT Creation
 const createToken = (_id) => {
@@ -18,6 +21,67 @@ const loginUser = async (req, res) => {
         res.status(400).json({ error: error.message })
     }
 }
+
+// Forgot Password
+const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+        if (!user) throw new Error('No user found with this email.');
+
+        // Generate a temporary token (valid for 15 minutes)
+        const token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: '15m' });
+
+        // Send email (configure nodemailer SMTP settings)
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Password Reset',
+            text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
+            Please click on the following link, or paste this into your browser to complete the process:\n\n
+            http://localhost:3000/reset-password/${token}\n\n
+            If you did not request this, please ignore this email and your password will remain unchanged.\n`
+        };
+
+        await transporter.sendMail(mailOptions);
+
+        res.status(200).json({ message: 'Reset link sent to your email.' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+const resetPassword = async (req, res) => {
+    const { token, newPassword } = req.body;
+
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET);
+        if (!decoded) {
+            console.log('Token is invalid.')
+            throw new Error('Invalid token');
+        }
+
+        const user = await User.findById(decoded._id);
+        if (!user) throw new Error('User not found.');
+        // Update password
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(newPassword, salt);
+        await user.save();
+
+        res.status(200).json({ message: 'Password updated successfully.' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
 // Sign Up User
 const registerUser = async (req, res) => {
@@ -63,4 +127,4 @@ const deleteUser = async (req, res) => {
     }
 }
 
-module.exports = { loginUser, registerUser, updateUser, deleteUser }
+module.exports = { loginUser, forgotPassword, resetPassword, registerUser, updateUser, deleteUser }
