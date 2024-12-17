@@ -10,8 +10,9 @@ const Budget = () => {
     const [showCreateForm, setShowCreateForm] = useState(false)
     const [isListVisible, setIsListVisible] = useState(true)
     const [selectedBudget, setSelectedBudget] = useState(null)
-    
+    const [isLoading, setIsLoading] = useState(false)
     const [isSmallScreen, setIsSmallScreen] = useState(false)
+
     useEffect(() => {
         const handleResize = () => {
             setIsSmallScreen(window.innerWidth <= 1024);
@@ -47,8 +48,30 @@ const Budget = () => {
             }
         }
 
+        const fetchDefaultBudget = async () => {
+
+            setIsLoading(true)
+
+            const response = await fetch('/budgets', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                },
+            });
+            const budgets = await response.json();
+    
+            if (response.ok) {
+                const defaultBudget = budgets.find((budget) => budget.isDefault);
+                if (defaultBudget) {
+                    setSelectedBudget(defaultBudget);
+                }
+            }
+
+            setIsLoading(false)
+        }
+
         if (user) {
             fetchBudgets()
+            fetchDefaultBudget()
         }
     }, [dispatch, user])
 
@@ -80,11 +103,18 @@ const Budget = () => {
                 } flex justify-center items-center transition-all duration-300 ease-in-out`}
             >
                 {shouldShowCreateForm && (
-                    <BudgetCreate onCancel={() => setShowCreateForm(false)}/>
+                    <BudgetCreate onCancel={() => {
+                        setShowCreateForm(false)
+                        setSelectedBudget(null)
+                    }}/>
                 )}
                 {!shouldShowCreateForm && (
                     <div className="flex w-full justify-center">
-                        {selectedBudget ? (
+                        {isLoading ? (
+                            <p className="text-dark1 text-2xl font-bold mx-8 text-center">
+                                Loading default budget...
+                            </p>
+                        ) : selectedBudget ? (
                             <BudgetDetails key={selectedBudget._id} budget={selectedBudget} />
                         ) : (
                             <p className='text-dark1 text-2xl font-bold mx-8 text-center'>

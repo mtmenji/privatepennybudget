@@ -10,6 +10,15 @@ export const budgetReducer = (state, action) => {
             return { budgets: [action.payload, ...state.budgets] };
         case 'DELETE_BUDGET':
             return { budgets: state.budgets.filter(budget => budget._id !== action.payload._id) };
+        case 'SET_DEFAULT_BUDGET':
+            return {
+                ...state,
+                budgets: state.budgets.map((budget) =>
+                    budget._id === action.payload._id
+                        ? { ...budget, isDefault: true }
+                        : { ...budget, isDefault: false }
+                ),
+            };
         default:
             return state;
     }

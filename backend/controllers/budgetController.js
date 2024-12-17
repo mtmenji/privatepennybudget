@@ -21,7 +21,7 @@ const getBudget = async (req, res) => {
 
 //CREATE budget.
 const createBudget = async (req, res) => {
-    const {month, year, categories = [], budgetedIncome} = req.body
+    const {month, year, categories = [], budgetedIncome, isDefault} = req.body
 
     let emptyFields = []
     if(!month) {
@@ -49,7 +49,7 @@ const createBudget = async (req, res) => {
             note: category.note || '',
         }));
 
-        const budget = await Budget.create({month, year, categories: updatedCategories, budgetedIncome, user_id})
+        const budget = await Budget.create({month, year, categories: updatedCategories, budgetedIncome, isDefault, user_id})
         
         res.status(200).json(budget)
     } catch (error) {
@@ -103,11 +103,38 @@ const updateBudget = async (req, res) => {
     }
 };
 
+// SET DEFAULT budget
+const setDefaultBudget = async (req, res) => {
+    const { id } = req.params;
+    const user_id = req.user._id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such budget.' });
+    }
+
+    // Unset any previous default budgets for the user
+    await Budget.updateMany({ user_id }, { $set: { isDefault: false } });
+
+    // Set the new default budget
+    const updatedBudget = await Budget.findOneAndUpdate(
+        { _id: id, user_id },
+        { $set: { isDefault: true } },
+        { new: true }
+    );
+
+    if (!updatedBudget) {
+        return res.status(404).json({ error: 'No such budget.' });
+    }
+
+    res.status(200).json(updatedBudget);
+};
+
 //Export
 module.exports = {
     getBudgets,
     getBudget,
     createBudget,
     deleteBudget,
-    updateBudget
+    updateBudget,
+    setDefaultBudget
 }

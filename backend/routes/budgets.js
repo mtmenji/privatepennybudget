@@ -1,5 +1,5 @@
 const express = require('express')
-const { createBudget, getBudgets, deleteBudget, updateBudget, getBudget } = require('../controllers/budgetController')
+const { createBudget, getBudgets, deleteBudget, updateBudget, getBudget, setDefaultBudget } = require('../controllers/budgetController')
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
@@ -19,6 +19,9 @@ router.delete('/:id', deleteBudget)
 
 //UPDATE a single budget.
 router.put('/:id', updateBudget)
+
+//SET a default budget.
+router.put('/:id/default', setDefaultBudget)
 
 
 module.exports = router

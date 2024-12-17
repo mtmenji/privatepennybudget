@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useBudgetContext } from '../../hooks/useBudgetContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
 const Selection = ({ onSelectionChange }) => {
     const { budgets, dispatch } = useBudgetContext();
     const { user } = useAuthContext();
+    const [selectedBudgetId, setSelectedBudgetId] = useState('')
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
 
     useEffect(() => {
         const fetchBudgets = async () => {
@@ -17,13 +19,22 @@ const Selection = ({ onSelectionChange }) => {
 
             if (response.ok) {
                 dispatch({ type: 'SET_BUDGETS', payload: json });
+
+                if (isInitialLoad) {
+                    const defaultBudget = json.find((budget) => budget.isDefault);
+                    if (defaultBudget) {
+                        setSelectedBudgetId(defaultBudget._id);
+                        onSelectionChange(defaultBudget._id, defaultBudget.month, defaultBudget.year);
+                    }
+                    setIsInitialLoad(false)
+                }
             }
         };
 
         if (user) {
             fetchBudgets();
         }
-    }, [dispatch, user]);
+    }, [dispatch, user, isInitialLoad]);
 
     const getMonthNumber = (month) => {
         const monthMap = {
@@ -43,6 +54,7 @@ const Selection = ({ onSelectionChange }) => {
         : [];
     
     const handleChange = (budgetId, month, year) => {
+        setSelectedBudgetId(budgetId)
         onSelectionChange(budgetId, month, year);
     };
 
@@ -54,6 +66,7 @@ const Selection = ({ onSelectionChange }) => {
             <select
                 id="budget-select"
                 className="w-full p-2 border border-gray-300 rounded"
+                value={selectedBudgetId}
                 onChange={(e) => {
                     const selectedBudget = budgets.find(budget => budget._id === e.target.value);
                     if (selectedBudget) {
@@ -64,7 +77,7 @@ const Selection = ({ onSelectionChange }) => {
                 <option value="">-- Select Month --</option>
                 {sortedBudgets.map((budget) => (
                     <option key={budget._id} value={budget._id}>
-                        {`${budget.month} ${budget.year}`}
+                        {`${budget.month} ${budget.year} ${budget.isDefault ? "(Default Budget)" : ""}`}
                     </option>
                 ))}
             </select>

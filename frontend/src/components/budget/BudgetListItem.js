@@ -28,6 +28,36 @@ const BudgetListItem = ({ budget, onSelectBudget }) => {
         }
     }
 
+    const handleSetDefault = async () => {
+        if (!user) return;
+
+        const response = await fetch(`/budgets/${budget._id}/default`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${user.token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const json = await response.json();
+
+        if (response.ok) {
+            dispatch({ type: 'SET_DEFAULT_BUDGET', payload: json });
+            const fetchBudgets = async () => {
+                const response = await fetch('/budgets', {
+                    headers: {
+                        'Authorization': `Bearer ${user.token}`,
+                    },
+                });
+                const json = await response.json();
+                if (response.ok) {
+                    dispatch({ type: 'SET_BUDGETS', payload: json });
+                }
+            };
+            fetchBudgets();
+        }
+    };
+
     return (
         <div className='flex items-center bg-dark1 w-full'>
             <button 
@@ -42,6 +72,13 @@ const BudgetListItem = ({ budget, onSelectBudget }) => {
                 className="w-full text-left p-2 bg-dark1 text-light1 hover:bg-dark2"
             >
                 {budget.month} {budget.year}
+            </button>
+            <button 
+                onClick={handleSetDefault} 
+                className='p-2 material-symbols-outlined hover:bg-dark2'
+                aria-label="Set Default Budget"
+            >
+                {budget.isDefault ? 'stars' : 'star'}
             </button>
         </div>
     )
