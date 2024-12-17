@@ -4,7 +4,6 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import TransactionDetails from '../components/transactions/TransactionDetails'
 import TransactionForm from '../components/transactions/TransactionForm'
 import TransactionFilter from '../components/transactions/TransactionFilter'
-import BatchTransactionForm from '../components/transactions/BatchTransactionForm'
 
 const Transactions = () => {
 
@@ -66,7 +65,6 @@ const Transactions = () => {
         <div className='flex flex-col w-full'>
                 <TransactionFilter setFilters={setFilters} transactions={transactions} />
                 <TransactionForm />
-                <BatchTransactionForm />
             <hr className='border-t-2 border-dark1 mt-2'/>
             <div className='w-full px-4'>
                 <div className='flex justify-evenly md:grid md:grid-cols-12 items-center w-full my-2 font-bold'>
