@@ -104,7 +104,7 @@ const BudgetDetails = ({ budget }) => {
     };
 
     return (
-        <div className="w-full p-6">
+        <div className="w-full p-6 overflow-y-auto h-[calc(100vh-80px)]">
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="text-center">
                     <div className="flex justify-center space-x-2 font-bold text-bodytext">

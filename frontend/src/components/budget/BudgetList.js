@@ -46,7 +46,7 @@ const BudgetList = ({ onCreateClick, onSelectBudget }) => {
     : []
 
     return (
-        <div className='h-full w-full'>
+        <div className='w-full overflow-y-auto h-[calc(100vh-80px)]'>
             <h1 className="text-center text-lg my-4 font-bold">Monthly Budget List</h1>
             <button 
                 onClick={onCreateClick} 
