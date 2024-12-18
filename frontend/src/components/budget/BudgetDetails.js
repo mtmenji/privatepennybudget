@@ -107,7 +107,7 @@ const BudgetDetails = ({ budget }) => {
         <div className="w-full p-6 overflow-y-auto h-[calc(100vh-80px)]">
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="text-center">
-                    <div className="flex justify-center space-x-2 font-bold text-bodytext">
+                    <div className="flex justify-center space-x-2 font-bold text-bodyTextDark">
                         <select
                             name="month"
                             value={formData.month}
@@ -137,30 +137,30 @@ const BudgetDetails = ({ budget }) => {
 
                 <div className="flex items-center justify-between space-x-4">
                     <div className="w-full sm:w-1/2">
-                        <h3 className="text-lg font-semibold text-bodytext">Budgeted Income:</h3>
+                        <h3 className="text-lg font-semibold text-bodyTextDark">Budgeted Income:</h3>
                         <input
                             type="number"
                             name="budgetedIncome"
                             value={formData.budgetedIncome}
                             onChange={handleChange}
                             placeholder="Enter budgeted income"
-                            className="mt-1 block w-full p-2 border border-dark1 text-bodytext text-sm rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                            className="mt-1 block w-full p-2 border border-dark1 bg-formInput text-bodyTextDark text-sm rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
                         />
                     </div>
                     <div className="w-full sm:w-1/2 sm:mt-0">
-                        <h3 className="text-lg font-semibold text-bodytext">Planned Expenses:</h3>
-                        <p className="text-sm text-bodytext bg-light2 p-2 rounded-md border border-dark1">${plannedExpenses.toFixed(2)}</p>
+                        <h3 className="text-lg font-semibold text-bodyTextDark">Planned Expenses:</h3>
+                        <p className="text-sm text-bodyTextDark bg-formInputDenied p-2 rounded-md border border-dark1">${plannedExpenses.toFixed(2)}</p>
                     </div>
                     <div className="w-full sm:w-1/2 sm:mt-0">
-                        <h3 className="text-lg font-semibold text-bodytext">Remaining Income:</h3>
-                        <p className={`text-sm text-bodytext p-2 rounded-md border border-dark1 ${formData.budgetedIncome - plannedExpenses < 0 ? 'bg-warningcolor': 'bg-light2'}`}>${(formData.budgetedIncome-plannedExpenses).toFixed(2)}</p>
+                        <h3 className="text-lg font-semibold text-bodyTextDark">Remaining Income:</h3>
+                        <p className={`text-sm text-bodyTextDark p-2 rounded-md border border-dark1 ${formData.budgetedIncome - plannedExpenses < 0 ? 'bg-warningColor': 'bg-formInputDenied'}`}>${(formData.budgetedIncome-plannedExpenses).toFixed(2)}</p>
                     </div>
                 </div>
 
                 <hr className='border-t-2 border-dark1 mt-2'/>
 
                 <div>
-                    <h3 className="text-lg font-semibold">Categories and Amounts:</h3>
+                    <h3 className="text-lg font-semibold text-bodyTextDark">Categories and Amounts:</h3>
                     {formData.categories.map((category, index) => (
                         <div key={index} className="flex flex-col sm:flex-row sm:space-x-4">
                             <div className="flex items-center">
@@ -175,7 +175,7 @@ const BudgetDetails = ({ budget }) => {
                             <button
                                 type="button"
                                 onClick={() => handleEditNoteClick(index)}
-                                className='mt-2 sm:mt-0 sm:ml-4 text-dark1 hover:text-dark3sm:self-center material-symbols-outlined'
+                                className={`mt-2 sm:mt-0 sm:ml-4 text-dark1 hover:text-dark3sm:self-center material-symbols-outlined hover:text-dark2`}
                             >
                                 edit_square
                             </button>
@@ -188,7 +188,7 @@ const BudgetDetails = ({ budget }) => {
                                         category.name === 'Add to Savings' ? null :
                                         handleCategoryChange(index, 'name', e.target.value)}
                                     placeholder="Name"
-                                    className={`mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${category.name === 'Add to Savings' ? 'bg-light2' : ''}`}
+                                    className={`text-bodyTextDark mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${category.name === 'Add to Savings' ? 'bg-formInputDenied focus:ring-0' : ''}`}
                                 />
                             </div>
 
@@ -198,7 +198,7 @@ const BudgetDetails = ({ budget }) => {
                                     value={category.amount}
                                     onChange={(e) => handleCategoryChange(index, 'amount', e.target.value)}
                                     placeholder="Amount"
-                                    className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                                    className="text-bodyTextDark mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
                                 />
                             </div>
 
@@ -220,7 +220,7 @@ const BudgetDetails = ({ budget }) => {
                     <button
                         type="button"
                         onClick={addCategory}
-                        className="w-full py-1 bg-button text-light1 rounded-lg hover:bg-buttonhover hover:text-dark1"
+                        className="w-full py-1 bg-button text-bodyTextLight rounded-lg hover:bg-buttonHover"
                     >
                         Add Category
                     </button>
@@ -228,28 +228,28 @@ const BudgetDetails = ({ budget }) => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className={`w-full py-1 text-light1 rounded-lg ${loading ? 'bg-gray-500' : 'bg-button hover:bg-buttonhover hover:text-dark1'}`}
+                        className={`w-full py-1 text-bodyTextLight rounded-lg ${loading ? 'bg-gray-500' : 'bg-button hover:bg-buttonHover'}`}
                     >
                         {loading ? 'Updating...' : 'Update Budget'}
                     </button>
                 </div>
 
-                {error && <p className="text-warningcolor text-xl text-center">{error}</p>}
+                {error && <p className="text-warningColor text-xl text-center">{error}</p>}
             </form>
 
             {modalVisible && (
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
                     <div className="modal-content bg-white p-6 rounded-lg shadow-lg w-96">
-                        <h2 className="text-xl font-semibold">Category Note</h2>
+                        <h2 className="text-xl font-semibold text-bodyTextDark">{formData.categories[selectedCategoryIndex]?.name || ''} Notes</h2>
                         <textarea
                             value={formData.categories[selectedCategoryIndex]?.note || ''}
                             onChange={(e) => handleCategoryChange(selectedCategoryIndex, 'note', e.target.value)}
-                            className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 h-56"
+                            className="mt-1 block w-full text-sm p-2 border border-dark1 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 h-56 text-bodyTextDark"
                         />
-                        <button onClick={closeModal} className="mt-2 bg-button text-light1 rounded-lg w-full">
+                        <button onClick={closeModal} className="mt-2 bg-button hover:bg-buttonHover text-bodyTextLight rounded-lg w-full">
                             Close
                         </button>
-                        <p className='text-center'>Don't forget to update your budget!</p>
+                        <p className='text-center text-bodyTextDark'>Don't forget to update your budget!</p>
                     </div>
                 </div>
             )}

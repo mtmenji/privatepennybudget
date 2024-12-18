@@ -28,11 +28,11 @@ const ForgotPassword = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 placeholder="Email"
-                className="bg-light1 border border-dark1 px-2 text-bodytext rounded-md focus:ring-2"
+                className="bg-light1 border border-dark1 px-2 text-bodyTextDark rounded-md focus:ring-2"
             />
             <button
                 type="submit"
-                className="bg-button px-2 text-light1 rounded-md font-semibold transition-colors duration-200 hover:bg-buttonhover focus:outline-none"
+                className="bg-button px-2 text-light1 rounded-md font-semibold transition-colors duration-200 hover:bg-buttonHover focus:outline-none"
             >
                 Send Reset Link
             </button>

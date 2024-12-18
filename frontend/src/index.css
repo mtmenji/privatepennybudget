@@ -8,13 +8,13 @@
     --dark2: #2d5a78;
     --dark3: #2E86C1;
     --light1: #D6EAF8;
-    --light1hover: #e8f2fa;
+    --navbarHover: #e8f2fa;
     --light2: #AED6F1;
     --light3: #85C1E9;
     --button: #3498DB;
-    --buttonhover: #5DADE2;
-    --bodytext: #000000;
-    --warningcolor: #ef4444;
+    --buttonHover: #5DADE2;
+    --bodyTextDark: #000000;
+    --warningColor: #ef4444;
 }
 
 /* Theme: Green */
@@ -26,9 +26,9 @@
     --light2: #81C784;
     --light3: #66BB6A;
     --button: #388E3C;
-    --buttonhover: #66BB6A;
-    --bodytext: #000000;
-    --warningcolor: #ef4444;
+    --buttonHover: #66BB6A;
+    --bodyTextDark: #000000;
+    --warningColor: #ef4444;
 }
 
 /* Theme: Pink */
@@ -40,9 +40,9 @@
     --light2: #F48FB1;
     --light3: #F06292;
     --button: #D81B60;
-    --buttonhover: #F06292;
-    --bodytext: #000000;
-    --warningcolor: #ffbf00;
+    --buttonHover: #F06292;
+    --bodyTextDark: #000000;
+    --warningColor: #ffbf00;
 }
 
 .theme-parchment {
@@ -53,9 +53,14 @@
     --light2: #e9e1ce;
     --light3: #d4c4a8;
     --button: #A67C52;
-    --buttonhover: #BF8E62;
-    --bodytext: #3E3A33;
-    --warningcolor: #ef4444;
+    --buttonHover: #8C6B44;
+    --bodyTextDark: #000000;
+    --bodyTextLight: #FFFFFF;
+    --formInput: #FFFFFF;
+    --formInputDenied: #a5a5a5;
+    --warningColor: #f98080;
+    --warningText: #000000;
+    --navbarHover: #FFDFA6;
 }
 
 /* Scroll Bar Styles */

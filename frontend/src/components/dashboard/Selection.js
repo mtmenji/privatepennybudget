@@ -60,12 +60,12 @@ const Selection = ({ onSelectionChange }) => {
 
     return (
         <div className='m-2'>
-            <label htmlFor="budget-select" className="block text-xl font-bold mb-4 text-dark1 text-center">
+            <label htmlFor="budget-select" className="block text-xl font-bold mb-4 text-bodyTextDark text-center">
                 Month Selection
             </label>
             <select
                 id="budget-select"
-                className="w-full p-2 border border-gray-300 rounded"
+                className="w-full p-2 border border-dark1 rounded text-bodyTextDark"
                 value={selectedBudgetId}
                 onChange={(e) => {
                     const selectedBudget = budgets.find(budget => budget._id === e.target.value);

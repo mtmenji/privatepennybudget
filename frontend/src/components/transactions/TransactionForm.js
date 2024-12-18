@@ -179,7 +179,7 @@ const TransactionForm = () => {
 
     return (
         <div>
-            <h1 className="text-center font-bold text-bodytext">Create a Transaction</h1>
+            <h1 className="text-center font-bold text-bodyTextDark">Create a Transaction</h1>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
                 <input
                     type="date"
@@ -189,7 +189,7 @@ const TransactionForm = () => {
                     }}
                     value={date}
                     className={`p-px border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                        emptyFields.includes('date') ? 'border-warningcolor' : 'border-light3'
+                        emptyFields.includes('date') ? 'border-warningColor' : 'border-light3'
                     }`}
                 />
 
@@ -199,7 +199,7 @@ const TransactionForm = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
                     className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                        emptyFields.includes('title') ? 'border-warningcolor' : 'border-light3'
+                        emptyFields.includes('title') ? 'border-warningColor' : 'border-light3'
                     }`}
                 />
 
@@ -207,7 +207,7 @@ const TransactionForm = () => {
                     onChange={(e) => setCategory(e.target.value)}
                     value={category}
                     className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                        emptyFields.includes('category') ? 'border-warningcolor' : 'border-light3'
+                        emptyFields.includes('category') ? 'border-warningColor' : 'border-light3'
                     }`}
                 >
                     <option value="" disable>Select Category</option>
@@ -223,7 +223,7 @@ const TransactionForm = () => {
                         onChange={(e) => setNote(e.target.value)}
                         value={note}
                         className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
-                            emptyFields.includes('note') ? 'border-warningcolor' : 'border-light3'
+                            emptyFields.includes('note') ? 'border-warningColor' : 'border-light3'
                         }`}
                     >
                         <option value="" disabled>Select Goal</option>
@@ -240,7 +240,7 @@ const TransactionForm = () => {
                         onChange={(e) => setNote(e.target.value)}
                         value={note}
                         className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                            emptyFields.includes('note') ? 'border-warningcolor' : 'border-light3'
+                            emptyFields.includes('note') ? 'border-warningColor' : 'border-light3'
                         }`}
                     />
                 )}
@@ -253,7 +253,7 @@ const TransactionForm = () => {
                         onChange={(e) => setValue(e.target.value)}
                         value={value}
                         className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                            emptyFields.includes('value') ? 'border-warningcolor' : 'border-light3'
+                            emptyFields.includes('value') ? 'border-warningColor' : 'border-light3'
                         }`}
                     />
                 </div>
@@ -262,7 +262,7 @@ const TransactionForm = () => {
                     add
                 </button>
 
-                {error && <div className="text-warningcolor">{error}</div>}
+                {error && <div className="text-warningColor">{error}</div>}
             </form>
         </div>
     )

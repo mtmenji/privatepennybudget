@@ -126,16 +126,16 @@ const BudgetCreate = ({ onCancel }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-3xl p-6 bg-light3 rounded-lg shadow-2xl">
-      <h3 className="text-xl font-bold mb-4 text-dark1">Create a New Budget</h3>
+    <form onSubmit={handleSubmit} className="w-full max-w-3xl px-6 py-4 m-2 bg-light3 rounded-lg shadow-2xl">
+      <h3 className="text-xl font-bold mb-4 text-bodyTextDark">Create a New Budget</h3>
 
       {/* Select Month and Year */}
-      <label className="block text-dark1 mb-2">Select Month and Year:</label>
+      <label className="block text-bodyTextDark mb-2">Select Month and Year:</label>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <select
           onChange={(e) => setMonth(e.target.value)}
           value={month}
-          className="w-full p-2 border border-gray-300 rounded-md bg-light1"
+          className="w-full p-2 border border-dark1 rounded-md bg-light1 text-bodyTextDark"
           required
         >
           <option value="" disabled>Select Month</option>
@@ -148,39 +148,39 @@ const BudgetCreate = ({ onCancel }) => {
           type="number"
           onChange={(e) => setYear(e.target.value)}
           value={year}
-          className="w-full p-2 border border-gray-300 rounded-md bg-light1"
+          className="w-full p-2 border border-dark1 rounded-md bg-light1 text-bodyTextDark"
           placeholder="Enter Year"
           required
         />
       </div>
 
       {/* Select a Budgeted Income */}
-      <label className="block text-dark1 mb-2">What is your expected income?</label>
+      <label className="block text-bodyTextDark mb-2">What is your expected income?</label>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <input
           type="number"
           onChange={(e) => setBudgetedIncome(e.target.value)}
           value={budgetedIncome}
-          className="w-full p-2 border border-gray-300 rounded-md bg-light1"
+          className="w-full p-2 border border-dark1 rounded-md bg-light1 text-bodyTextDark"
           placeholder="Enter Income"
           required
         />
       </div>
 
       {/* Use Categories from Another Month */}
-      <label className="block text-dark1 mb-2">Would you like to use the same categories as another month?</label>
+      <label className="block text-bodyTextDark mb-2">Would you like to use the same categories as another month?</label>
       <div className="flex gap-4 mb-4">
         <button
           type="button"
           onClick={() => setUseCategories(true)}
-          className={`w-full p-2 rounded-md ${useCategories ? 'bg-button text-white' : 'bg-light1 border border-gray-300 text-dark1'}`}
+          className={`w-full p-2 rounded-md ${useCategories ? 'bg-button text-bodyTextLight' : 'bg-light1 border border-dark1 text-bodyTextDark'}`}
         >
           Yes
         </button>
         <button
           type="button"
           onClick={() => setUseCategories(false)}
-          className={`w-full p-2 rounded-md ${useCategories === false ? 'bg-button text-white' : 'bg-light1 border border-gray-300 text-dark1'}`}
+          className={`w-full p-2 rounded-md ${useCategories === false ? 'bg-button  text-bodyTextLight' : 'bg-light1 border border-dark1  text-bodyTextDark'}`}
         >
           No
         </button>
@@ -189,11 +189,11 @@ const BudgetCreate = ({ onCancel }) => {
       {/* Select Previous Budget (Conditional) */}
       {useCategories && (
         <>
-          <label className="block text-dark1 mb-2">Select a previous budget:</label>
+          <label className="block  text-bodyTextDark mb-2">Select a previous budget:</label>
           <select
             onChange={(e) => setSelectedBudget(e.target.value)}
             value={selectedBudget}
-            className="w-full p-2 border border-gray-300 rounded-md mb-4 bg-light1"
+            className="w-full p-2 border border-dark1 rounded-md mb-4 bg-light1  text-bodyTextDark"
             required
           >
             <option value="" disabled>Select Budget</option>
@@ -205,42 +205,42 @@ const BudgetCreate = ({ onCancel }) => {
           </select>
 
           {/* Copy Budgeted Amounts (Conditional) */}
-          <label className="block text-dark1 mb-2">
+          <label className="block text-bodyTextDark mb-2">
             Would you like to use the same budgeted amounts from the copied categories? These can be edited later.
           </label>
           <div className="flex gap-4 mb-4">
             <button
               type="button"
               onClick={() => setCopyAmounts(true)}
-              className={`w-full p-2 rounded-md ${copyAmounts ? 'bg-button text-white' : 'bg-light1 border border-gray-300 text-dark1'}`}
+              className={`w-full p-2 rounded-md ${copyAmounts ? 'bg-button  text-bodyTextLight' : 'bg-light1 border border-dark1 text-bodyTextDark'}`}
             >
               Yes
             </button>
             <button
               type="button"
               onClick={() => setCopyAmounts(false)}
-              className={`w-full p-2 rounded-md ${copyAmounts === false ? 'bg-button text-white' : 'bg-light1 border border-gray-300 text-dark1'}`}
+              className={`w-full p-2 rounded-md ${copyAmounts === false ? 'bg-button  text-bodyTextLight' : 'bg-light1 border border-dark1 text-bodyTextDark'}`}
             >
               No
             </button>
           </div>
 
           {/* Copy Category Notes (Conditional) */}
-          <label className="block text-dark1 mb-2">
+          <label className="block text-bodyTextDark mb-2">
             Would you like to use the same notes from the copied categories? These can be edited later.
           </label>
           <div className="flex gap-4 mb-4">
             <button
               type="button"
               onClick={() => setCopyNotes(true)}
-              className={`w-full p-2 rounded-md ${copyNotes ? 'bg-button text-white' : 'bg-light1 border border-gray-300 text-dark1'}`}
+              className={`w-full p-2 rounded-md ${copyNotes ? 'bg-button  text-bodyTextLight' : 'bg-light1 border border-dark1 text-bodyTextDark'}`}
             >
               Yes
             </button>
             <button
               type="button"
               onClick={() => setCopyNotes(false)}
-              className={`w-full p-2 rounded-md ${copyNotes === false ? 'bg-button text-white' : 'bg-light1 border border-gray-300 text-dark1'}`}
+              className={`w-full p-2 rounded-md ${copyNotes === false ? 'bg-button  text-bodyTextLight' : 'bg-light1 border border-dark1 text-bodyTextDark'}`}
             >
               No
             </button>
@@ -249,13 +249,13 @@ const BudgetCreate = ({ onCancel }) => {
       )}
 
       {/* Create Button */}
-      <button type="submit" className="w-full mt-4 bg-button hover:bg-buttonhover text-white p-2 rounded-md">
+      <button type="submit" className="w-full mt-4 bg-button hover:bg-buttonHover  text-bodyTextLight p-2 rounded-md">
         Create
       </button>
       <button
         type="button"
         onClick={handleCancel}
-        className="w-full mt-2 bg-light1 border border-gray-300 text-dark1 p-2 rounded-md"
+        className="w-full mt-2 bg-light1 border border-dark1 text-bodyTextDark p-2 rounded-md"
       >
         Cancel
       </button>

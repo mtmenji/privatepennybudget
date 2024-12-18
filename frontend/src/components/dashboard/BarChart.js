@@ -142,12 +142,12 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
 
     return (
         <div className="m-2 overflow-y-auto h-[calc(100vh-96px)] w-full">
-            <h2 className="text-xl font-bold text-dark1 mb-4 text-center">Budget Category Spending</h2>
+            <h2 className="text-xl font-bold text-bodyTextDark mb-4 text-center">Budget Category Spending</h2>
             {categories.length > 0 ? (
                 <div className='h-[250px] p-2'>
-                    <p className='text-center text-sm mb-2'>A visualization of the money you spent.</p>
+                    <p className='text-center text-sm mb-2 text-bodyTextDark'>A visualization of the money you spent.</p>
                     <Bar data={data} options={options} />
-                    <ul className="list-none mt-4">
+                    <ul className="list-none mt-4 text-bodyTextDark">
                         {categories.map((category, index) => {
                             const spentAmount = getSpentAmount(category.name);
                             const percentageSpent = (category.amount > 0 ? (spentAmount / category.amount) * 100 : 0).toFixed(2);

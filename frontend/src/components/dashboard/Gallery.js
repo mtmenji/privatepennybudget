@@ -24,7 +24,7 @@ const Gallery = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
     <div className='flex items-center justify-center h-full w-full'>
       <button 
         onClick={handlePrev} 
-        className='bg-light1 h-full text-5xl'
+        className='bg-light1 h-full text-5xl text-bodyTextDark'
       >
         &#8249;
       </button>
@@ -35,7 +35,7 @@ const Gallery = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
       
       <button 
         onClick={handleNext} 
-        className='bg-light1 h-full text-5xl'
+        className='bg-light1 h-full text-5xl text-bodyTextDark'
       >
         &#8250;
       </button>

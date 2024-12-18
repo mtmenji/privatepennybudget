@@ -184,7 +184,7 @@ const BatchTransactionForm = () => {
 
     return (
         <div>
-            <h1 className="text-center font-bold text-bodytext">Create a Transaction</h1>
+            <h1 className="text-center font-bold text-bodyTextDark">Create a Transaction</h1>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
                 <textarea
                     placeholder="Enter transaction data (CSV format: title, category, note, value)"
@@ -205,7 +205,7 @@ const BatchTransactionForm = () => {
                     }}
                     value={`${date}, ${title}, ${category}, ${note}, ${value}`}
                     className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                        emptyFields.includes('title') ? 'border-warningcolor' : 'border-light3'
+                        emptyFields.includes('title') ? 'border-warningColor' : 'border-light3'
                     }`}
                 />
 
@@ -213,7 +213,7 @@ const BatchTransactionForm = () => {
                     add
                 </button>
 
-                {error && <div className="text-warningcolor">{error}</div>}
+                {error && <div className="text-warningColor">{error}</div>}
             </form>
         </div>
     )

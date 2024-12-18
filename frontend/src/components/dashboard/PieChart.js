@@ -52,7 +52,7 @@ const PieChart = ({ selectedBudgetId }) => {
             },
             datalabels: {
                 color: 'black',
-                backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                backgroundColor: 'rgba(255, 255, 255, 0.7)',
                 font: {
                     weight: 'bold',
                     size: 12,
@@ -70,16 +70,16 @@ const PieChart = ({ selectedBudgetId }) => {
 
     return (
         <div className="m-2 overflow-y-auto h-[calc(100vh-96px)] w-full">
-            <h2 className="text-xl font-bold text-dark1 mb-4 text-center">Budget Categories</h2>
+            <h2 className="text-xl font-bold text-bodyTextDark mb-4 text-center">Budget Categories</h2>
             {categories.length > 0 ? (
                 <div className='p-2'>
-                    <p className='text-center text-sm mb-2'>A visual breakdown of your budgeted categories.</p>
+                    <p className='text-center text-sm mb-2 text-bodyTextDark'>A visual breakdown of your budgeted categories.</p>
                     <div className='w-4/5 h-[300px] mx-auto'>
                         <Pie data={data} options={options} className='mx-auto'/>
                     </div>
                     <ul className="list-none mt-4">
                         {categories.map((category, index) => (
-                            <li key={category.name} className="mb-2 flex justify-between text-sm">
+                            <li key={category.name} className="mb-2 flex justify-between text-sm text-bodyTextDark">
                                 <div
                                     className="w-4 h-4 mr-2 rounded-md"
                                     style={{ backgroundColor: category.color }}

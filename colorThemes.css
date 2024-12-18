@@ -5,7 +5,7 @@
     --button: #C6A87D;
     --light1: #3C2F2F;
     --light2: #7F6756;
-    --buttonhover: #FFF1CC;
+    --buttonHover: #FFF1CC;
 }
   
 /* Theme: Sunset */
@@ -15,7 +15,7 @@
     --button: #FF8966;
     --light1: #5D4037;
     --light2: #8B5E34;
-    --buttonhover: #FF6F61;
+    --buttonHover: #FF6F61;
 }
 
 /* Theme: Midnight */
@@ -25,7 +25,7 @@
     --button: #0F3460;
     --light1: #EAEAEA;
     --light2: #B1B1B1;
-    --buttonhover: #FFC300;
+    --buttonHover: #FFC300;
 }
 
 /* Theme: Bouquet */
@@ -35,7 +35,7 @@
     --button: #D36E70;
     --light1: #4B2E83;
     --light2: #77487D;
-    --buttonhover: #AF1C54;
+    --buttonHover: #AF1C54;
 }
 
 /* Theme: Forest Moss */
@@ -45,7 +45,7 @@
     --button: #8BC34A;
     --light1: #3A5311;
     --light2: #6D9A3A;
-    --buttonhover: #4CAF50;
+    --buttonHover: #4CAF50;
 }
 
 /* Theme: Blue */
@@ -57,6 +57,6 @@
     --light2: #AED6F1;
     --light3: #85C1E9;
     --button: #3498DB;
-    --buttonhover: #5DADE2;
-    --bodytext: #000000;
+    --buttonHover: #5DADE2;
+    --bodyTextDark: #000000;
 }

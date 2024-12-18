@@ -87,7 +87,7 @@ const Settings = () => {
                 <option value="Pink">Pink</option>
             </select>
 
-            <button disabled={isLoading} className="w-full lg:w-1/4 mt-4 bg-button hover:bg-buttonhover text-light1 p-2 rounded-md">Update Account</button>
+            <button disabled={isLoading} className="w-full lg:w-1/4 mt-4 bg-button hover:bg-buttonHover text-light1 p-2 rounded-md">Update Account</button>
             
             {successMessage && <div className="bg-dark1 text-light1 text-center rounded-md p-4 mt-4">{successMessage}</div>}
             {error && <div className="bg-dark1 text-light1 text-center rounded-md p-4 mt-4">❌❌❌ {error} ❌❌❌</div>}
@@ -102,7 +102,7 @@ const Settings = () => {
                 value={deletePassword}
                 className="w-full p-2 rounded-md mb-4 bg-light1 border border-dark1"
             />
-            <button onClick={handleDeleteAccount} className="w-full lg:w-1/4 bg-button hover:bg-buttonhover text-light1 p-2 rounded-md">Delete Account</button>
+            <button onClick={handleDeleteAccount} className="w-full lg:w-1/4 bg-button hover:bg-buttonHover text-light1 p-2 rounded-md">Delete Account</button>
         </form>
     )
 }

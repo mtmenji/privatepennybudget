@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useTransactionsContext } from '../../hooks/useTransactionsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, Tooltip, Legend, BarElement, Title, CategoryScale, LinearScale } from 'chart.js';
@@ -107,21 +106,21 @@ const Ratio = ({ selectedMonth, selectedYear }) => {
 
     return (
         <div className='m-2 h-[calc(100vh-96px)]'>
-            <h2 className="text-xl font-bold text-dark1 mb-4 text-center">Spending Ratio</h2>
-            <p className='text-center text-sm mb-2'>A visual breakdown of your spending ratio.</p>
+            <h2 className="text-xl font-bold text-bodyTextDark mb-4 text-center">Spending Ratio</h2>
+            <p className='text-center text-sm mb-2 text-bodyTextDark'>A visual breakdown of your spending ratio.</p>
             <div className="flex flex-col md:flex-row md:divide-x md:space-x-4 h-[calc(100vh-142px)]">
                 <div className="md:w-1/2 space-y-4 p-2 text-center flex flex-col justify-evenly">
                     <div className="space-y-2">
-                        <h2 className="text-xl font-bold border-b-2 border-gray-500 pb-1">Total Income</h2>
-                        <p className="text-lg">${totalIncome}</p>
+                        <h2 className="text-xl font-bold border-b-2 border-dark1 pb-1 text-bodyTextDark">Total Income</h2>
+                        <p className="text-lg text-bodyTextDark">${totalIncome}</p>
                     </div>
                     <div className="space-y-2">
-                        <h2 className="text-xl font-bold border-b-2 border-gray-500 pb-1">Total Expenses</h2>
-                        <p className="text-lg">${totalExpenses}</p>
+                        <h2 className="text-xl font-bold border-b-2 border-dark1 pb-1 text-bodyTextDark">Total Expenses</h2>
+                        <p className="text-lg text-bodyTextDark">${totalExpenses}</p>
                     </div>
                     <div className="space-y-2">
-                        <h2 className="text-xl font-bold border-b-2 border-gray-500 pb-1">Percentage Spent</h2>
-                        <p className="text-lg">{expensePercentage.toFixed(2)}%</p>
+                        <h2 className="text-xl font-bold border-b-2 border-dark1 pb-1 text-bodyTextDark">Percentage Spent</h2>
+                        <p className="text-lg text-bodyTextDark">{expensePercentage.toFixed(2)}%</p>
                     </div>
                 </div>
 
@@ -131,7 +130,7 @@ const Ratio = ({ selectedMonth, selectedYear }) => {
                             <Bar data={data} options={options} />
                         </div>
                     ) : (
-                        <p>Loading or no transactions available for the selected period.</p>
+                        <p className='text-bodyTextDark'>Loading or no transactions available for the selected period.</p>
                     )}
                 </div>
             </div>

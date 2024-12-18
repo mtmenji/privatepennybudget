@@ -92,7 +92,7 @@ const Budget = () => {
                 
                 <button
                 onClick={() => setIsListVisible(!isListVisible)}
-                className="absolute right-0 top-0 bottom-0 transform translate-x-full bg-dark1 text-white hover:bg-buttonhover"
+                className="absolute right-0 top-0 bottom-0 transform translate-x-full bg-dark1 text-white hover:bg-buttonHover"
                 >
                 {isListVisible ? "<" : ">"}
                 </button>

@@ -346,7 +346,7 @@ const PaymentReminders = () => {
           <div className="flex items-center justify-center">
             <button
                 type="submit"
-                className="w-full bg-button hover:bg-buttonhover text-white p-px rounded-md material-symbols-outlined"
+                className="w-full bg-button hover:bg-buttonHover text-white p-px rounded-md material-symbols-outlined"
             >
                 check
             </button>

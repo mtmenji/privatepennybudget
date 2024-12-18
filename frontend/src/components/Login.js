@@ -20,7 +20,7 @@ const Login = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                     placeholder="Email"
-                    className="bg-light1 px-2 text-bodytext rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 md:w-48"
+                    className="bg-formInput px-2 text-bodyTextDark rounded-md focus:outline-none focus:ring-2 focus:ring-navbarHover md:w-48"
                 />
 
                 <input
@@ -28,19 +28,19 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     placeholder="Password"
-                    className="bg-light1 px-2 text-bodytext rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 md:w-48"
+                    className="bg-formInput px-2 text-bodyTextDark rounded-md focus:outline-none focus:ring-2 focus:ring-navbarHover md:w-48"
                 />
 
                 <button
                     disabled={isLoading}
-                    className={`bg-button px-2 text-light1 rounded-md font-semibold transition-colors duration-200 hover:bg-buttonhover focus:outline-none ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`bg-button px-2 text-bodyTextLight rounded-md font-semibold transition-colors duration-200 hover:bg-buttonHover focus:outline-none ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                     Log In
                 </button>
 
-                {error && <div className="text-red-500">{error}</div>}
+                {error && <div className="text-warningColor">{error}</div>}
 
-                <Link to="/forgot-password" className="text-light1">
+                <Link to="/forgot-password" className="text-bodyTextLight hover:text-navbarHover">
                     Forgot Password?
                 </Link>
             </form>

@@ -82,7 +82,7 @@ const Register = () => {
                     <option value="Pink">Pink</option>
                 </select>
 
-                <button disabled={isLoading} className="w-full mt-4 bg-button hover:bg-buttonhover text-white p-2 rounded-md">Register</button>
+                <button disabled={isLoading} className="w-full mt-4 bg-button hover:bg-buttonHover text-white p-2 rounded-md">Register</button>
                 
 
                 {error && <div className="bg-dark1 text-light1 text-center rounded-md p-4 mt-4">❌❌❌ {error} ❌❌❌</div>}

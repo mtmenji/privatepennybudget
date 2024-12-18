@@ -47,14 +47,14 @@ const BudgetList = ({ onCreateClick, onSelectBudget }) => {
 
     return (
         <div className='w-full overflow-y-auto h-[calc(100vh-80px)]'>
-            <h1 className="text-center text-lg my-4 font-bold">Monthly Budget List</h1>
+            <h1 className="text-center text-lg my-4 font-bold text-bodyTextLight">Monthly Budget List</h1>
             <button 
                 onClick={onCreateClick} 
-                className="w-full bg-light1 text-dark1 p-2 hover:bg-light3"
+                className="w-full bg-light2 text-bodyTextDark p-2 hover:bg-light3"
             >
                 Create A Budget
             </button>
-            <div>
+            <div className='bg-dark3 py-4'>
                 {sortedBudgets.map((budget) => (
                     <BudgetListItem key={budget._id} budget={budget} onSelectBudget={onSelectBudget}/>
                 ))}

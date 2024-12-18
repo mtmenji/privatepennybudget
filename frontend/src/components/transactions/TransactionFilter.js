@@ -122,7 +122,7 @@ const TransactionFilter = ({setFilters, transactions}) => {
             <button
                 type="button"
                 onClick={handleReset}
-                className="bg-button text-light1 px-2 py-1 rounded-md shadow-sm hover:bg-buttonhover material-symbols-outlined mt-2 w-full md:w-auto"
+                className="bg-button text-light1 px-2 py-1 rounded-md shadow-sm hover:bg-buttonHover material-symbols-outlined mt-2 w-full md:w-auto"
             >
                 history
             </button>

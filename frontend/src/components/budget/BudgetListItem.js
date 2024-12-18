@@ -12,7 +12,7 @@ const BudgetListItem = ({ budget, onSelectBudget }) => {
 
         const isConfirmed = window.confirm(`Are you sure you want to delete the budget for ${budget.month} ${budget.year}?`)
         if (!isConfirmed) {
-            return // If user cancels, stop here
+            return
         }
 
         const response = await fetch('/budgets/' + budget._id, {
@@ -62,20 +62,20 @@ const BudgetListItem = ({ budget, onSelectBudget }) => {
         <div className='flex items-center bg-dark1 w-full'>
             <button 
                 onClick={handleClick} 
-                className="p-2 material-symbols-outlined hover:bg-dark2"
+                className="p-2 material-symbols-outlined text-bodyTextLight hover:bg-dark2"
                 aria-label="Delete Budget"
             >
                 delete
             </button>
             <button 
                 onClick={() => onSelectBudget(budget)} 
-                className="w-full text-left p-2 bg-dark1 text-light1 hover:bg-dark2"
+                className="w-full text-left p-2 bg-dark1 text-bodyTextLight hover:bg-dark2"
             >
                 {budget.month} {budget.year}
             </button>
             <button 
                 onClick={handleSetDefault} 
-                className='p-2 material-symbols-outlined hover:bg-dark2'
+                className='p-2 material-symbols-outlined text-bodyTextLight hover:bg-dark2'
                 aria-label="Set Default Budget"
             >
                 {budget.isDefault ? 'stars' : 'star'}
