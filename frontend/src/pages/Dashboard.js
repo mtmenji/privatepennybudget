@@ -65,7 +65,7 @@ const Dashboard = () => {
                 <hr className="border-t-4 border-dark1 rounded-2xl mx-2 my-4" />
                 <PaymentReminders/>
             </div>
-            <div className='w-full md:w-5/12 flex justify-center items-center'>
+            <div className='w-full md:w-5/12 flex justify-center items-center text-bodyTextDark'>
                 {isLoading ? (
                         <p>Loading your default budget...</p>
                 ) : selectedBudgetId ? (

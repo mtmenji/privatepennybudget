@@ -66,7 +66,6 @@ const resetPassword = async (req, res) => {
     try {
         const decoded = jwt.verify(token, process.env.SECRET);
         if (!decoded) {
-            console.log('Token is invalid.')
             throw new Error('Invalid token');
         }
 

@@ -67,7 +67,7 @@ const Transactions = () => {
                 <TransactionForm />
             <hr className='border-t-2 border-dark1 mt-2'/>
             <div className='w-full px-4'>
-                <div className='flex justify-evenly md:grid md:grid-cols-12 items-center w-full my-2 font-bold'>
+                <div className='flex text-bodyTextDark justify-evenly md:grid md:grid-cols-12 items-center w-full my-2 font-bold'>
                     <p className='col-span-1'>Date</p>
                     <p className='col-span-3'>Title</p>
                     <p className='col-span-2'>Category</p>

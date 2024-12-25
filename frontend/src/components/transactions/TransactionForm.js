@@ -188,8 +188,8 @@ const TransactionForm = () => {
                         handleDataChange(e.target.value)
                     }}
                     value={date}
-                    className={`p-px border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                        emptyFields.includes('date') ? 'border-warningColor' : 'border-light3'
+                    className={`p-px border bg-formInput text-bodyTextDark text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
+                        emptyFields.includes('date') ? 'border-warningColor' : 'border-dark1'
                     }`}
                 />
 
@@ -198,16 +198,16 @@ const TransactionForm = () => {
                     placeholder="Title"
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
-                    className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                        emptyFields.includes('title') ? 'border-warningColor' : 'border-light3'
+                    className={`p-px border bg-formInput text-bodyTextDark rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
+                        emptyFields.includes('title') ? 'border-warningColor' : 'border-dark1'
                     }`}
                 />
 
                 <select
                     onChange={(e) => setCategory(e.target.value)}
                     value={category}
-                    className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                        emptyFields.includes('category') ? 'border-warningColor' : 'border-light3'
+                    className={`p-px border bg-formInput text-bodyTextDark rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
+                        emptyFields.includes('category') ? 'border-warningColor' : 'border-dark1'
                     }`}
                 >
                     <option value="" disable>Select Category</option>
@@ -222,8 +222,8 @@ const TransactionForm = () => {
                     <select
                         onChange={(e) => setNote(e.target.value)}
                         value={note}
-                        className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
-                            emptyFields.includes('note') ? 'border-warningColor' : 'border-light3'
+                        className={`p-px border bg-formInput text-bodyTextDark rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 ${
+                            emptyFields.includes('note') ? 'border-warningColor' : 'border-dark1'
                         }`}
                     >
                         <option value="" disabled>Select Goal</option>
@@ -239,8 +239,8 @@ const TransactionForm = () => {
                         placeholder="Note"
                         onChange={(e) => setNote(e.target.value)}
                         value={note}
-                        className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                            emptyFields.includes('note') ? 'border-warningColor' : 'border-light3'
+                        className={`p-px border bg-formInput text-bodyTextDark rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
+                            emptyFields.includes('note') ? 'border-warningColor' : 'border-dark1'
                         }`}
                     />
                 )}
@@ -252,13 +252,13 @@ const TransactionForm = () => {
                         placeholder="0"
                         onChange={(e) => setValue(e.target.value)}
                         value={value}
-                        className={`p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
-                            emptyFields.includes('value') ? 'border-warningColor' : 'border-light3'
+                        className={`p-px border bg-formInput text-bodyTextDark rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1 w-full md:w-auto ${
+                            emptyFields.includes('value') ? 'border-warningColor' : 'border-dark1'
                         }`}
                     />
                 </div>
 
-                <button className="material-symbols-outlined border border-dark1 rounded-md bg-dark1 text-light1 font-bold w-full md:w-auto">
+                <button className="material-symbols-outlined rounded-md bg-button hover:bg-buttonHover text-bodyTextLight font-bold w-full md:w-auto">
                     add
                 </button>
 

@@ -23,21 +23,22 @@ const ForgotPassword = () => {
 
     return (
         <form onSubmit={handleForgotPassword} className="mt-12 flex flex-col space-y-4">
+            <label className="block text-bodyTextDark mb-2">We will send you a reset link to your email.</label>
             <input
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 placeholder="Email"
-                className="bg-light1 border border-dark1 px-2 text-bodyTextDark rounded-md focus:ring-2"
+                className="bg-formInput border border-dark1 px-2 text-bodyTextDark rounded-md focus:ring-2"
             />
             <button
                 type="submit"
-                className="bg-button px-2 text-light1 rounded-md font-semibold transition-colors duration-200 hover:bg-buttonHover focus:outline-none"
+                className="bg-button px-2 text-bodyTextLight rounded-md font-semibold transition-colors duration-200 hover:bg-buttonHover focus:outline-none"
             >
                 Send Reset Link
             </button>
-            {message && <div className="text-green-500">{message}</div>}
-            {error && <div className="text-red-500">{error}</div>}
+            {message && <div className="text-warningColor">{message}</div>}
+            {error && <div className="text-warningColor">{error}</div>}
         </form>
     );
 };

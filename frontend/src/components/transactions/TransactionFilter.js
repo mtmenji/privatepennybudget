@@ -56,33 +56,33 @@ const TransactionFilter = ({setFilters, transactions}) => {
     <form className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center justify-center gap-4 mb-1">
         {/* Start Date */}
         <div className="w-full sm:w-auto">
-            <p className="text-light1 mb-1 text-sm">Start Date</p>
+            <p className="text-bodyTextLight mb-1 text-sm">Start Date</p>
             <input
                 type="date"
                 onChange={(e) => setStartDate(e.target.value)}
                 value={startDate}
-                className="w-full sm:w-auto bg-light1 p-px border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                className="w-full sm:w-auto bg-bodyTextLight text-bodyTextDark p-px border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
             />
         </div>
 
         {/* End Date */}
         <div className="w-full sm:w-auto">
-            <p className="text-light1 mb-1 text-sm">End Date</p>
+            <p className="text-bodyTextLight mb-1 text-sm">End Date</p>
             <input
                 type="date"
                 onChange={(e) => setEndDate(e.target.value)}
                 value={endDate}
-                className="w-full sm:w-auto bg-light1 p-px border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                className="w-full sm:w-auto bg-bodyTextLight text-bodyTextDark p-px border text-center rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
             />
         </div>
 
         {/* Category Selection */}
         <div className="w-full sm:w-auto">
-            <p className="text-light1 mb-1 text-sm">Category</p>
+            <p className="text-bodyTextLight mb-1 text-sm">Category</p>
             <select
                 value={categories}
                 onChange={handleCategoryChange}
-                className="w-full sm:w-auto bg-light1 p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                className="w-full sm:w-auto bg-bodyTextLight text-bodyTextDark p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
             >
                 <option value="">Select A Category</option>
                 {filteredCategories.map((category) => (
@@ -95,25 +95,25 @@ const TransactionFilter = ({setFilters, transactions}) => {
 
         {/* Minimum Amount */}
         <div className="w-full sm:w-auto">
-            <p className="text-light1 mb-1 text-sm">Minimum Amount</p>
+            <p className="text-bodyTextLight mb-1 text-sm">Minimum Amount</p>
             <input
                 type="number"
                 placeholder="$0"
                 onChange={(e) => setMinAmount(e.target.value)}
                 value={minAmount}
-                className="w-full sm:w-auto bg-light1 p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                className="w-full sm:w-auto bg-bodyTextLight text-bodyTextDark p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
             />
         </div>
 
         {/* Maximum Amount */}
         <div className="w-full sm:w-auto">
-            <p className="text-light1 mb-1 text-sm">Maximum Amount</p>
+            <p className="text-bodyTextLight mb-1 text-sm">Maximum Amount</p>
             <input
                 type="number"
                 placeholder="$0"
                 onChange={(e) => setMaxAmount(e.target.value)}
                 value={maxAmount}
-                className="w-full sm:w-auto bg-light1 p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
+                className="w-full sm:w-auto bg-bodyTextLight text-bodyTextDark p-px border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-dark1"
             />
         </div>
 
@@ -122,7 +122,7 @@ const TransactionFilter = ({setFilters, transactions}) => {
             <button
                 type="button"
                 onClick={handleReset}
-                className="bg-button text-light1 px-2 py-1 rounded-md shadow-sm hover:bg-buttonHover material-symbols-outlined mt-2 w-full md:w-auto"
+                className="bg-button text-bodyTextLight px-2 py-1 rounded-md shadow-sm hover:bg-buttonHover material-symbols-outlined mt-2 w-full md:w-auto"
             >
                 history
             </button>

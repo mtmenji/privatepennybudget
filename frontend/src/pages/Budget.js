@@ -84,7 +84,7 @@ const Budget = () => {
             <div
                 className={`${
                 isListVisible ? "w-screen lg:w-1/4" : "w-0"
-                } bg-dark3 text-light1 flex transition-all duration-300 ease-in-out relative`}
+                } bg-dark3 text-bodyTextLight flex transition-all duration-300 ease-in-out relative`}
             >
                 {isListVisible && (
                 <BudgetList onCreateClick={() => setShowCreateForm(true)} onSelectBudget={handleSelectBudget}/>
@@ -92,7 +92,7 @@ const Budget = () => {
                 
                 <button
                 onClick={() => setIsListVisible(!isListVisible)}
-                className="absolute right-0 top-0 bottom-0 transform translate-x-full bg-dark1 text-white hover:bg-buttonHover"
+                className="absolute right-0 top-0 bottom-0 transform translate-x-full bg-dark1 text-bodyTextLight hover:bg-buttonHover"
                 >
                 {isListVisible ? "<" : ">"}
                 </button>
@@ -111,13 +111,13 @@ const Budget = () => {
                 {!shouldShowCreateForm && (
                     <div className="flex w-full justify-center">
                         {isLoading ? (
-                            <p className="text-dark1 text-2xl font-bold mx-8 text-center">
+                            <p className="text-bodyTextDark text-2xl font-bold mx-8 text-center">
                                 Loading default budget...
                             </p>
                         ) : selectedBudget ? (
                             <BudgetDetails key={selectedBudget._id} budget={selectedBudget} />
                         ) : (
-                            <p className='text-dark1 text-2xl font-bold mx-8 text-center'>
+                            <p className='text-bodyTextDark text-2xl font-bold mx-8 text-center'>
                                 No budget selected. Choose one from the Monthly Budget List!
                             </p>
                         )}

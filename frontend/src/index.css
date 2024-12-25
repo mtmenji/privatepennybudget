@@ -54,13 +54,16 @@
     --light3: #d4c4a8;
     --button: #A67C52;
     --buttonHover: #8C6B44;
+    --button2: #3b82f6;
+    --buttonHover2: #1068f4;
     --bodyTextDark: #000000;
     --bodyTextLight: #FFFFFF;
     --formInput: #FFFFFF;
     --formInputDenied: #a5a5a5;
     --warningColor: #f98080;
-    --warningText: #000000;
+    --warningText: #4b4b4b;
     --navbarHover: #FFDFA6;
+    --progressBar: #e5e7eb;
 }
 
 /* Scroll Bar Styles */

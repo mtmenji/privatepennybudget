@@ -220,29 +220,29 @@ const PaymentReminders = () => {
 
   return (
     <div className="m-2 bg-light1 overflow-y-auto h-[calc(100vh-216px)]">
-      <h3 className="text-xl font-bold mb-4 text-dark1 text-center">Your Payment Reminders</h3>
+      <h3 className="text-xl font-bold mb-4 text-bodyTextDark text-center">Your Payment Reminders</h3>
 
       {error && (
-        <p className='text-center text-red-500 mb-4'>
+        <p className='text-center text-warningColor mb-4'>
             {error}
         </p>
       )}
 
       {reminders.length === 0 ? (
-        <p className="text-gray-600">No reminders found. Start by creating a new reminder.</p>
+        <p className="text-bodyTextDark">No reminders found. Start by creating a new reminder.</p>
       ) : (
         <ul className="bg-light1 rounded-md">
           {reminders.map((reminder) => (
             <li
               key={reminder._id}
-              className={`text-sm flex flex-col p-2 rounded-md space-y-2 ${reminder.checkbox ? 'bg-dark3': 'bg-light1'}`}
+              className={`text-sm flex flex-col p-2 rounded-md space-y-2 ${reminder.checkbox ? 'bg-dark3 text-bodyTextLight': 'bg-light1 text-bodyTextDark'}`}
             >
               <div className="flex items-center justify-between">
                 <input
                     type="checkbox"
                     checked={reminder.checkbox}
                     onChange={() => handleToggleCheckbox(reminder._id, !reminder.checkbox)}
-                    className="mr-2"
+                    className="mr-2 accent-light1"
                 />
                 {editingReminderId === reminder._id ? (
                   <div className="flex items-center space-x-4 flex-grow">
@@ -250,19 +250,19 @@ const PaymentReminders = () => {
                       type="date"
                       value={editDate}
                       onChange={(e) => setEditDate(e.target.value)}
-                      className="w-28 p-px border border-gray-300 rounded-md"
+                      className="w-28 p-px border border-dark1 rounded-md text-bodyTextDark"
                     />
                     <input
                       type="text"
                       value={editName}
                       onChange={(e) => setEditName(e.target.value)}
-                      className="flex-1 w-2 p-px border border-gray-300 rounded-md"
+                      className="flex-1 w-2 p-px border border-dark1 rounded-md text-bodyTextDark"
                     />
                     <input
                       type="number"
                       value={editAmount}
                       onChange={(e) => setEditAmount(e.target.value)}
-                      className="w-10 p-px border border-gray-300 rounded-md"
+                      className="w-10 p-px border border-dark1 rounded-md text-bodyTextDark"
                       placeholder="Amount"
                     />
                   </div>
@@ -277,14 +277,14 @@ const PaymentReminders = () => {
                 {editingReminderId === reminder._id ? (
                   <button
                     onClick={handleSaveEdit}
-                    className="bg-green-500 text-white p-px rounded-md ml-4 material-symbols-outlined"
+                    className="bg-button2 hover:bg-buttonHover2 text-bodyTextLight p-px rounded-md ml-4 material-symbols-outlined"
                   >
                     check
                   </button>
                 ) : (
                   <button
                     onClick={() => handleEdit(reminder._id, reminder.name, reminder.date, reminder.amount)}
-                    className="bg-blue-500 text-white p-px rounded-md ml-4 material-symbols-outlined"
+                    className="bg-button2 hover:bg-buttonHover2 text-bodyTextLight p-px rounded-md ml-4 material-symbols-outlined"
                   >
                     edit
                   </button>
@@ -292,7 +292,7 @@ const PaymentReminders = () => {
 
                 <button
                   onClick={() => handleDelete(reminder._id)}
-                  className="bg-red-500 text-white p-px rounded-md ml-2 material-symbols-outlined"
+                  className="bg-warningColor text-warningText p-px rounded-md ml-2 material-symbols-outlined"
                 >
                   delete
                 </button>
@@ -306,14 +306,14 @@ const PaymentReminders = () => {
 
       {/* Create Reminder Form */}
       <form onSubmit={handleSubmit} className="w-full text-sm">
-        <h2 className="font-semibold mb-1 text-dark1 text-center">Create A New Reminder</h2>
+        <h2 className="font-semibold mb-1 text-bodyTextDark text-center">Create A New Reminder</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
             <input
               type="text"
               onChange={(e) => setName(e.target.value)}
               value={name}
-              className="p-px border border-gray-300 rounded-md bg-light1"
+              className="p-px border border-dark1 rounded-md bg-light1 text-bodyTextDark"
               placeholder="Name"
               required
             />
@@ -324,7 +324,7 @@ const PaymentReminders = () => {
               type="date"
               onChange={(e) => setdate(e.target.value)}
               value={date}
-              className="p-px border border-gray-300 rounded-md bg-light1"
+              className="p-px border border-dark1 rounded-md bg-light1 text-bodyTextDark"
               placeholder="Due Date"
               required
             />
@@ -337,7 +337,7 @@ const PaymentReminders = () => {
               type="number"
               onChange={(e) => setAmount(e.target.value)}
               value={amount}
-              className="p-px border border-gray-300 rounded-md bg-light1"
+              className="p-px border border-dark1 rounded-md bg-light1 text-bodyTextDark"
               placeholder="Amount"
               required
             />
@@ -346,7 +346,7 @@ const PaymentReminders = () => {
           <div className="flex items-center justify-center">
             <button
                 type="submit"
-                className="w-full bg-button hover:bg-buttonHover text-white p-px rounded-md material-symbols-outlined"
+                className="w-full bg-button hover:bg-buttonHover text-bodyTextLight p-px rounded-md material-symbols-outlined"
             >
                 check
             </button>
