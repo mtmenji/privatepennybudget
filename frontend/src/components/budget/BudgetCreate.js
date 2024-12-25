@@ -46,7 +46,6 @@ const BudgetCreate = ({ onCancel }) => {
     if (selectedBudget && user) {
       const fetchBudgetDetails = async () => {
         try {
-          console.log(`TEST 101: ${selectedBudget}`)
           const response = await fetch(`http://localhost:4001/budgets/${selectedBudget}`, {
           // const response = await fetch(`https://privatepennybudgettest-backend.onrender.com/budgets/${selectedBudget}`, {
             headers: {

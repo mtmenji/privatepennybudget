@@ -27,7 +27,6 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
     useEffect(() => {
         if (selectedBudgetId) {
             const selectedBudget = budgets.find(budget => budget._id === selectedBudgetId);
-            console.log(`Test ID: ${selectedBudgetId}`)
             if (selectedBudget && selectedBudget.categories) {
                 setCategories(selectedBudget.categories);
             }
@@ -61,7 +60,6 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
 
         if (!transactions1 || !Array.isArray(transactions1)) {
             console.error("Invalid transactions data");
-            return console.log(`FAIL: ${transactions1}`);
         }
 
         return transactions1.filter(transaction => {
@@ -73,10 +71,8 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
     // Aggregate transactions for each category
     const getSpentAmount = (categoryName) => {
         const filteredTransactions = getFilteredTransactions();
-        console.log(`Test 989: ${categoryName}`)
         return filteredTransactions
             .filter(transaction => {
-                console.log(`Test 6 --- Transaction: ${transaction.category} and Cat: ${categoryName}`)
                 return transaction.category === categoryName
             })
             .reduce((total, transaction) => total + transaction.value, 0);

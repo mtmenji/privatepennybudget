@@ -111,8 +111,6 @@ const BatchTransactionForm = () => {
             return
         }
 
-        console.log(`Categories: ${availableCategories}`)
-
         // Check if the category is valid for the selected month/year
         if (!availableCategories.includes(category)) {
             setError("The selected category does not exist for the selected month/year.")
@@ -196,10 +194,8 @@ const BatchTransactionForm = () => {
                         setNote(n || '');
                         setValue(v || '');
                         if (d) {
-                            console.log(`date: ${d}`)
                             const [year, month] = d.split('-');  // Split the date to get year and month
                             const formattedDate = `${year}-${month}`;  // Create the YYYY-MM format
-                            console.log(`formatted date ${formattedDate}`)
                             handleDataChange(formattedDate);  // Pass this to handleDataChange
                         }
                     }}

@@ -214,10 +214,6 @@ const PaymentReminders = () => {
     return <p className="text-center text-gray-600">Loading payment reminders...</p>;
   }
 
-  if (error) {
-    console.log(`Error Message: ${error}`)
-  }
-
   return (
     <div className="m-2 bg-light1 overflow-y-auto h-[calc(100vh-216px)]">
       <h3 className="text-xl font-bold mb-4 text-bodyTextDark text-center">Your Payment Reminders</h3>

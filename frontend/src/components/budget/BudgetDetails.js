@@ -94,7 +94,6 @@ const BudgetDetails = ({ budget }) => {
             }
 
             const updatedBudget = await response.json();
-            console.log('Budget updated successfully:', updatedBudget);
             alert('Budget updated successfully!');
         } catch (err) {
             setError(err.message);

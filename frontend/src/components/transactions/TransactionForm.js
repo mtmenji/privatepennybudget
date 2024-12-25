@@ -75,10 +75,6 @@ const TransactionForm = () => {
             fetchBudgets()
         }
     }, [dispatch, user])
-    
-    {budgets.map((budget) => (
-        console.log(`${budget.month} ${budget.year}`)
-    ))}
 
     useEffect(() => {
         const fetchGoals = async () => {
@@ -122,10 +118,6 @@ const TransactionForm = () => {
             const updatedAmount = category === "Add to Savings"
                 ? parseFloat(goal.amountActual) + parseFloat(value)
                 : parseFloat(goal.amountActual) - parseFloat(value);
-
-            console.log(`TEST 1: ${goal.amountActual}`)
-            console.log(`TEST 2: ${value}`)
-            console.log(`TEST 1123123: ${updatedAmount}`)
     
             const goalResponse = await fetch(`/goals/${goal._id}`, {
                 method: 'PUT',
@@ -172,7 +164,6 @@ const TransactionForm = () => {
             setValue('')
             setError(null)
             setEmptyFields([])
-            console.log('New Transaction Added', json)
             dispatch({type: 'CREATE_EXPENSE', payload: json})
         }
     }
