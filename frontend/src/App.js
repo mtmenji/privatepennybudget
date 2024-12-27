@@ -10,6 +10,7 @@ import Budget from './pages/Budget';
 import Transactions from './pages/Transactions';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import Tutorial from './pages/Tutorial';
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
         <Navbar />
         <div className='pages flex flex-col items-center flex-grow bg-light1 text-bodyTextDark mt-14 lg:mt-12 h-full'>
           <Routes>
-            <Route path='/' element={<Home />}/>
+            <Route path='/' element={user ? <Dashboard/> : <Home/>}/>
             <Route path='/forgot-password' element={<ForgotPassword />}/>
             <Route path='/reset-password/:token' element={<ResetPassword />}/>
             <Route path='dashboard' element={user ? <Dashboard/> : <Navigate to='/' />}/>
@@ -30,6 +31,7 @@ function App() {
             <Route path='/settings' element={user ? <Settings /> : <Navigate to='/' />}/>
             <Route path='/budget' element={user ? <Budget /> : <Navigate to='/' />}/>
             <Route path='/transactions' element={user ? <Transactions /> : <Navigate to='/' />}/>
+            <Route path='/tutorial' element={user? <Tutorial/> : <Home/>} />
           </Routes>
         </div>
         <Footer />

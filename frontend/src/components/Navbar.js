@@ -25,7 +25,7 @@ const Navbar = () => {
             <div className="container mx-auto flex justify-between items-center py-2 px-6">
                 <div className='flex items-center'>
                     <img src="/images/logo.png" alt="saluting soldier logo" style={{ width: '30px', height: '30px' }}/>
-                    <Link to="/" className="text-2xl font-bold text-bodyTextLight hover:text-navbarHover" onClick={() => handleToggleMenu(false)}>
+                    <Link to="/tutorial" className="text-2xl font-bold text-bodyTextLight hover:text-navbarHover" onClick={() => handleToggleMenu(false)}>
                         Private Penny
                     </Link>
                 </div>
