@@ -6,7 +6,6 @@ import Ratio from './Ratio';
 const Gallery = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  console.log(`TEST FROM GALLERY: ${selectedMonth}`)
   const components = [
     <PieChart selectedBudgetId={selectedBudgetId} />,
     <BarChart selectedMonth={selectedMonth} selectedYear={selectedYear} selectedBudgetId={selectedBudgetId} />,

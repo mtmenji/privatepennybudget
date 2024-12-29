@@ -52,8 +52,6 @@ const Dashboard = () => {
         setSelectedYear(year);
     };
 
-    console.log(`TEST FROM DASHBOARD: ${selectedMonth} ${selectedYear}`)
-
     return (
         <div className='w-full flex flex-col md:flex-row'>
             <div className='w-full md:w-4/12'>

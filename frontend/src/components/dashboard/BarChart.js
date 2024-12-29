@@ -15,14 +15,11 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
     const {user} = useAuthContext()
     const [transactions1, setTransactions1] = useState(null); // or []
 
-    console.log(`TEST 0: ${selectedMonth}`)
-
     const selectedMonthNumber = (selectedMonth) => {
         const monthMap = {
             January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
             July: 7, August: 8, September: 9, October: 10, November: 11, December: 12,
         };
-        console.log(`Test 00: ${monthMap[selectedMonth]}`)
         return monthMap[selectedMonth] || 0; // Default to 0 for invalid month names
     };
 
@@ -71,15 +68,10 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
             const transactionYear = transactionDate.getUTCFullYear();
             const transactionDay = transactionDate.getUTCDate();
 
-            console.log(`TEST 1: ${transactionDate} - ${transaction.title}`)
             const tester1 = parseInt(transactionMonth) === parseInt(selectedMonthNumber(selectedMonth)) && parseInt(transactionYear) === parseInt(selectedYear);
-            console.log(`TEST 2: ${transactionMonth} ${transactionYear} // ${transactionDate.getDate()} // ${transactionDay}`)
-            console.log(`TEST 3: ${parseInt(selectedMonthNumber(selectedMonth))} // ${parseInt(selectedYear)}`)
             return tester1
         });
     };
-
-    console.log(`Test 3: ${getFilteredTransactions()}`)
 
     // Aggregate transactions for each category
     const getSpentAmount = (categoryName) => {
