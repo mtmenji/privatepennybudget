@@ -28,9 +28,11 @@ const Ratio = ({ selectedMonth, selectedYear }) => {
                 const data = await response.json();
                 const filtered = data.filter(transaction => {
                     const transactionDate = new Date(transaction.date);
+                    const transactionMonth = transactionDate.getUTCMonth() + 1;
+                    const transactionYear = transactionDate.getUTCFullYear();
                     return (
-                        transactionDate.getMonth() + 1 === selectedMonthNumber(selectedMonth) &&
-                        transactionDate.getFullYear() === parseInt(selectedYear)
+                        transactionMonth === selectedMonthNumber(selectedMonth) &&
+                        transactionYear === parseInt(selectedYear)
                     );
                 });
                 setFilteredTransactions(filtered);
@@ -48,7 +50,7 @@ const Ratio = ({ selectedMonth, selectedYear }) => {
 
         const totalExpenses = filteredTransactions
             .filter(transaction => transaction.category !== 'Income' && transaction.category !== 'Remove from Savings')
-            .reduce((sum, transaction) => sum + transaction.value, 0);
+            .reduce((sum, transaction) => sum + Number(transaction.value), 0);
 
         return { totalIncome, totalExpenses };
     };
@@ -76,7 +78,7 @@ const Ratio = ({ selectedMonth, selectedYear }) => {
             tooltip: {
                 callbacks: {
                     label: function (context) {
-                        return `Expenses: ${context.raw.toFixed(2)}% of Income`;
+                        return `Expenses: ${context.raw.toFixed(2)}%`;
                     },
                 },
             },
@@ -120,7 +122,7 @@ const Ratio = ({ selectedMonth, selectedYear }) => {
                     </div>
                     <div className="space-y-2">
                         <h2 className="text-xl font-bold border-b-2 border-dark1 pb-1 text-bodyTextDark">Percentage Spent</h2>
-                        <p className="text-lg text-bodyTextDark">{expensePercentage.toFixed(2)}%</p>
+                        <p className="text-lg text-bodyTextDark">{totalIncome === 0 ? "No Income" : `${expensePercentage.toFixed(2)}%`}</p>
                     </div>
                 </div>
 

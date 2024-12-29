@@ -66,7 +66,6 @@ const BarChart = ({ selectedBudgetId, selectedMonth, selectedYear }) => {
             const transactionDate = new Date(transaction.date);
             const transactionMonth = transactionDate.getUTCMonth() + 1;
             const transactionYear = transactionDate.getUTCFullYear();
-            const transactionDay = transactionDate.getUTCDate();
 
             const tester1 = parseInt(transactionMonth) === parseInt(selectedMonthNumber(selectedMonth)) && parseInt(transactionYear) === parseInt(selectedYear);
             return tester1
