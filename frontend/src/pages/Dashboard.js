@@ -30,9 +30,7 @@ const Dashboard = () => {
                     if (!selectedBudgetId) {
                         const defaultBudget = budgetData.find((budget) => budget.isDefault);
                         if (defaultBudget) {
-                            setSelectedBudgetId(defaultBudget._id);
-                            setSelectedMonth(new Date().getMonth());
-                            setSelectedYear(new Date().getFullYear());
+                            handleSelectionChange(defaultBudget._id, defaultBudget.month, defaultBudget.year);
                         }
                     }
                 }
@@ -53,6 +51,8 @@ const Dashboard = () => {
         setSelectedMonth(month);
         setSelectedYear(year);
     };
+
+    console.log(`TEST FROM DASHBOARD: ${selectedMonth} ${selectedYear}`)
 
     return (
         <div className='w-full flex flex-col md:flex-row'>

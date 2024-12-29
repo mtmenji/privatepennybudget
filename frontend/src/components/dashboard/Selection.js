@@ -77,7 +77,7 @@ const Selection = ({ onSelectionChange }) => {
                 <option value="">-- Select Month --</option>
                 {sortedBudgets.map((budget) => (
                     <option key={budget._id} value={budget._id}>
-                        {`${budget.month} ${budget.year} ${budget.isDefault ? "(Default Budget)" : ""}`}
+                        {`${budget.month} ${budget.year}`}
                     </option>
                 ))}
             </select>
