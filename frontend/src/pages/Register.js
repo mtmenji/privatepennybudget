@@ -77,9 +77,9 @@ const Register = () => {
                     required
                 >
                     <option value="Parchment" selected>Parchment</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Green">Green</option>
-                    <option value="Pink">Pink</option>
+                    <option value="Ocean">Ocean</option>
+                    <option value="Forest">Forest</option>
+                    <option value="Rose">Rose</option>
                 </select>
 
                 <button disabled={isLoading} className="w-full mt-4 bg-button hover:bg-buttonHover text-bodyTextLight p-2 rounded-md">Register</button>

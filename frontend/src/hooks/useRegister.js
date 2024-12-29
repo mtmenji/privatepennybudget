@@ -16,14 +16,14 @@ export const useRegister = () => {
             case 'Parchment':
                 theme = 'theme-parchment';
                 break;
-            case 'Blue':
-                theme = 'theme-blue';
+            case 'Ocean':
+                theme = 'theme-ocean';
                 break;
-            case 'Green':
-                theme= 'theme-green';
+            case 'Forest':
+                theme= 'theme-forest';
                 break;
-            case 'Pink':
-                theme = 'theme-pink';
+            case 'Rose':
+                theme = 'theme-rose';
                 break;
             default:
                 theme = 'theme-parchment';

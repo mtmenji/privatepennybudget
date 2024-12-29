@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Theme: Blue */
-.theme-blue {
+/* Theme: Ocean */
+.theme-ocean {
     --dark1: #0A3D62;
     --dark2: #2d5a78;
     --dark3: #2E86C1;
@@ -17,8 +17,8 @@
     --warningColor: #ef4444;
 }
 
-/* Theme: Green */
-.theme-green {
+/* Theme: Forest */
+.theme-forest {
     --dark1: #0D4D1A;
     --dark2: #1B5E20;
     --dark3: #388E3C;
@@ -31,8 +31,8 @@
     --warningColor: #ef4444;
 }
 
-/* Theme: Pink */
-.theme-pink {
+/* Theme: Rose */
+.theme-rose {
     --dark1: #880E4F;
     --dark2: #C2185B;
     --dark3: #D81B60;
