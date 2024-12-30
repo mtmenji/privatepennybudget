@@ -103,7 +103,7 @@ const Settings = () => {
                 value={deletePassword}
                 className="w-full p-2 rounded-md mb-4 bg-formInput border border-dark1"
             />
-            <button onClick={handleDeleteAccount} className="w-full lg:w-1/4 bg-button hover:bg-buttonHover text-bodyTextLight p-2 rounded-md">Delete Account</button>
+            <button onClick={handleDeleteAccount} className="w-full lg:w-1/4 bg-button hover:bg-warningColor text-bodyTextLight p-2 rounded-md">Delete Account</button>
         </form>
     )
 }

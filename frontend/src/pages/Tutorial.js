@@ -30,11 +30,21 @@ const Carousel = ({ slides }) => {
               key={index}
               className="flex-shrink-0 w-full h-[calc(100vh-80px)] relative"
             >
-              <img
-                src={slide.image}
-                alt={slide.text}
-                className="w-full h-full object-fill"
-              />
+              {slide.image ? (
+                <img
+                  src={slide.image}
+                  alt={slide.text || ''}
+                  className="w-full h-full object-fill"
+                />
+              ) : slide.video ? (
+                <video
+                  src={slide.video}
+                  controls
+                  className="w-full h-full object-fill"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              ) : null}
               {slide.text && (
                 <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white p-4 text-center">
                 {slide.text}
@@ -60,15 +70,15 @@ const Carousel = ({ slides }) => {
       </button>
 
       {/* Dots navigation */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute top-1.5 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full ${
+            className={`w-2 h-2 rounded-full ${
               currentIndex === index
-                ? 'bg-gray-900'
-                : 'bg-gray-400 hover:bg-gray-600'
+                ? 'bg-[#2696FF]'
+                : 'bg-white hover:bg-[#97cdff]'
             }`}
           ></button>
         ))}
@@ -100,28 +110,33 @@ const SideNavigationMenu = ({ carousels, setActiveCarousel }) => {
 const Tutorial = () => {
   const carouselsData = [
     [
+      // Overview
         { image: '/images/tutorial1-1Large.png' },
         { image: '/images/tutorial1-2Large.png' }
     ],
     [
+      // Dashboard Page
       { image: '/images/tutorial2-1Large.png', text: "The Dashboard Page is where you can review your reports. You can set Payment Reminders and Savings Goals. You can also view your spending habits to adjust your battle plans if your proposed plan isn't working!" },
-      { image: 'https://via.placeholder.com/400x300', text: 'Reports: ' },
-      { image: 'https://via.placeholder.com/400x300', text: 'Payment Reminders: ' },
-      { image: 'https://via.placeholder.com/400x300', text: 'Savings Goals: ' },
-      { image: 'https://via.placeholder.com/400x300', text: 'Utilized Dashboard Page: ' }
+      { image: '/images/tutorial2-2Large.gif'},
+      { image: '/images/tutorial2-3Large.gif'},
+      { image: '/images/tutorial2-4Large.gif'},
+      { image: '/images/tutorial2-5Large.gif'}
     ],
     [
+      // Budget Page
       { image: 'https://via.placeholder.com/400x300', text: 'Creating a Budget: ' },
       { image: 'https://via.placeholder.com/400x300', text: 'Selecting a Budget: ' },
       { image: 'https://via.placeholder.com/400x300', text: 'Setting a Default Budget or Deleting a Budget: ' },
       { image: 'https://via.placeholder.com/400x300', text: 'Budget Details: ' }
     ],
     [
-      { image: 'https://via.placeholder.com/400x300', text: 'Adding a Transaction: ' },
-      { image: 'https://via.placeholder.com/400x300', text: 'Filtering Transactions: ' }
+      // Transactions Page
+      { image: '/images/tutorial4-1Large.gif'},
+      { image: '/images/tutorial4-2Large.gif'}
     ],
     [
-        { image: 'https://via.placeholder.com/400x300', text: 'Editing Account Settings: ' }
+      // Settings Page
+      { image: '/images/tutorial5-1Large.gif'}
     ]
   ];
 

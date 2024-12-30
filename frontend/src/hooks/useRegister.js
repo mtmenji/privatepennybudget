@@ -29,7 +29,7 @@ export const useRegister = () => {
                 theme = 'theme-slate';
                 break;
             default:
-                theme = 'theme-parchment';
+                theme = 'theme-slate';
         }
 
         const response = await fetch('/user/register', {
