@@ -25,6 +25,9 @@ export const useSettings = () => {
             case 'Rose':
                 theme = 'theme-rose';
                 break;
+            case 'Slate':
+                theme = 'theme-slate';
+                break;
             default:
                 break;
         }

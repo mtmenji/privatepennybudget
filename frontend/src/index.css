@@ -66,6 +66,27 @@
     --progressBar: #e5e7eb;
 }
 
+.theme-slate {
+    --dark1: #1E293B;
+    --dark2: #334155;
+    --dark3: #475569;
+    --light1: #F8FAFC;
+    --light2: #E2E8F0;
+    --light3: #CBD5E1;
+    --button: #64748B;
+    --buttonHover: #475569;
+    --button2: #3b82f6;
+    --buttonHover2: #1068f4;
+    --bodyTextDark: #000000;
+    --bodyTextLight: #FFFFFF;
+    --formInput: #FFFFFF;
+    --formInputDenied: #a5a5a5;
+    --warningColor: #f98080;
+    --warningText: #4b4b4b;
+    --navbarHover: #3e9ba3;
+    --progressBar: #e5e7eb;
+}
+
 /* Scroll Bar Styles */
 ::-webkit-scrollbar {
     width: 10px;

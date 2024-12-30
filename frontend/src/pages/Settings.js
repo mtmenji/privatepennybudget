@@ -81,10 +81,11 @@ const Settings = () => {
                 className="w-full p-2 border border-dark1 rounded-md mb-4 bg-formInput"
             >
                 <option value="" disabled>Select a color theme</option>
-                <option value="Parchment">Parchment</option>
+                <option value="Slate">Slate</option>
                 <option value="Ocean">Ocean</option>
                 <option value="Forest">Forest</option>
                 <option value="Rose">Rose</option>
+                <option value="Parchment">Parchment</option>
             </select>
 
             <button disabled={isLoading} className="w-full lg:w-1/4 mt-4 bg-button hover:bg-buttonHover text-bodyTextLight p-2 rounded-md">Update Account</button>
