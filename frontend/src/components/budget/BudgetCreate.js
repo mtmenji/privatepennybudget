@@ -82,7 +82,11 @@ const BudgetCreate = ({ onCancel }) => {
         return;
     }
 
-    const budget = { month, year, categories, budgetedIncome };
+    const updatedCategories = categories.length === 0
+    ? [{ name: 'Add to Savings', color: '#000000', amount: 0, note: '' }]
+    : categories;
+
+    const budget = { month, year, categories: updatedCategories, budgetedIncome };
 
     const response = await fetch('/budgets', {
         method: 'POST',
