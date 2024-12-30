@@ -204,7 +204,7 @@ const BudgetDetails = ({ budget }) => {
                             <button
                                 type="button"
                                 onClick={() => removeCategory(index)}
-                                className={`mt-2 sm:mt-0 sm:ml-4 sm:self-center material-symbols-outlined ${category.name === 'Add to Savings' ? 'text-light1' : 'text-dark1'} ${category.name === 'Add to Savings' ? 'hover:text-light1' : 'hover:text-dark3'}`}
+                                className={`mt-2 sm:mt-0 sm:ml-4 sm:self-center material-symbols-outlined ${category.name === 'Add to Savings' ? 'text-light1' : 'text-dark1'} ${category.name === 'Add to Savings' ? 'hover:text-light1' : 'hover:text-warningColor'}`}
                                 disabled={category.name === 'Add to Savings'}
                             >
                                 delete
