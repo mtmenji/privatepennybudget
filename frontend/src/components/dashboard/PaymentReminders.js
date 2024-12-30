@@ -25,41 +25,40 @@ const PaymentReminders = () => {
     return `${day}${suffix}`;
   };
 
-  // Fetch reminders
+  const fetchReminders = async () => {
+    if (!user) {
+      setError('You must be logged in.');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('/reminders', {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(json.error || 'Failed to fetch reminders.');
+      } else {
+        const sortedReminders = json.sort((a, b) => {
+          const dayA = new Date(a.date).getDate()
+          const dayB = new Date(b.date).getDate()
+          return dayA - dayB
+        })
+        setReminders(sortedReminders);
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchReminders = async () => {
-      if (!user) {
-        setError('You must be logged in.');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const response = await fetch('/reminders', {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-
-        const json = await response.json();
-
-        if (!response.ok) {
-          setError(json.error || 'Failed to fetch reminders.');
-        } else {
-          const sortedReminders = json.sort((a, b) => {
-            const dayA = new Date(a.date).getDate()
-            const dayB = new Date(b.date).getDate()
-            return dayA - dayB
-          })
-          setReminders(sortedReminders);
-        }
-      } catch (err) {
-        setError('Something went wrong. Please try again.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchReminders();
   }, [user]);
 
@@ -168,6 +167,7 @@ const PaymentReminders = () => {
       setEditDate('');
       setEditAmount('');
       setError(null);
+      fetchReminders();
     } catch (err) {
       setError('Something went wrong. Please try again.');
     }
@@ -204,6 +204,7 @@ const PaymentReminders = () => {
         setdate('');
         setAmount('');
         setError(null);
+        fetchReminders();
       }
     } catch (err) {
       setError('Something went wrong. Please try again.');
