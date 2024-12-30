@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Carousel = ({ slides }) => {
+const Carousel = ({ slides, activeCarousel }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    setCurrentIndex(0)
+  }, [activeCarousel])
 
   const goToNextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
@@ -116,7 +120,7 @@ const Tutorial = () => {
     ],
     [
       // Dashboard Page
-      { image: '/images/tutorial2-1Large.png', text: "The Dashboard Page is where you can review your reports. You can set Payment Reminders and Savings Goals. You can also view your spending habits to adjust your battle plans if your proposed plan isn't working!" },
+      { image: '/images/tutorial2-1Large.gif'},
       { image: '/images/tutorial2-2Large.gif'},
       { image: '/images/tutorial2-3Large.gif'},
       { image: '/images/tutorial2-4Large.gif'},
@@ -124,18 +128,20 @@ const Tutorial = () => {
     ],
     [
       // Budget Page
-      { image: 'https://via.placeholder.com/400x300', text: 'Creating a Budget: ' },
-      { image: 'https://via.placeholder.com/400x300', text: 'Selecting a Budget: ' },
-      { image: 'https://via.placeholder.com/400x300', text: 'Setting a Default Budget or Deleting a Budget: ' },
-      { image: 'https://via.placeholder.com/400x300', text: 'Budget Details: ' }
+      { image: '/images/tutorial3-4Large.gif'},
+      { image: '/images/tutorial3-1Large.gif'},
+      { image: '/images/tutorial3-2Large.gif'},
+      { image: '/images/tutorial3-3Large.gif'}
     ],
     [
       // Transactions Page
+      { image: '/images/tutorial4-3Large.gif'},
       { image: '/images/tutorial4-1Large.gif'},
       { image: '/images/tutorial4-2Large.gif'}
     ],
     [
       // Settings Page
+      { image: '/images/tutorial5-2Large.gif'},
       { image: '/images/tutorial5-1Large.gif'}
     ]
   ];
@@ -154,7 +160,7 @@ const Tutorial = () => {
 
       {/* Carousel */}
       <div className="flex-grow flex items-center justify-center">
-        <Carousel slides={carouselsData[activeCarousel]} />
+        <Carousel slides={carouselsData[activeCarousel]} activeCarousel={activeCarousel}/>
       </div>
     </div>
   );
