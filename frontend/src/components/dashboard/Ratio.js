@@ -109,7 +109,6 @@ const Ratio = ({ selectedMonth, selectedYear }) => {
     return (
         <div className='m-2 h-[calc(100vh-96px)]'>
             <h2 className="text-xl font-bold text-bodyTextDark mb-4 text-center">Spending Ratio</h2>
-            <p className='text-center text-sm mb-2 text-bodyTextDark'>A visual breakdown of your spending ratio.</p>
             <div className="flex flex-col md:flex-row md:divide-x md:space-x-4 h-[calc(100vh-142px)]">
                 <div className="md:w-1/2 space-y-4 p-2 text-center flex flex-col justify-evenly">
                     <div className="space-y-2">

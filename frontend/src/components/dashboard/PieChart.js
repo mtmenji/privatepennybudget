@@ -73,7 +73,6 @@ const PieChart = ({ selectedBudgetId }) => {
             <h2 className="text-xl font-bold text-bodyTextDark mb-4 text-center">Budget Categories</h2>
             {categories.length > 0 ? (
                 <div className='p-2'>
-                    <p className='text-center text-sm mb-2 text-bodyTextDark'>A visual breakdown of your budgeted categories.</p>
                     <div className='w-4/5 h-[300px] mx-auto'>
                         <Pie data={data} options={options} className='mx-auto'/>
                     </div>
